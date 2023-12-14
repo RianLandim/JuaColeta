@@ -57,7 +57,7 @@ export function SignInCardFrom() {
         </label>
       )}
       <Link
-        href="/recover-password"
+        href="/recuperar-senha"
         className="text-sm self-start text-zinc-800 hover:cursor-pointer hover:underline"
       >
         Esqueceu a senha?
