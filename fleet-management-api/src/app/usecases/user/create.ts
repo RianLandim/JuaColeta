@@ -23,9 +23,5 @@ export class CreateUser {
     const user = new User({ ...request, password: hashedPassword });
 
     await this.userRepository.create(user);
-
-    return {
-      user,
-    };
   }
 }

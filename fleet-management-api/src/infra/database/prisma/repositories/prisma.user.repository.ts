@@ -1,5 +1,9 @@
 import { UserRepository } from '@app/repositories/user.repository';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { User } from '@app/entities/user';
 import { PrismaUserMapper } from '../mappers/prisma.user.mapper';
@@ -16,7 +20,7 @@ export class PrismaUserRepository implements UserRepository {
     });
 
     if (alreadyUser) {
-      throw new BadRequestException('');
+      throw new BadRequestException('Usuário já cadastrado');
     }
 
     const data = PrismaUserMapper.toPrisma(user);
@@ -24,5 +28,21 @@ export class PrismaUserRepository implements UserRepository {
     await this.prisma.user.create({
       data,
     });
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    const prismaUser = await this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (!prismaUser) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+
+    const user = new User(prismaUser);
+
+    return user;
   }
 }

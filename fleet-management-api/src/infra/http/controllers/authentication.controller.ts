@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Get,
@@ -12,32 +11,32 @@ import { Response } from 'express';
 import { LoginDTO } from '../dtos/login.dto';
 import { JwtAuthGuard } from 'src/infra/authentication/guards/auth.guard';
 import { JwtService } from '@nestjs/jwt';
-import { randomUUID } from 'crypto';
+import { Login } from '@app/usecases/auth/login';
 
 @Controller('authentication')
 export class AuthenticationController {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private jwtService: JwtService,
+    private loginUsecase: Login,
+  ) {}
 
   @Post('login')
   async login(
-    @Body() data: LoginDTO,
+    @Body() data: Required<LoginDTO>,
     @Res({ passthrough: true }) response: Response,
   ) {
-    if (data.username === 'test@gmail.com' && data.password === 'teste123') {
-      const token = this.jwtService.sign({
-        username: data.username,
-        sub: randomUUID(),
-      });
+    const user = await this.loginUsecase.execute(data);
 
-      response.cookie('token', token, {
-        httpOnly: true,
-        secure: true,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-      });
-    } else {
-      response.clearCookie('token');
-      throw new BadRequestException('Usuário ou senha incorretos');
-    }
+    const token = this.jwtService.sign({
+      name: user.name,
+      sub: user.id,
+    });
+
+    response.cookie('token', token, {
+      httpOnly: true,
+      secure: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    });
   }
 
   @UseGuards(JwtAuthGuard)
