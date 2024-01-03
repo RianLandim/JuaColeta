@@ -1,6 +1,10 @@
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  HydrationBoundary,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import { FC, ReactNode, useState } from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -19,7 +23,7 @@ export const Providers: FC<{ children: ReactNode }> = ({ children }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <HydrationBoundary>{children}</HydrationBoundary>
       <ReactQueryDevtools
         initialIsOpen={process.env.NODE_ENV === "development"}
       />

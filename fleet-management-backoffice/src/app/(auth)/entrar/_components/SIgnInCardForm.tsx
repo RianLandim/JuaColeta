@@ -7,10 +7,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { api } from "@/utils/api";
+import { useLogin } from "@/hooks/mutations/useLogin";
+import { redirect, useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 const signInFormSchema = z.object({
-  username: z
+  email: z
     .string()
     .email("E-mail invalido")
     .min(1, "Email precisa ser preenchido"),
@@ -26,11 +28,24 @@ export function SignInCardFrom() {
     formState: { errors },
   } = useForm<SignInProps>({ resolver: zodResolver(signInFormSchema) });
 
-  const submit: SubmitHandler<SignInProps> = (data) => {
-    api
-      .post("authentication/login", data)
-      .then(() => api.get("authentication/me"));
-  };
+  const { toast } = useToast();
+  const router = useRouter();
+
+  const loginMutation = useLogin();
+
+  const submit: SubmitHandler<SignInProps> = (data) =>
+    loginMutation.mutate(data, {
+      onSuccess: () => {
+        console.log("aqui");
+        router.replace("/quadro");
+      },
+      onError: (error) => {
+        toast({
+          title: "Erro",
+          description: error.message,
+        });
+      },
+    });
 
   return (
     <Card onSubmit={handleSubmit(submit)}>
@@ -41,10 +56,10 @@ export function SignInCardFrom() {
       >
         E-mail
       </label>
-      <Input type="email" {...register("username")} />
-      {errors.username && (
-        <label htmlFor="username" className="self-start text-base text-red-700">
-          {errors.username.message}
+      <Input type="email" {...register("email")} />
+      {errors.email && (
+        <label htmlFor="email" className="self-start text-base text-red-700">
+          {errors.email.message}
         </label>
       )}
       <label
