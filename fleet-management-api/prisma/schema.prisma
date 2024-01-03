@@ -1,0 +1,116 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  COMPANY_ADMIN
+  DRIVER
+}
+
+model User {
+  id       String @id
+  email    String @unique
+  password String
+
+  name      String
+  cellphone String
+  license   String?
+
+  role UserRole @default(COMPANY_ADMIN)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  RefrestToken RefreshToken[]
+  Company      Company[]
+  Vehicle      Vehicle[]
+
+  @@map("user")
+}
+
+model RefreshToken {
+  id    String @id
+  token String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime  @default(now())
+  expiresAt DateTime?
+
+  @@map("refresh_token")
+}
+
+model Address {
+  id String @id
+
+  number   Int
+  street   String
+  city     String
+  state    String
+  district String
+  country  String
+  zipCode  String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  company Company?
+}
+
+model Company {
+  id String @id
+
+  cnpj       String
+  socialName String
+  addressId  String  @unique
+  address    Address @relation(fields: [addressId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  users   User[]
+  Vehicle Vehicle[]
+
+  @@map("company")
+}
+
+enum VehicleCategory {
+  A
+  B
+  C
+  D
+  E
+}
+
+model Vehicle {
+  id String @id
+
+  model    String
+  plate    String
+  color    String?
+  year     String
+  category VehicleCategory @default(B)
+
+  isSecured Boolean
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("vehicle")
+}

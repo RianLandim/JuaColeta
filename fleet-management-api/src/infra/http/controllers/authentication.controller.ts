@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { LoginDTO } from '../dtos/login.dto';
-import { JwtAuthGuard } from 'src/authentication/guards/auth.guard';
+import { JwtAuthGuard } from 'src/infra/authentication/guards/auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { randomUUID } from 'crypto';
 
