@@ -1,15 +1,6 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Request,
-  Res,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { LoginDTO } from '../dtos/login.dto';
-import { JwtAuthGuard } from 'src/infra/authentication/guards/auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { Login } from '@app/usecases/auth/login';
 
@@ -37,11 +28,5 @@ export class AuthenticationController {
       secure: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
     });
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get('me')
-  me(@Request() request) {
-    return request.user;
   }
 }

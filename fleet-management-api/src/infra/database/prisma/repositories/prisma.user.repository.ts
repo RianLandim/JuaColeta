@@ -45,4 +45,28 @@ export class PrismaUserRepository implements UserRepository {
 
     return user;
   }
+
+  async find() {
+    const rawUsers = await this.prisma.user.findMany();
+
+    const users = rawUsers.map((user) => new User(user));
+
+    return users;
+  }
+
+  async findById(id: string) {
+    const rawUser = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!rawUser) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+
+    const user = new User(rawUser);
+
+    return user;
+  }
 }

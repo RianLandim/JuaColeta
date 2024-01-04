@@ -17,10 +17,12 @@ export class User {
   private props: UserProps;
 
   constructor(
-    props: Replace<UserProps, { createdAt?: Date; updatedAt?: Date }>,
-    id?: string,
+    props: Replace<
+      UserProps,
+      { createdAt?: Date; updatedAt?: Date; id?: string }
+    >,
   ) {
-    this._id = id ?? createId();
+    this._id = props.id ?? createId();
     this.props = {
       ...props,
       createdAt: props.createdAt ?? new Date(),
