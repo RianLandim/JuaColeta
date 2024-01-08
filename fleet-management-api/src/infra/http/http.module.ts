@@ -7,10 +7,12 @@ import { DatabaseModule } from '@infra/database/database.module';
 import { Login } from '@app/usecases/auth/login';
 import { FindUsers } from '@app/usecases/user/find';
 import { FindUserById } from '@app/usecases/user/findById';
+import { CompanyController } from './controllers/company.controllet';
+import { CreateCompany } from '@app/usecases/company/create';
 
 @Module({
   imports: [AuthenticationModule, DatabaseModule],
-  controllers: [AuthenticationController, UserController],
-  providers: [CreateUser, Login, FindUsers, FindUserById],
+  controllers: [AuthenticationController, UserController, CompanyController],
+  providers: [CreateUser, Login, FindUsers, FindUserById, CreateCompany],
 })
 export class HttpModule {}
