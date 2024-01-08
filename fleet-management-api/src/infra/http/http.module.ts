@@ -9,10 +9,18 @@ import { FindUsers } from '@app/usecases/user/find';
 import { FindUserById } from '@app/usecases/user/findById';
 import { CompanyController } from './controllers/company.controllet';
 import { CreateCompany } from '@app/usecases/company/create';
+import { FindCompany } from '@app/usecases/company/find';
 
 @Module({
   imports: [AuthenticationModule, DatabaseModule],
   controllers: [AuthenticationController, UserController, CompanyController],
-  providers: [CreateUser, Login, FindUsers, FindUserById, CreateCompany],
+  providers: [
+    CreateUser,
+    Login,
+    FindUsers,
+    FindUserById,
+    CreateCompany,
+    FindCompany,
+  ],
 })
 export class HttpModule {}
