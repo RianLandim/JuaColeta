@@ -13,15 +13,23 @@ interface UserRequestProps {
   role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER';
 }
 
+export interface UserResponseProps {
+  id: string;
+}
+
 @Injectable()
 export class CreateUser {
   constructor(private userRepository: UserRepository) {}
 
-  async execute(request: UserRequestProps) {
+  async execute(request: UserRequestProps): Promise<UserResponseProps> {
     const hashedPassword = hashSync(request.password, 8);
 
     const user = new User({ ...request, password: hashedPassword });
 
     await this.userRepository.create(user);
+
+    return {
+      id: user.id,
+    };
   }
 }

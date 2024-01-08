@@ -10,6 +10,7 @@ import { FindUserById } from '@app/usecases/user/findById';
 import { CompanyController } from './controllers/company.controllet';
 import { CreateCompany } from '@app/usecases/company/create';
 import { FindCompany } from '@app/usecases/company/find';
+import { InsertEmployeeCompany } from '@app/usecases/company/insertEmployee';
 
 @Module({
   imports: [AuthenticationModule, DatabaseModule],
@@ -21,6 +22,7 @@ import { FindCompany } from '@app/usecases/company/find';
     FindUserById,
     CreateCompany,
     FindCompany,
+    InsertEmployeeCompany,
   ],
 })
 export class HttpModule {}

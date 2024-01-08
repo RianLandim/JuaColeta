@@ -1,5 +1,5 @@
 import { CompanyRepository } from '@app/repositories/company.repository';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { Company } from '@app/entities/company';
 import { PrismaCompanyMapper } from '../mappers/prisma.company.mapper';
@@ -31,5 +31,39 @@ export class PrismaCompanyRepository implements CompanyRepository {
     });
 
     return companies;
+  }
+
+  async findById(id: string): Promise<Company> {
+    const rawCompany = await this.prisma.company.findUnique({
+      where: { id },
+      include: {
+        address: true,
+      },
+    });
+
+    if (!rawCompany) {
+      throw new NotFoundException('Empresa não encontrada');
+    }
+
+    const address = new Address(rawCompany.address);
+
+    const company = new Company({ ...rawCompany, address });
+
+    return company;
+  }
+
+  async insertEmployee(userId: string, companyId: string): Promise<void> {
+    await this.prisma.company.update({
+      where: {
+        id: companyId,
+      },
+      data: {
+        users: {
+          connect: {
+            id: userId,
+          },
+        },
+      },
+    });
   }
 }
