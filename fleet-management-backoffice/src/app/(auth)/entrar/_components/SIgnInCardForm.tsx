@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useLogin } from "@/hooks/mutations/useLogin";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 
 const signInFormSchema = z.object({
@@ -36,8 +36,7 @@ export function SignInCardFrom() {
   const submit: SubmitHandler<SignInProps> = (data) =>
     loginMutation.mutate(data, {
       onSuccess: () => {
-        console.log("aqui");
-        router.replace("/quadro");
+        router.replace("/painel");
       },
       onError: (error) => {
         toast({

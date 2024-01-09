@@ -1,17 +1,32 @@
 import { api } from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
+import { z } from "zod";
 
-type MeProps = {
-  userId: string;
-  username: string;
-};
+const currentUserValidator = z.object({
+  id: z.string().cuid2(),
+  email: z.string().email(),
+  name: z.string(),
+  cellphone: z.string(),
+  license: z.string().nullish(),
+  role: z.enum(["ADMIN", "COMPANY_ADMIN", "DRIVER"]),
+  createdAt: z.coerce.date(),
+});
 
-const fetchMe = () => api.get<MeProps>("authentication/me");
+const fetchCurrentUser = () =>
+  api.get<any>("user/current-user").then(({ data }) => {
+    const parsedUser = currentUserValidator.safeParse(data);
 
-const useMe = () =>
-  useQuery({
-    queryKey: ["me"],
-    queryFn: () => fetchMe(),
+    if (!parsedUser.success) {
+      throw new Error("Erro ao validar informações");
+    }
+
+    return parsedUser.data;
   });
 
-export { fetchMe, useMe };
+const useCurrentUser = () =>
+  useQuery({
+    queryKey: ["current-user"],
+    queryFn: () => fetchCurrentUser(),
+  });
+
+export { useCurrentUser };
