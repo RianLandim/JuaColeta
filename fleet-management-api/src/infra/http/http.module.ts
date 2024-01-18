@@ -11,10 +11,17 @@ import { CompanyController } from './controllers/company.controllet';
 import { CreateCompany } from '@app/usecases/company/create';
 import { FindCompany } from '@app/usecases/company/find';
 import { InsertEmployeeCompany } from '@app/usecases/company/insertEmployee';
+import { VehicleController } from './controllers/vehicle.controller';
+import { CreateVehicle } from '@app/usecases/vehicle/create';
 
 @Module({
   imports: [AuthenticationModule, DatabaseModule],
-  controllers: [AuthenticationController, UserController, CompanyController],
+  controllers: [
+    AuthenticationController,
+    UserController,
+    CompanyController,
+    VehicleController,
+  ],
   providers: [
     CreateUser,
     Login,
@@ -23,6 +30,7 @@ import { InsertEmployeeCompany } from '@app/usecases/company/insertEmployee';
     CreateCompany,
     FindCompany,
     InsertEmployeeCompany,
+    CreateVehicle,
   ],
 })
 export class HttpModule {}
