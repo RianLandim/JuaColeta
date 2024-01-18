@@ -2,6 +2,7 @@ import { CreateVehicle } from '@app/usecases/vehicle/create';
 import { ListVehicle } from '@app/usecases/vehicle/list';
 import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { CreateVehicleDTO } from '../dtos/create-vehicle.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('vehicle')
@@ -12,7 +13,7 @@ export class VehicleController {
   ) {}
 
   @Post()
-  async create(@Body() data: any) {
+  async create(@Body() data: CreateVehicleDTO) {
     return this.createVehicle.execute(data);
   }
 
