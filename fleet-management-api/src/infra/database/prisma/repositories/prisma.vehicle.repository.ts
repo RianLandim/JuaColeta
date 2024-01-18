@@ -15,4 +15,14 @@ export class PrismaVehicleRepository implements VehicleRepository {
       data: rawVehicle,
     });
   }
+
+  async list(companyId: string): Promise<Vehicle[]> {
+    const prismaVehicles = await this.prisma.vehicle.findMany({
+      where: { companyId },
+    });
+
+    const vehicles = prismaVehicles.map((vehicle) => new Vehicle(vehicle));
+
+    return vehicles;
+  }
 }

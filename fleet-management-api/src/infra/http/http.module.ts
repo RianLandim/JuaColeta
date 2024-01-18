@@ -13,6 +13,7 @@ import { FindCompany } from '@app/usecases/company/find';
 import { InsertEmployeeCompany } from '@app/usecases/company/insertEmployee';
 import { VehicleController } from './controllers/vehicle.controller';
 import { CreateVehicle } from '@app/usecases/vehicle/create';
+import { ListVehicle } from '@app/usecases/vehicle/list';
 
 @Module({
   imports: [AuthenticationModule, DatabaseModule],
@@ -31,6 +32,7 @@ import { CreateVehicle } from '@app/usecases/vehicle/create';
     FindCompany,
     InsertEmployeeCompany,
     CreateVehicle,
+    ListVehicle,
   ],
 })
 export class HttpModule {}

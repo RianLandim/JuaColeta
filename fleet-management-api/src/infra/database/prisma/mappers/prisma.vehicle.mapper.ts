@@ -9,6 +9,8 @@ export class PrismaVehicleMapper {
       model: vehicle.model,
       plate: vehicle.plate,
       year: vehicle.year,
+      renavam: vehicle.renavam,
+      fabricator: vehicle.fabricator,
       category: vehicle.category,
       color: vehicle.color,
       company: {
