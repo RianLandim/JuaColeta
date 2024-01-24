@@ -1,5 +1,6 @@
 import { api } from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
+
 import { z } from "zod";
 
 const currentUserValidator = z.object({
@@ -12,21 +13,22 @@ const currentUserValidator = z.object({
   createdAt: z.coerce.date(),
 });
 
-const fetchCurrentUser = () =>
-  api.get<any>("user/current-user").then(({ data }) => {
-    const parsedUser = currentUserValidator.safeParse(data);
+type CurrentUser = z.infer<typeof currentUserValidator>;
 
-    if (!parsedUser.success) {
-      throw new Error("Erro ao validar informações");
-    }
+const FETCH_CURRENT_USER_KEY = ["fetch-current-user"];
 
-    return parsedUser.data;
-  });
+const fetchCurrentUser = async () => {
+  const response = await api.get("user/current-user");
+
+  const parsedResponse = currentUserValidator.parse(response);
+
+  return parsedResponse;
+};
 
 const useCurrentUser = () =>
   useQuery({
-    queryKey: ["current-user"],
+    queryKey: FETCH_CURRENT_USER_KEY,
     queryFn: () => fetchCurrentUser(),
   });
 
-export { useCurrentUser };
+export { useCurrentUser, type CurrentUser, FETCH_CURRENT_USER_KEY };
