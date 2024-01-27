@@ -7,9 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { useLogin } from "@/hooks/mutations/useLogin";
-import { useRouter } from "next/navigation";
-import { useToast } from "@/components/ui/use-toast";
+import { useParams } from "next/navigation";
 
 const signInFormSchema = z.object({
   email: z
@@ -28,23 +26,7 @@ export function SignInCardFrom() {
     formState: { errors },
   } = useForm<SignInProps>({ resolver: zodResolver(signInFormSchema) });
 
-  const { toast } = useToast();
-  const router = useRouter();
-
-  const loginMutation = useLogin();
-
-  const submit: SubmitHandler<SignInProps> = (data) =>
-    loginMutation.mutate(data, {
-      onSuccess: () => {
-        router.replace("/painel");
-      },
-      onError: (error) => {
-        toast({
-          title: "Erro",
-          description: error.message,
-        });
-      },
-    });
+  const submit: SubmitHandler<SignInProps> = async (data) => console.log(data);
 
   return (
     <Card onSubmit={handleSubmit(submit)}>
