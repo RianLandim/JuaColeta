@@ -14,7 +14,10 @@ type PayloadProps = {
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private prisma: PrismaService) {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        ExtractJwt.fromAuthHeaderAsBearerToken(),
+        JwtStrategy.extractJWT,
+      ]),
       ignoreExpiration: false,
       secretOrKey: process.env.SECRET,
     });
@@ -40,10 +43,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   private static extractJWT(req: Request) {
-    console.log(req.cookies['token']);
-
     if (req.cookies && 'token' in req.cookies) {
-      console.log(req.cookies['token']);
       return req.cookies['token'];
     }
 

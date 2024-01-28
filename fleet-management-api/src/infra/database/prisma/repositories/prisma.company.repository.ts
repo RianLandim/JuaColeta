@@ -1,4 +1,7 @@
-import { CompanyRepository } from '@app/repositories/company.repository';
+import {
+  CompanyListQueryParams,
+  CompanyRepository,
+} from '@app/repositories/company.repository';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { Company } from '@app/entities/company';
@@ -17,10 +20,17 @@ export class PrismaCompanyRepository implements CompanyRepository {
     });
   }
 
-  async list(): Promise<Company[]> {
+  async list({ searchParams }: CompanyListQueryParams): Promise<Company[]> {
     const rawCompanies = await this.prisma.company.findMany({
       include: {
         address: true,
+      },
+      where: {
+        cnpj: { contains: searchParams.cnpj },
+        socialName: { contains: searchParams.socialName },
+      },
+      orderBy: {
+        createdAt: 'desc',
       },
     });
 

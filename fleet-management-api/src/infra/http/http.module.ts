@@ -7,7 +7,7 @@ import { DatabaseModule } from '@infra/database/database.module';
 import { Login } from '@app/usecases/auth/login';
 import { FindUsers } from '@app/usecases/user/find';
 import { FindUserById } from '@app/usecases/user/findById';
-import { CompanyController } from './controllers/company.controllet';
+import { CompanyController } from './controllers/company.controller';
 import { CreateCompany } from '@app/usecases/company/create';
 import { FindCompany } from '@app/usecases/company/find';
 import { InsertEmployeeCompany } from '@app/usecases/company/insertEmployee';

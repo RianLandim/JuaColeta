@@ -1,5 +1,13 @@
 import { CreateCompany } from '@app/usecases/company/create';
-import { Body, Controller, Get, Logger, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { CreateCompanyDto } from '../dtos/create-company.dto';
 import { FindCompany } from '@app/usecases/company/find';
 import { CompanyViewModel } from '../view-model/company.view-model';
@@ -7,6 +15,8 @@ import { User, UserProps } from '@utils/decorator/user.decorator';
 
 import { InsertEmployeeCompany } from '@app/usecases/company/insertEmployee';
 import { InsertEmployeeCompanyDto } from '../dtos/insert-employee-company';
+import { ListCompanyDTO } from '../dtos/list-company.dto';
+import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
 
 @Controller('company')
 export class CompanyController {
@@ -16,19 +26,19 @@ export class CompanyController {
     private insertEmployeeCompany: InsertEmployeeCompany,
   ) {}
 
-  logger = new Logger(CompanyController.name);
-
   @Post()
   create(@Body() data: CreateCompanyDto) {
     // @ts-expect-error the zod type is correct
     return this.createCompany.execute(data);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  async list(@User() user: UserProps) {
-    this.logger.debug(`user: ${JSON.stringify(user)}`);
-
-    const companies = await this.findCompany.execute();
+  async list(@User() user: UserProps, @Query() queryParams: ListCompanyDTO) {
+    const companies = await this.findCompany.execute({
+      socialName: queryParams?.socialName,
+      cnpj: queryParams?.cnpj,
+    });
 
     return companies.map(CompanyViewModel.toHttp);
   }
