@@ -65,7 +65,7 @@ export function CreateCompanyDialog() {
       setValue("country", "Brasil");
       setValue("street", cepResponse.street ?? "");
     }
-  }, [cepResponse]);
+  }, [cepResponse, setValue]);
 
   return (
     <Dialog>

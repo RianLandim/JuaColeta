@@ -8,7 +8,7 @@ const companyValidator = z.object({
   socialName: z.string(),
   address: z.object({
     id: z.string(),
-    number: z.string(),
+    number: z.number(),
     street: z.string(),
     district: z.string(),
     city: z.string(),
