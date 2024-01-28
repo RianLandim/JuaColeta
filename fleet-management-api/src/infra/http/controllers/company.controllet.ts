@@ -1,18 +1,10 @@
 import { CreateCompany } from '@app/usecases/company/create';
-import {
-  Body,
-  Controller,
-  Get,
-  Logger,
-  Param,
-  Post,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Logger, Param, Post } from '@nestjs/common';
 import { CreateCompanyDto } from '../dtos/create-company.dto';
 import { FindCompany } from '@app/usecases/company/find';
 import { CompanyViewModel } from '../view-model/company.view-model';
 import { User, UserProps } from '@utils/decorator/user.decorator';
-import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
+
 import { InsertEmployeeCompany } from '@app/usecases/company/insertEmployee';
 import { InsertEmployeeCompanyDto } from '../dtos/insert-employee-company';
 
@@ -32,7 +24,6 @@ export class CompanyController {
     return this.createCompany.execute(data);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
   async list(@User() user: UserProps) {
     this.logger.debug(`user: ${JSON.stringify(user)}`);

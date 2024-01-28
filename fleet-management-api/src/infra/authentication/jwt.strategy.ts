@@ -5,20 +5,18 @@ import { Request } from 'express';
 import { PrismaService } from '@infra/database/prisma/prisma.service';
 
 type PayloadProps = {
-  name: string;
   sub: string;
+  name: string;
+  email: string;
 };
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private prisma: PrismaService) {
     super({
-      jwtFromRequest: ExtractJwt.fromExtractors([
-        JwtStrategy.extractJWT,
-        ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ]),
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: 'secret',
+      secretOrKey: process.env.SECRET,
     });
   }
 
@@ -30,6 +28,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       select: {
         id: true,
         name: true,
+        email: true,
       },
     });
 
@@ -37,11 +36,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException('Usuário não autorizado');
     }
 
-    return { userId: user.id, name: user.name };
+    return { id: user.id, name: user.name, email: user.email };
   }
 
   private static extractJWT(req: Request) {
+    console.log(req.cookies['token']);
+
     if (req.cookies && 'token' in req.cookies) {
+      console.log(req.cookies['token']);
       return req.cookies['token'];
     }
 
