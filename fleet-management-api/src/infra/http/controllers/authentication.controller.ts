@@ -1,8 +1,9 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Res } from '@nestjs/common';
 import { LoginDTO } from '../dtos/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Login } from '@app/usecases/auth/login';
 import { UserViewModel } from '../view-model/user.view-model';
+import { Response } from 'express';
 
 @Controller('authentication')
 export class AuthenticationController {
@@ -12,7 +13,10 @@ export class AuthenticationController {
   ) {}
 
   @Post('login')
-  async login(@Body() data: Required<LoginDTO>) {
+  async login(
+    @Body() data: Required<LoginDTO>,
+    @Res({ passthrough: true }) response: Response,
+  ) {
     const user = await this.loginUsecase.execute(data);
 
     const token = this.jwtService.sign({
@@ -20,6 +24,12 @@ export class AuthenticationController {
       sub: user.id,
     });
 
-    return { ...UserViewModel.toHttp(user), accessToken: token };
+    response.cookie('access_token', token, {
+      httpOnly: true,
+      secure: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    });
+
+    return { ...UserViewModel.toHttp(user) };
   }
 }
