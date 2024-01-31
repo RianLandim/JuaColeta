@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-query";
 import { FC, ReactNode, useState } from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import SessionProvider from "./SessionProvider";
 
 export const Providers: FC<{ children: ReactNode }> = ({ children }) => {
   const [queryClient] = useState(
@@ -22,11 +23,13 @@ export const Providers: FC<{ children: ReactNode }> = ({ children }) => {
   );
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <HydrationBoundary>{children}</HydrationBoundary>
-      <ReactQueryDevtools
-        initialIsOpen={process.env.NODE_ENV === "development"}
-      />
-    </QueryClientProvider>
+    <SessionProvider>
+      <QueryClientProvider client={queryClient}>
+        <HydrationBoundary>{children}</HydrationBoundary>
+        <ReactQueryDevtools
+          initialIsOpen={process.env.NODE_ENV === "development"}
+        />
+      </QueryClientProvider>
+    </SessionProvider>
   );
 };

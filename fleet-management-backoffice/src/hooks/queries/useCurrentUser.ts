@@ -1,4 +1,4 @@
-import { api } from "@/utils/api";
+import { fetchApi } from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
 
 import { z } from "zod";
@@ -18,11 +18,12 @@ type CurrentUser = z.infer<typeof currentUserValidator>;
 const FETCH_CURRENT_USER_KEY = ["fetch-current-user"];
 
 const fetchCurrentUser = async () => {
-  const response = await api.get("user/current-user");
+  const [data] = await fetchApi("user/current-user", {
+    method: "GET",
+    validator: currentUserValidator,
+  });
 
-  const parsedResponse = currentUserValidator.parse(response);
-
-  return parsedResponse;
+  return data;
 };
 
 const useCurrentUser = () =>

@@ -1,4 +1,4 @@
-import { api } from "@/utils/api";
+import { fetchApi } from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 
@@ -25,15 +25,12 @@ type Companies = z.infer<typeof companyValidator>;
 const FETCH_COMPANIES_KEY = ["fetch-companies-list"];
 
 const fetchCompanies = async () => {
-  const response = await api.get("company");
+  const [data, _] = await fetchApi("company", {
+    method: "GET",
+    validator: companyValidator.array(),
+  });
 
-  const parsedResponse = z.array(companyValidator).safeParse(response.data);
-
-  if (!parsedResponse.success) {
-    throw new Error("Erro ao validar empresas");
-  }
-
-  return parsedResponse.data;
+  return data;
 };
 
 const useCompaniesList = () =>

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { signIn } from "@/utils/providers/SessionProvider";
 
 const signInFormSchema = z.object({
   email: z
@@ -26,7 +27,7 @@ export function SignInCardFrom() {
     formState: { errors },
   } = useForm<SignInProps>({ resolver: zodResolver(signInFormSchema) });
 
-  const submit: SubmitHandler<SignInProps> = async (data) => console.log(data);
+  const submit: SubmitHandler<SignInProps> = async (data) => signIn(data);
 
   return (
     <Card onSubmit={handleSubmit(submit)}>
