@@ -8,7 +8,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { CreateCompanyDto } from '../dtos/create-company.dto';
+import { CreateCompanyDTO } from '../dtos/create-company.dto';
 import { FindCompany } from '@app/usecases/company/find';
 import { CompanyViewModel } from '../view-model/company.view-model';
 import { User, UserProps } from '@utils/decorator/user.decorator';
@@ -27,8 +27,7 @@ export class CompanyController {
   ) {}
 
   @Post()
-  create(@Body() data: CreateCompanyDto) {
-    // @ts-expect-error the zod type is correct
+  create(@Body() data: CreateCompanyDTO) {
     return this.createCompany.execute(data);
   }
 

@@ -1,18 +1,37 @@
-import { createZodDto } from 'nestjs-zod';
-import { z } from 'zod';
+import { Type } from 'class-transformer';
+import { IsNumber, IsString, ValidateNested } from 'class-validator';
 
-const createCompanySchema = z.object({
-  socialName: z.string(),
-  cnpj: z.string(),
-  address: z.object({
-    number: z.number(),
-    street: z.string(),
-    city: z.string(),
-    state: z.string(),
-    country: z.string(),
-    district: z.string(),
-    zipCode: z.string(),
-  }),
-});
+class CreateAddressDto {
+  @IsNumber()
+  number: number;
 
-export class CreateCompanyDto extends createZodDto(createCompanySchema) {}
+  @IsString()
+  street: string;
+
+  @IsString()
+  city: string;
+
+  @IsString()
+  state: string;
+
+  @IsString()
+  country: string;
+
+  @IsString()
+  district: string;
+
+  @IsString()
+  zipCode: string;
+}
+
+export class CreateCompanyDTO {
+  @IsString()
+  socialName: string;
+
+  @IsString()
+  cnpj: string;
+
+  @ValidateNested()
+  @Type(() => CreateAddressDto)
+  address: CreateAddressDto;
+}
