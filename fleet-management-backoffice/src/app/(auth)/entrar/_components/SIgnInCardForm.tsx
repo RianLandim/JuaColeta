@@ -7,8 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { signIn } from "@/utils/providers/SessionProvider";
+import { UseSession } from "@/utils/providers/SessionProvider";
 
 const signInFormSchema = z.object({
   email: z
@@ -26,6 +25,8 @@ export function SignInCardFrom() {
     handleSubmit,
     formState: { errors },
   } = useForm<SignInProps>({ resolver: zodResolver(signInFormSchema) });
+
+  const { signIn } = UseSession();
 
   const submit: SubmitHandler<SignInProps> = async (data) => signIn(data);
 

@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { redirect } from "next/navigation";
-import { ReactNode, createContext, useContext, useMemo, useState } from "react";
-import { cookies } from "next/headers";
+import { redirect, useRouter } from "next/navigation";
+import { ReactNode, createContext, useContext, useState } from "react";
+import secureLocalStorage from "react-secure-storage";
 import { fetchApi } from "../api";
 import { z } from "zod";
 
@@ -10,7 +9,7 @@ type User = {
   email: string;
   name: string;
   cellphone: string;
-  license: string;
+  license?: string | null;
   role: string;
   createdAt: Date;
 };
@@ -24,6 +23,8 @@ type SessionStatus = "authenticated" | "unathenticated";
 type Session = {
   user: User;
   status: SessionStatus;
+  signIn: SessionContextProps["signIn"];
+  signOut: SessionContextProps["signOut"];
 };
 
 type SignInParams = {
@@ -34,7 +35,7 @@ type SignInParams = {
 interface SessionContextProps {
   user: User;
   status: SessionStatus;
-  signIn(params: SignInParams): void;
+  signIn(params: SignInParams): Promise<void>;
   signOut(): void;
 }
 
@@ -47,9 +48,10 @@ const userValidator = z.object({
   email: z.string().email(),
   name: z.string(),
   cellphone: z.string(),
-  license: z.string(),
+  license: z.string().nullish(),
   role: z.string(),
   createdAt: z.coerce.date(),
+  token: z.string(),
 });
 
 type SessionProvider = {
@@ -60,60 +62,38 @@ export default function SessionProvider({ children }: SessionProvider) {
   const [status, setStatus] = useState<SessionStatus>("unathenticated");
   const [user, setUser] = useState<User>({} as User);
 
+  const router = useRouter();
+
   async function signIn({ email, password }: SignInParams) {
     const [data, error] = await fetchApi("authentication/login", {
       method: "POST",
       body: { email, password },
       validator: userValidator,
-      credentials: "same-origin",
     });
 
     if (error) {
       throw new Error(error.message ?? "");
     }
 
-    if (data) {
-      setUser(data);
-    }
+    const { token, ...user } = data;
+
+    setUser(user);
+
+    setStatus("authenticated");
+
+    router.replace("/painel");
   }
 
-  function signOut() {}
+  function signOut() {
+    secureLocalStorage.clear();
+    setStatus("unathenticated");
+  }
 
   return (
     <SessionContext.Provider value={{ status, user, signIn, signOut }}>
       {children}
     </SessionContext.Provider>
   );
-}
-
-export function signIn(params: SignInParams) {
-  const context = useContext(SessionContext);
-
-  if (!context) {
-    throw new Error(
-      "signIn must be inside SessionProvider, verify if SessionProvider is setted on initial settings",
-      {
-        cause: "SessionProvider not been settled",
-      }
-    );
-  }
-
-  return context.signIn(params);
-}
-
-export function signOut() {
-  const context = useContext(SessionContext);
-
-  if (!context) {
-    throw new Error(
-      "signOut must be inside SessionProvider, verify if SessionProvider is setted on initial settings",
-      {
-        cause: "SessionProvider not been settled",
-      }
-    );
-  }
-
-  return context.signOut();
 }
 
 export function UseSession(options?: SessionOptions): Session {
@@ -128,14 +108,5 @@ export function UseSession(options?: SessionOptions): Session {
     );
   }
 
-  const { status, user } = context;
-
-  if (status === "unathenticated" && options?.required && options.required) {
-    redirect("/entrar");
-  } else {
-    return {
-      status,
-      user,
-    };
-  }
+  return context;
 }

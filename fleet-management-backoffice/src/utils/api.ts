@@ -1,3 +1,4 @@
+import secureLocalStorage from "react-secure-storage";
 import { z } from "zod";
 
 type FetchApiOptions<TValidator extends z.ZodTypeAny> = (
@@ -16,7 +17,9 @@ type FetchApiOptions<TValidator extends z.ZodTypeAny> = (
 
 export async function fetchApi<TValidator extends z.ZodType<unknown>>(
   route: string,
-  options: FetchApiOptions<TValidator> = { method: "GET" }
+  options: FetchApiOptions<TValidator> = {
+    method: "GET",
+  }
 ) {
   const url = new URL(route, "http://localhost:3333/");
 
@@ -25,7 +28,7 @@ export async function fetchApi<TValidator extends z.ZodType<unknown>>(
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: options.credentials,
+    credentials: options.credentials ?? "include",
     body:
       options.method === "POST" ||
       options.method === "PUT" ||
