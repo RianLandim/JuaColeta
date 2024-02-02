@@ -1,8 +1,8 @@
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ReactNode, createContext, useContext, useState } from "react";
-import secureLocalStorage from "react-secure-storage";
 import { fetchApi } from "../api";
 import { z } from "zod";
+import Cookies from "js-cookie";
 
 type User = {
   id: string;
@@ -51,7 +51,6 @@ const userValidator = z.object({
   license: z.string().nullish(),
   role: z.string(),
   createdAt: z.coerce.date(),
-  token: z.string(),
 });
 
 type SessionProvider = {
@@ -75,18 +74,19 @@ export default function SessionProvider({ children }: SessionProvider) {
       throw new Error(error.message ?? "");
     }
 
-    const { token, ...user } = data;
-
-    setUser(user);
+    setUser(data);
 
     setStatus("authenticated");
 
     router.replace("/painel");
   }
 
-  function signOut() {
-    secureLocalStorage.clear();
+  async function signOut() {
+    await fetchApi("authentication/logout");
+
     setStatus("unathenticated");
+
+    router.replace("/entrar");
   }
 
   return (

@@ -22,6 +22,7 @@ export default function ProfileCard() {
         .otherwise(({ data }) => (
           <div className="bg-white w-full rounded-md p-2 flex items-center justify-center flex-col">
             <p>{data?.name}</p>
+            <p>{data?.email}</p>
           </div>
         ))}
     </div>

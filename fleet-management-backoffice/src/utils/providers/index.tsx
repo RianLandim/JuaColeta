@@ -16,7 +16,6 @@ export const Providers: FC<{ children: ReactNode }> = ({ children }) => {
         defaultOptions: {
           queries: {
             retry: 3,
-            staleTime: 1000 * 60,
           },
         },
       })
