@@ -1,6 +1,6 @@
 import { ExecutionContext, createParamDecorator } from '@nestjs/common';
 
-export type UserProps = { userId: string; name: string };
+export type UserProps = { id: string; name: string; email: string };
 
 export const User = createParamDecorator(
   (_data: unknown, ctx: ExecutionContext): UserProps => {

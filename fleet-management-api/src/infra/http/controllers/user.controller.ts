@@ -40,9 +40,9 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Get('current-user')
   async currentUser(@User() currentUser: UserProps) {
-    this.logger.debug(`current-user has id: ${currentUser.userId}`);
+    this.logger.debug(`current-user has id: ${currentUser.id}`);
 
-    const user = await this.findUserById.execute({ id: currentUser.userId });
+    const user = await this.findUserById.execute({ id: currentUser.id });
 
     return UserViewModel.toHttp(user);
   }

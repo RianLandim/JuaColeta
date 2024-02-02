@@ -24,12 +24,12 @@ export class AuthenticationController {
       sub: user.id,
     });
 
-    response.cookie('access_token', token, {
+    response.cookie('token', token, {
       httpOnly: true,
       secure: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
     });
 
-    return { ...UserViewModel.toHttp(user) };
+    return UserViewModel.toHttp(user);
   }
 }
