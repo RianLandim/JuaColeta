@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { LoginDTO } from '../dtos/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Login } from '@app/usecases/auth/login';
@@ -31,5 +31,16 @@ export class AuthenticationController {
     });
 
     return UserViewModel.toHttp(user);
+  }
+
+  @Get('logout')
+  async logout(@Res({ passthrough: true }) response: Response) {
+    response.cookie('token', '', {
+      httpOnly: true,
+      secure: true,
+      expires: new Date(Date.now() - 1000 * 60 * 60 * 24),
+    });
+
+    return { message: 'success' };
   }
 }
