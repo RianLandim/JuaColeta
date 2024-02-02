@@ -23,6 +23,17 @@ export async function fetchApi<TValidator extends z.ZodType<unknown>>(
 ) {
   const url = new URL(route, "http://localhost:3333/");
 
+  Object.entries(options.queryParams ?? {}).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      url.searchParams.delete(key);
+      value
+        .filter((v) => v !== undefined)
+        .forEach((v) => url.searchParams.append(key, v));
+    } else if (value !== undefined) {
+      url.searchParams.set(key, value);
+    }
+  });
+
   const response = await fetch(url, {
     method: options.method,
     headers: {

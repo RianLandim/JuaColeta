@@ -20,6 +20,14 @@ import { z } from "zod";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback } from "react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 const filterSchema = z.object({
   name: z.string(),
@@ -55,12 +63,14 @@ export default function CompanyRegister() {
     },
   });
 
-  const handleFilter: SubmitHandler<FilterSchemaProps> = ({
-    name,
-    cnpj,
-    email,
-  }) => {
-    router.push(pathname + "?" + createQueryString("name", name));
+  const handleFilter: SubmitHandler<FilterSchemaProps> = ({ name, cnpj }) => {
+    router.push(
+      pathname +
+        "?" +
+        createQueryString("name", name) +
+        "?" +
+        createQueryString("cnpj", cnpj)
+    );
   };
 
   return (
@@ -79,11 +89,6 @@ export default function CompanyRegister() {
         >
           <Input className="w-auto" placeholder="Nome" {...register("name")} />
           <Input className="w-auto" placeholder="CNPJ" {...register("cnpj")} />
-          <Input
-            className="w-auto"
-            placeholder="Email"
-            {...register("email")}
-          />
 
           <Button type="submit" variant="outline">
             <Search className="w-4 h-4 mr-2" /> Filtrar
@@ -97,18 +102,33 @@ export default function CompanyRegister() {
         <TableHeader>
           <TableHead>Nome</TableHead>
           <TableHead>CNPJ</TableHead>
-          <TableHead>Endereço</TableHead>
+          <TableHead>Cidade</TableHead>
         </TableHeader>
         <TableBody>
           {companiesQuery.data?.map((company) => (
             <TableRow key={company.id}>
               <TableCell>{company.socialName}</TableCell>
               <TableCell>{cnpjMask(company.cnpj)}</TableCell>
-              <TableCell>{company.address.city}</TableCell>
+              <TableCell>
+                {company.address.city}-{company.address.state}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink>1</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </main>
   );
 }
