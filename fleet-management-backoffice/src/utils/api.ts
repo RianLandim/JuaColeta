@@ -1,4 +1,3 @@
-import secureLocalStorage from "react-secure-storage";
 import { z } from "zod";
 
 type FetchApiOptions<TValidator extends z.ZodTypeAny> = (

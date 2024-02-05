@@ -1,15 +1,6 @@
 "use client";
 
 import { useCompaniesList } from "@/hooks/queries/useCompanyList";
-
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { CreateCompanyDialog } from "@/components/cadastros/CreateCompanyDialog";
 import { Button } from "@/components/ui/button";
@@ -17,60 +8,36 @@ import { Search } from "lucide-react";
 import { cnpjMask } from "@/utils/format/cnpj";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback } from "react";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+import { Suspense } from "react";
+import { useQueryParam } from "@/hooks/useQueryParam";
+import { Table } from "@/components/Table";
+import { TableCell, TableRow } from "@/components/ui/table";
 
 const filterSchema = z.object({
   name: z.string(),
   cnpj: z.string(),
-  email: z.string(),
 });
 
 type FilterSchemaProps = z.infer<typeof filterSchema>;
 
 export default function CompanyRegister() {
   const companiesQuery = useCompaniesList();
-
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
+  const { createQueryString, searchParams } = useQueryParam();
 
   const { register, handleSubmit } = useForm<FilterSchemaProps>({
     resolver: zodResolver(filterSchema),
     values: {
       name: searchParams.get("name") ?? "",
       cnpj: searchParams.get("cnpj") ?? "",
-      email: searchParams.get("email") ?? "",
     },
   });
 
-  const handleFilter: SubmitHandler<FilterSchemaProps> = ({ name, cnpj }) => {
-    router.push(
-      pathname +
-        "?" +
-        createQueryString("name", name) +
-        "?" +
-        createQueryString("cnpj", cnpj)
-    );
+  const handleFilter: SubmitHandler<FilterSchemaProps> = ({ cnpj, name }) => {
+    createQueryString([
+      { name: "name", value: name },
+      { name: "cnpj", value: cnpj },
+    ]);
   };
 
   return (
@@ -98,14 +65,10 @@ export default function CompanyRegister() {
         <CreateCompanyDialog />
       </div>
 
-      <Table className="w-full rounded-md bg-slate-300">
-        <TableHeader>
-          <TableHead>Nome</TableHead>
-          <TableHead>CNPJ</TableHead>
-          <TableHead>Cidade</TableHead>
-        </TableHeader>
-        <TableBody>
-          {companiesQuery.data?.map((company) => (
+      <Suspense>
+        <Table
+          headers={["nome", "cnpj", "endereço"]}
+          rows={companiesQuery.data?.map((company) => (
             <TableRow key={company.id}>
               <TableCell>{company.socialName}</TableCell>
               <TableCell>{cnpjMask(company.cnpj)}</TableCell>
@@ -114,21 +77,8 @@ export default function CompanyRegister() {
               </TableCell>
             </TableRow>
           ))}
-        </TableBody>
-      </Table>
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink>1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+        />
+      </Suspense>
     </main>
   );
 }
