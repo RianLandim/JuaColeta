@@ -18,6 +18,9 @@ import { Input } from "../ui/input";
 import { useHookFormMask } from "use-mask-input";
 import { useFetchCep } from "@/hooks/queries/useFetchCep";
 import { useEffect, useState } from "react";
+import { useCreateCompanyMutation } from "@/hooks/mutations/useCreateCompany";
+import { useQueryClient } from "@tanstack/react-query";
+import { FETCH_COMPANIES_KEY } from "@/hooks/queries/useCompanyList";
 
 const createCompanySchema = z.object({
   name: z.string(),
@@ -36,6 +39,7 @@ type CreateCompanySchemaProps = z.infer<typeof createCompanySchema>;
 
 export function CreateCompanyDialog() {
   const [fetch, setFetch] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const {
     register,
@@ -47,10 +51,36 @@ export function CreateCompanyDialog() {
     resolver: zodResolver(createCompanySchema),
   });
 
+  const createCompanyMutation = useCreateCompanyMutation();
+  const queryClient = useQueryClient();
+
   const registerWithMask = useHookFormMask(register);
 
-  const submit: SubmitHandler<CreateCompanySchemaProps> = (data) =>
-    console.log(data);
+  const submit: SubmitHandler<CreateCompanySchemaProps> = async (data) => {
+    const { name, cnpj, ...address } = data;
+
+    await createCompanyMutation.mutateAsync(
+      {
+        cnpj,
+        socialName: name,
+        address,
+      },
+      {
+        onSuccess: (company) => {
+          if (company) {
+            queryClient.setQueryData(
+              [FETCH_COMPANIES_KEY],
+              (data: unknown[]) => {
+                return [...data, company];
+              }
+            );
+          }
+
+          setOpen(false);
+        },
+      }
+    );
+  };
 
   const { data: cepResponse, isLoading: cepLoading } = useFetchCep({
     cep: watch("zipCode", ""),
@@ -68,7 +98,7 @@ export function CreateCompanyDialog() {
   }, [cepResponse, setValue]);
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>
           <PlusCircle className="w-4 h-4 mr-2" />
