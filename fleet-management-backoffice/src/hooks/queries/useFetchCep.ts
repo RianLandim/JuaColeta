@@ -1,7 +1,6 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { z } from "zod";
 
 const cepSchemaValidator = z.object({
@@ -24,11 +23,22 @@ const fetchCep = async (cep: string) => {
 
   const unformmatedCep = cepFormmated ? cep : cep.replace(/\D/g, "");
 
-  const response = await axios.get(
-    `https://brasilapi.com.br/api/cep/v2/${unformmatedCep}`
+  const url = new URL(
+    `/cep/v2/${unformmatedCep}`,
+    "https://brasilapi.com.br/api"
   );
 
-  const parsedResponse = cepSchemaValidator.safeParse(response.data);
+  const response = await fetch(url, { method: "POST" });
+
+  if (response.ok) {
+    const error = (await response.json()) as { message?: string };
+
+    throw new Error(error.message ?? "Ocorreu um erro na requiseção");
+  }
+
+  const responseJSON = await response.json();
+
+  const parsedResponse = cepSchemaValidator.safeParse(responseJSON);
 
   if (!parsedResponse.success) {
     console.log("erro");
