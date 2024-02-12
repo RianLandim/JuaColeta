@@ -26,7 +26,7 @@ export class UserController {
   logger = new Logger(UserController.name);
 
   @Post()
-  create(@Body() data: Required<CreateUserDto>) {
+  create(@Body() data: CreateUserDto) {
     return this.createUser.execute(data);
   }
 

@@ -8,7 +8,7 @@ interface UserRequestProps {
   email: string;
   password: string;
   name: string;
-  license: string | null;
+  license?: string | null;
   cellphone: string;
   role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER';
 }

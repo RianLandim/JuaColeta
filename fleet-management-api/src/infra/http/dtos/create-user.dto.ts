@@ -1,13 +1,24 @@
-import { createZodDto } from 'nestjs-zod';
-import { z } from 'zod';
+import { IsEmail, IsEnum, IsOptional, IsString } from 'class-validator';
 
-const createUserSchema = z.object({
-  email: z.string().email().min(1),
-  password: z.string().min(8),
-  name: z.string().min(1),
-  license: z.string().nullish(),
-  cellphone: z.string(),
-  role: z.enum(['ADMIN', 'COMPANY_ADMIN', 'DRIVER']),
-});
+export class CreateUserDto {
+  @IsString()
+  @IsEmail()
+  email: string;
 
-export class CreateUserDto extends createZodDto(createUserSchema) {}
+  @IsString()
+  password: string;
+
+  @IsString()
+  name: string;
+
+  @IsString()
+  @IsOptional()
+  license?: string | null;
+
+  @IsString()
+  cellphone: string;
+
+  @IsString()
+  @IsEnum(['ADMIN', 'COMPANY_ADMIN', 'DRIVER'])
+  role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER';
+}

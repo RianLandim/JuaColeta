@@ -8,4 +8,12 @@ export class ListCompanyDTO {
   @IsString()
   @IsOptional()
   cnpj?: string;
+
+  @IsString()
+  @IsOptional()
+  page?: string;
+
+  @IsString()
+  @IsOptional()
+  offset?: string;
 }

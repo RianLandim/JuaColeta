@@ -18,6 +18,7 @@ import { InsertEmployeeCompanyDto } from '../dtos/insert-employee-company';
 import { ListCompanyDTO } from '../dtos/list-company.dto';
 import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('company')
 export class CompanyController {
   constructor(
@@ -31,7 +32,6 @@ export class CompanyController {
     return this.createCompany.execute(data);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
   async list(@User() user: UserProps, @Query() queryParams: ListCompanyDTO) {
     const companies = await this.findCompany.execute({

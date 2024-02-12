@@ -105,14 +105,34 @@ model Vehicle {
 
   isSecured Boolean
 
-  userId String?
-  user   User?   @relation(fields: [userId], references: [id])
+  driverId String?
+  driver   User?   @relation(fields: [driverId], references: [id])
 
   companyId String
   company   Company @relation(fields: [companyId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+  Route     Route[]
 
   @@map("vehicle")
+}
+
+model Route {
+  id         String  @id
+  externalId String?
+
+  vehicleId String
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id])
+
+  startPointLat String
+  startPointLon String
+  endPointLat   String
+  endPointLon   String
+
+  duration Float
+  distance Float
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }

@@ -6,7 +6,7 @@ interface UserProps {
   password: string;
   name: string;
   cellphone: string;
-  license: string | null;
+  license?: string | null;
   role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER';
   createdAt: Date;
   updatedAt: Date;
