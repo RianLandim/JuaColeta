@@ -3,7 +3,7 @@ import { useCallback } from "react";
 
 type CreateQueryStringParams = {
   name: string;
-  value: string;
+  value?: string;
 };
 
 export function useQueryParam() {

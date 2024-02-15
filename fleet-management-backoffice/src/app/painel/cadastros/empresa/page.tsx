@@ -2,17 +2,17 @@
 
 import { useCompaniesList } from "@/hooks/queries/useCompanyList";
 import { Input } from "@/components/ui/input";
-import { CreateCompanyDialog } from "@/components/cadastros/CreateCompanyDialog";
+import { CreateCompanyDialog } from "@/components/cadastros/empresa/CreateCompanyDialog";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { cnpjMask } from "@/utils/format/cnpj";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Suspense } from "react";
 import { useQueryParam } from "@/hooks/useQueryParam";
 import { Table } from "@/components/Table";
 import { TableCell, TableRow } from "@/components/ui/table";
+import { EditCompanyDialog } from "@/components/cadastros/empresa/EditCompanyDialog";
 
 const filterSchema = z.object({
   name: z.string(),
@@ -46,6 +46,8 @@ export default function CompanyRegister() {
         Empresas
       </h1>
 
+      <EditCompanyDialog />
+
       <div
         id="header"
         className="w-full flex flex-row items-center justify-between"
@@ -65,20 +67,27 @@ export default function CompanyRegister() {
         <CreateCompanyDialog />
       </div>
 
-      <Suspense>
-        <Table
-          headers={["nome", "cnpj", "endereço"]}
-          rows={companiesQuery.data?.map((company) => (
-            <TableRow key={company.id}>
-              <TableCell>{company.socialName}</TableCell>
-              <TableCell>{cnpjMask(company.cnpj)}</TableCell>
-              <TableCell>
-                {company.address.city}-{company.address.state}
-              </TableCell>
-            </TableRow>
-          ))}
-        />
-      </Suspense>
+      <Table
+        headers={["nome", "cnpj", "endereço", ""]}
+        rows={companiesQuery.data?.map((company) => (
+          <TableRow key={company.id}>
+            <TableCell>{company.socialName}</TableCell>
+            <TableCell>{cnpjMask(company.cnpj)}</TableCell>
+            <TableCell>
+              {company.address.city}-{company.address.state}
+            </TableCell>
+            <TableCell>
+              <Button
+                onClick={() =>
+                  createQueryString([{ name: "editId", value: company.id }])
+                }
+              >
+                Editar
+              </Button>
+            </TableCell>
+          </TableRow>
+        ))}
+      />
     </main>
   );
 }
