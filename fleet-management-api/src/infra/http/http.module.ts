@@ -14,6 +14,7 @@ import { InsertEmployeeCompany } from '@app/usecases/company/insertEmployee';
 import { VehicleController } from './controllers/vehicle.controller';
 import { CreateVehicle } from '@app/usecases/vehicle/create';
 import { ListVehicle } from '@app/usecases/vehicle/list';
+import { FindCompanyById } from '@app/usecases/company/findById';
 
 @Module({
   imports: [AuthenticationModule, DatabaseModule],
@@ -33,6 +34,7 @@ import { ListVehicle } from '@app/usecases/vehicle/list';
     InsertEmployeeCompany,
     CreateVehicle,
     ListVehicle,
+    FindCompanyById,
   ],
 })
 export class HttpModule {}

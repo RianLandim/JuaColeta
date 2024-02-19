@@ -17,6 +17,7 @@ import { InsertEmployeeCompany } from '@app/usecases/company/insertEmployee';
 import { InsertEmployeeCompanyDto } from '../dtos/insert-employee-company';
 import { ListCompanyDTO } from '../dtos/list-company.dto';
 import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
+import { FindCompanyById } from '@app/usecases/company/findById';
 
 @UseGuards(JwtAuthGuard)
 @Controller('company')
@@ -25,6 +26,7 @@ export class CompanyController {
     private createCompany: CreateCompany,
     private findCompany: FindCompany,
     private insertEmployeeCompany: InsertEmployeeCompany,
+    private findCompanyById: FindCompanyById,
   ) {}
 
   @Post()
@@ -51,5 +53,12 @@ export class CompanyController {
       companyId: id,
       userId: body.userId,
     });
+  }
+
+  @Get(':id')
+  async findById(@Param('id') id: string) {
+    const company = await this.findCompanyById.execute({ id });
+
+    return CompanyViewModel.toHttp(company);
   }
 }
