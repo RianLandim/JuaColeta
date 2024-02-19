@@ -4,7 +4,7 @@ import { useCompaniesList } from "@/hooks/queries/useCompanyList";
 import { Input } from "@/components/ui/input";
 import { CreateCompanyDialog } from "@/components/cadastros/empresa/CreateCompanyDialog";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
+import { Eye, Search } from "lucide-react";
 import { cnpjMask } from "@/utils/format/cnpj";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,6 +13,7 @@ import { useQueryParam } from "@/hooks/useQueryParam";
 import { Table } from "@/components/Table";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { EditCompanyDialog } from "@/components/cadastros/empresa/EditCompanyDialog";
+import { useRouter } from "next/navigation";
 
 const filterSchema = z.object({
   name: z.string(),
@@ -22,6 +23,8 @@ const filterSchema = z.object({
 type FilterSchemaProps = z.infer<typeof filterSchema>;
 
 export default function CompanyRegister() {
+  const router = useRouter();
+
   const companiesQuery = useCompaniesList();
   const { createQueryString, searchParams } = useQueryParam();
 
@@ -76,13 +79,23 @@ export default function CompanyRegister() {
             <TableCell>
               {company.address.city}-{company.address.state}
             </TableCell>
-            <TableCell>
+            <TableCell className="w-full flex flex-row items-center justify-center gap-2">
               <Button
                 onClick={() =>
                   createQueryString([{ name: "editId", value: company.id }])
                 }
               >
                 Editar
+              </Button>
+              <Button
+                title="Ver Usuários"
+                onClick={() =>
+                  router.push(
+                    `/painel/cadastros/usuarios?companyId=${company.id}`
+                  )
+                }
+              >
+                <Eye className="w-4 h-4" />
               </Button>
             </TableCell>
           </TableRow>

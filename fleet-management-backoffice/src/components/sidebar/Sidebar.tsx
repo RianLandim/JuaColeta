@@ -25,7 +25,11 @@ export function SideBar() {
       <ProfileCard />
       <div className="w-full flex flex-col items-center justify-evenly space-y-4">
         <NavButton label="Empresa" href="painel/cadastros/empresa" />
-        <NavButton label="Cadastros" href="painel/cadastro" icon={AirVent} />
+        <NavButton
+          label="Usuários"
+          href="painel/cadastros/usuarios"
+          icon={AirVent}
+        />
       </div>
 
       <Button onClick={signOut}>Sair</Button>
