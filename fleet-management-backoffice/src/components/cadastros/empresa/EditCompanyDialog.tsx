@@ -109,17 +109,17 @@ export function EditCompanyDialog() {
                 </div>
 
                 <div className="gap-2 w-full">
-                  <p className="self-start text-sm">Estado</p>
+                  <p className="self-start text-sm">Cidade</p>
+                  <Input {...register("city")} placeholder="Cidade" />
+                </div>
+
+                <div className="gap-2 w-fit">
+                  <p className="self-start text-sm">UF</p>
                   <Input {...register("state")} placeholder="Estado" />
                 </div>
               </div>
 
               <div className="w-full flex flex-row gap-2">
-                <div className="gap-2 w-full">
-                  <p className="self-start text-sm">Cidade</p>
-                  <Input {...register("city")} placeholder="Cidade" />
-                </div>
-
                 <div className="gap-2 w-full">
                   <p className="self-start text-sm">Rua</p>
                   <Input {...register("street")} placeholder="Rua" />

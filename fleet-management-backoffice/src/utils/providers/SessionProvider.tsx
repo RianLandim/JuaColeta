@@ -1,5 +1,11 @@
 import { useRouter } from "next/navigation";
-import { ReactNode, createContext, useContext, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { fetchApi } from "../api";
 import { z } from "zod";
 import Cookies from "js-cookie";
@@ -62,6 +68,29 @@ export default function SessionProvider({ children }: SessionProvider) {
   const [user, setUser] = useState<User>({} as User);
 
   const router = useRouter();
+
+  useEffect(() => {
+    async function validate() {
+      const [data, error] = await fetchApi("user/current-user", {
+        method: "GET",
+        validator: userValidator,
+      });
+
+      console.log(data);
+
+      if (data) {
+        setStatus("authenticated");
+
+        setUser(data);
+      }
+
+      console.log("error", error);
+
+      router.replace("/entrar");
+    }
+
+    void validate();
+  }, []);
 
   async function signIn({ email, password }: SignInParams) {
     const [data, error] = await fetchApi("authentication/login", {

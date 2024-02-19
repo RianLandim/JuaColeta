@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { z } from "zod";
 
 type FetchApiOptions<TValidator extends z.ZodTypeAny> = (
@@ -14,13 +15,18 @@ type FetchApiOptions<TValidator extends z.ZodTypeAny> = (
   credentials?: RequestCredentials;
 };
 
+type ErrorLike = {
+  message?: string;
+  statusCode: number;
+};
+
 export async function fetchApi<TValidator extends z.ZodType<unknown>>(
   route: string,
   options: FetchApiOptions<TValidator> = {
     method: "GET",
   }
 ) {
-  const url = new URL(route, "http://localhost:3333/");
+  const url = new URL(route, env.NEXT_PUBLIC_BASE_URL);
 
   Object.entries(options.queryParams ?? {}).forEach(([key, value]) => {
     if (Array.isArray(value)) {
@@ -48,7 +54,7 @@ export async function fetchApi<TValidator extends z.ZodType<unknown>>(
   });
 
   if (!response.ok) {
-    const error = (await response.json()) as { message?: string };
+    const error = (await response.json()) as ErrorLike;
     return [null, error] as const;
   }
 
