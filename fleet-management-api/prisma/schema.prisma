@@ -95,13 +95,15 @@ enum VehicleCategory {
 model Vehicle {
   id String @id
 
-  model      String
-  plate      String
-  color      String?
-  year       String
-  fabricator String
-  category   VehicleCategory @default(B)
-  renavam    String
+  model          String
+  plate          String
+  color          String?
+  year           String
+  fabricator     String
+  category       VehicleCategory @default(B)
+  renavam        String
+  averageConsume Float?
+  capacity       Float?
 
   isSecured Boolean
 

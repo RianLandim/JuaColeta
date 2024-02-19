@@ -1,7 +1,15 @@
+import { VehicleProps } from '@app/entities/vehicle';
 import { VehicleCategoryProps } from '@utils/enum/vehicle-category.enum';
-import { IsBoolean, IsDate, IsEnum, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsDate,
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
-export class CreateVehicleDTO {
+export class CreateVehicleDTO implements VehicleProps {
   @IsString()
   model: string;
 
@@ -34,4 +42,12 @@ export class CreateVehicleDTO {
 
   @IsDate()
   updatedAt: Date;
+
+  @IsOptional()
+  @IsNumber()
+  averageConsume?: number | null;
+
+  @IsOptional()
+  @IsNumber()
+  capacity?: number | null;
 }

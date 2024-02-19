@@ -2,7 +2,7 @@ import { createId } from '@paralleldrive/cuid2';
 import { VehicleCategoryProps } from '@utils/enum/vehicle-category.enum';
 import { Replace } from '@utils/helpers/replace';
 
-interface VehicleProps {
+export interface VehicleProps {
   model: string;
   fabricator: string;
   plate: string;
@@ -10,6 +10,8 @@ interface VehicleProps {
   year: string;
   renavam: string;
   category: VehicleCategoryProps;
+  averageConsume?: number | null;
+  capacity?: number | null;
   isSecured: boolean;
   companyId: string;
   createdAt: Date;
@@ -72,6 +74,14 @@ export class Vehicle {
 
   get renavam() {
     return this.props.renavam;
+  }
+
+  get averageConsume() {
+    return this.props.averageConsume;
+  }
+
+  get capacity() {
+    return this.props.capacity;
   }
 
   get createdAt() {
