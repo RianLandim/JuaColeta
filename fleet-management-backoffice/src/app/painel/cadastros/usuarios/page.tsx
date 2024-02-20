@@ -1,15 +1,10 @@
 "use client";
 
-import { useCompaniesList } from "@/hooks/queries/useCompanyList";
 import { Input } from "@/components/ui/input";
-import { CreateCompanyDialog } from "@/components/cadastros/empresa/CreateCompanyDialog";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
-import { cnpjMask } from "@/utils/format/cnpj";
 import { Table } from "@/components/Table";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { EditCompanyDialog } from "@/components/cadastros/empresa/EditCompanyDialog";
-import { register } from "module";
 import { useQueryParam } from "@/hooks/useQueryParam";
 import { CreateUserDialog } from "@/components/cadastros/usuario/CreateUserDialog";
 
