@@ -41,7 +41,7 @@ export class PrismaUserRepository implements UserRepository {
       throw new NotFoundException('Usuário não encontrado');
     }
 
-    const user = new User(prismaUser);
+    const user = new User(prismaUser, prismaUser.id);
 
     return user;
   }
@@ -49,7 +49,7 @@ export class PrismaUserRepository implements UserRepository {
   async find() {
     const rawUsers = await this.prisma.user.findMany();
 
-    const users = rawUsers.map((user) => new User(user));
+    const users = rawUsers.map((user) => new User(user, user.id));
 
     return users;
   }
@@ -65,7 +65,7 @@ export class PrismaUserRepository implements UserRepository {
       throw new NotFoundException('Usuário não encontrado');
     }
 
-    const user = new User(rawUser);
+    const user = new User(rawUser, rawUser.id);
 
     return user;
   }

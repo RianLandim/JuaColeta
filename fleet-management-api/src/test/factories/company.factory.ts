@@ -13,7 +13,7 @@ export const fakerCNPJ = () =>
     )}-${faker.string.numeric(2)}`,
   );
 
-export function makeCompany(override: Override) {
+export function makeCompany(override?: Override) {
   const address = new Address({
     city: faker.location.city(),
     country: faker.location.country(),

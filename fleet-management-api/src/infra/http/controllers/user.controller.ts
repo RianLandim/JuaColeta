@@ -1,4 +1,4 @@
-import { CreateUser } from '@app/usecases/user/create';
+import { CreateUser } from '@app/usecases/user/create-user.usecase';
 import {
   Body,
   Controller,
