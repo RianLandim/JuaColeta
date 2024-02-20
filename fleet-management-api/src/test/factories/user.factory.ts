@@ -1,5 +1,5 @@
 import { User } from '@app/entities/user';
-import { faker } from '@faker-js/faker';
+import { fakerPT_BR as faker } from '@faker-js/faker';
 
 type Override = Partial<User>;
 
