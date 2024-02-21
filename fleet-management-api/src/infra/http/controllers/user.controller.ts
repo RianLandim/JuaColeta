@@ -9,9 +9,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from '../dtos/create-user.dto';
-import { FindUsers } from '@app/usecases/user/find';
+import { FindUsers } from '@app/usecases/user/list-users.usecase';
 import { UserViewModel } from '../view-model/user.view-model';
-import { FindUserById } from '@app/usecases/user/findById';
+import { FindUserById } from '@app/usecases/user/find-by-id.usecase';
 import { User, UserProps } from '@utils/decorator/user.decorator';
 import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
 
