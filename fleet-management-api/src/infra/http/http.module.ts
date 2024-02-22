@@ -12,8 +12,8 @@ import { CreateCompany } from '@app/usecases/company/create';
 import { FindCompany } from '@app/usecases/company/find';
 import { InsertEmployeeCompany } from '@app/usecases/company/insertEmployee';
 import { VehicleController } from './controllers/vehicle.controller';
-import { CreateVehicle } from '@app/usecases/vehicle/create';
-import { ListVehicle } from '@app/usecases/vehicle/list';
+import { CreateVehicle } from '@app/usecases/vehicle/create-vehicle.usecase';
+import { ListVehicle } from '@app/usecases/vehicle/list-vehicle.usecase';
 import { FindCompanyById } from '@app/usecases/company/findById';
 
 @Module({
