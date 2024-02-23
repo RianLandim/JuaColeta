@@ -29,6 +29,6 @@ jobs:
         with:
           version: 8
           run_install: false
-      - run: cd fleet-management-api
+      - run: pnpm i
       - run: pnpm test
         working-directory: ./fleet-management-api
