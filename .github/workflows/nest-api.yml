@@ -30,6 +30,4 @@ jobs:
           run_install: false
 
       - run: cd fleet-management-api
-      - run: pnpm ci --if-present
-      - run: pnpm run build --if-present
       - run: pnpm test
