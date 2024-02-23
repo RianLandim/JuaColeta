@@ -22,11 +22,14 @@ jobs:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
+
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          version: 8
+          run_install: false
+
       - run: cd fleet-management-api
-      - run: npm i -g pnpm
       - run: pnpm ci
       - run: pnpm run build --if-present
       - run: pnpm test
