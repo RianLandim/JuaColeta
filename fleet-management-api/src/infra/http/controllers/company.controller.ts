@@ -1,4 +1,4 @@
-import { CreateCompany } from '@app/usecases/company/create';
+import { CreateCompany } from '@app/usecases/company/create-company.usecase';
 import {
   Body,
   Controller,
@@ -9,15 +9,15 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CreateCompanyDTO } from '../dtos/create-company.dto';
-import { FindCompany } from '@app/usecases/company/find';
+import { FindCompany } from '@app/usecases/company/list-company.usecase';
 import { CompanyViewModel } from '../view-model/company.view-model';
 import { User, UserProps } from '@utils/decorator/user.decorator';
 
-import { InsertEmployeeCompany } from '@app/usecases/company/insertEmployee';
+import { InsertEmployeeCompany } from '@app/usecases/company/insert-company-employe.usecase';
 import { InsertEmployeeCompanyDto } from '../dtos/insert-employee-company';
 import { ListCompanyDTO } from '../dtos/list-company.dto';
 import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
-import { FindCompanyById } from '@app/usecases/company/findById';
+import { FindCompanyById } from '@app/usecases/company/find-company-by-id.usecase';
 
 @UseGuards(JwtAuthGuard)
 @Controller('company')

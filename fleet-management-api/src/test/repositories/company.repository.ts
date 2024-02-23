@@ -12,7 +12,13 @@ export class InMemoryCompanyRepository implements CompanyRepository {
   }
 
   async findById(id: string): Promise<Company> {
-    const company = this.companies.find((c) => c.id === id);
+    const companyIndex = this.companies.findIndex((c) => c.id === id);
+
+    const company = this.companies[companyIndex];
+
+    if (!company) {
+      throw new Error('Company not found');
+    }
 
     return company;
   }

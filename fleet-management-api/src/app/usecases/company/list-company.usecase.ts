@@ -7,10 +7,10 @@ interface ListCompanyQueryParams {
 }
 
 @Injectable()
-export class FindCompany {
+export class ListCompany {
   constructor(private companyRepository: CompanyRepository) {}
 
-  async execute(queryParams: ListCompanyQueryParams) {
+  async execute(queryParams?: ListCompanyQueryParams) {
     const companies = await this.companyRepository.list({
       searchParams: queryParams,
     });

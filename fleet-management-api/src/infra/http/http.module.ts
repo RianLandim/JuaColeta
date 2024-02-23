@@ -8,13 +8,13 @@ import { Login } from '@app/usecases/auth/login';
 import { FindUsers } from '@app/usecases/user/list-users.usecase';
 import { FindUserById } from '@app/usecases/user/find-by-id.usecase';
 import { CompanyController } from './controllers/company.controller';
-import { CreateCompany } from '@app/usecases/company/create';
-import { FindCompany } from '@app/usecases/company/find';
-import { InsertEmployeeCompany } from '@app/usecases/company/insertEmployee';
+import { CreateCompany } from '@app/usecases/company/create-company.usecase';
+import { FindCompany } from '@app/usecases/company/list-company.usecase';
+import { InsertEmployeeCompany } from '@app/usecases/company/insert-company-employe.usecase';
 import { VehicleController } from './controllers/vehicle.controller';
 import { CreateVehicle } from '@app/usecases/vehicle/create-vehicle.usecase';
 import { ListVehicle } from '@app/usecases/vehicle/list-vehicle.usecase';
-import { FindCompanyById } from '@app/usecases/company/findById';
+import { FindCompanyById } from '@app/usecases/company/find-company-by-id.usecase';
 
 @Module({
   imports: [AuthenticationModule, DatabaseModule],
