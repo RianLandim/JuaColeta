@@ -1,5 +1,5 @@
 import { Company } from '@app/entities/company';
-import { ListCompany } from './list-company.usecase';
+import { ListCompany } from './get-company.usecase';
 import { InMemoryCompanyRepository } from '@test/repositories/company.repository';
 
 describe('List Company [usecase]', () => {

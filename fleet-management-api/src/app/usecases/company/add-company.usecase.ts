@@ -17,7 +17,7 @@ interface CreateCompanyRequest {
   cnpj: string;
   socialName: string;
   address: AddressProps;
-  email: string;
+  email?: string;
 }
 
 @Injectable()

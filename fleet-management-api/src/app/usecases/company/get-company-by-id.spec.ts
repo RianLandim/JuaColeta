@@ -1,5 +1,5 @@
 import { InMemoryCompanyRepository } from '@test/repositories/company.repository';
-import { FindCompanyById } from './find-company-by-id.usecase';
+import { FindCompanyById } from './get-company-by-id.usecase';
 import { makeCompany } from '@test/factories/company.factory';
 import { createId } from '@paralleldrive/cuid2';
 import { Company } from '@app/entities/company';

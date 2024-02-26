@@ -1,5 +1,5 @@
 import { InMemoryUserRepository } from '@test/repositories/user.repository';
-import { ListUsers } from './list-users.usecase';
+import { ListUsers } from './get-users.usecase';
 import { User } from '@app/entities/user';
 
 describe('list users [usecase]', () => {

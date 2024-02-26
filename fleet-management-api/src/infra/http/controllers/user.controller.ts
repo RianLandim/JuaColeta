@@ -1,4 +1,4 @@
-import { CreateUser } from '@app/usecases/user/create-user.usecase';
+import { CreateUser } from '@app/usecases/user/add-user.usecase';
 import {
   Body,
   Controller,
@@ -9,9 +9,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from '../dtos/create-user.dto';
-import { FindUsers } from '@app/usecases/user/list-users.usecase';
+import { ListUsers } from '@app/usecases/user/get-users.usecase';
 import { UserViewModel } from '../view-model/user.view-model';
-import { FindUserById } from '@app/usecases/user/find-by-id.usecase';
+import { FindUserById } from '@app/usecases/user/get-by-id.usecase';
 import { User, UserProps } from '@utils/decorator/user.decorator';
 import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
 
@@ -19,7 +19,7 @@ import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
 export class UserController {
   constructor(
     private createUser: CreateUser,
-    private findUsers: FindUsers,
+    private listUsers: ListUsers,
     private findUserById: FindUserById,
   ) {}
 
@@ -32,7 +32,7 @@ export class UserController {
 
   @Get()
   async list() {
-    const users = await this.findUsers.execute();
+    const users = await this.listUsers.execute();
 
     return users.map(UserViewModel.toHttp);
   }

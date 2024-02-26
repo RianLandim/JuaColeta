@@ -1,5 +1,5 @@
 import { InMemoryCompanyRepository } from '@test/repositories/company.repository';
-import { CreateCompany } from './create-company.usecase';
+import { CreateCompany } from './add-company.usecase';
 import { makeCompany } from '@test/factories/company.factory';
 import { fakerPT_BR as faker } from '@faker-js/faker';
 

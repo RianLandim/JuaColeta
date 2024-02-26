@@ -1,5 +1,5 @@
 import { InMemoryVehicleRepository } from '@test/repositories/vehicle.repository';
-import { ListVehicle } from './list-vehicle.usecase';
+import { ListVehicle } from './get-vehicle.usecase';
 import { makeVehicle } from '@test/factories/vehicle.factory';
 import { createId } from '@paralleldrive/cuid2';
 import { Vehicle } from '@app/entities/vehicle';

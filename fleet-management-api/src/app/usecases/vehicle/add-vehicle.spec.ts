@@ -1,5 +1,5 @@
 import { InMemoryVehicleRepository } from '@test/repositories/vehicle.repository';
-import { CreateVehicle } from './create-vehicle.usecase';
+import { CreateVehicle } from './add-vehicle.usecase';
 import { makeVehicle } from '@test/factories/vehicle.factory';
 
 describe('Create Vehicle [usecase]', () => {

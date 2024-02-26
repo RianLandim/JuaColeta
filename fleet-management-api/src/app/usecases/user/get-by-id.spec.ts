@@ -1,5 +1,5 @@
 import { InMemoryUserRepository } from '@test/repositories/user.repository';
-import { FindUserById } from './find-by-id.usecase';
+import { FindUserById } from './get-by-id.usecase';
 import { makeUser } from '@test/factories/user.factory';
 import { User } from '@app/entities/user';
 

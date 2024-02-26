@@ -1,5 +1,5 @@
-import { CreateVehicle } from '@app/usecases/vehicle/create-vehicle.usecase';
-import { ListVehicle } from '@app/usecases/vehicle/list-vehicle.usecase';
+import { CreateVehicle } from '@app/usecases/vehicle/add-vehicle.usecase';
+import { ListVehicle } from '@app/usecases/vehicle/get-vehicle.usecase';
 import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CreateVehicleDTO } from '../dtos/create-vehicle.dto';

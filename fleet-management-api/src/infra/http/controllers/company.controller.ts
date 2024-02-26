@@ -1,4 +1,4 @@
-import { CreateCompany } from '@app/usecases/company/create-company.usecase';
+import { CreateCompany } from '@app/usecases/company/add-company.usecase';
 import {
   Body,
   Controller,
@@ -9,22 +9,22 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CreateCompanyDTO } from '../dtos/create-company.dto';
-import { FindCompany } from '@app/usecases/company/list-company.usecase';
+import { ListCompany } from '@app/usecases/company/get-company.usecase';
 import { CompanyViewModel } from '../view-model/company.view-model';
 import { User, UserProps } from '@utils/decorator/user.decorator';
 
-import { InsertEmployeeCompany } from '@app/usecases/company/insert-company-employe.usecase';
+import { InsertEmployeeCompany } from '@app/usecases/company/add-company-employe.usecase';
 import { InsertEmployeeCompanyDto } from '../dtos/insert-employee-company';
 import { ListCompanyDTO } from '../dtos/list-company.dto';
 import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
-import { FindCompanyById } from '@app/usecases/company/find-company-by-id.usecase';
+import { FindCompanyById } from '@app/usecases/company/get-company-by-id.usecase';
 
 @UseGuards(JwtAuthGuard)
 @Controller('company')
 export class CompanyController {
   constructor(
     private createCompany: CreateCompany,
-    private findCompany: FindCompany,
+    private listCompany: ListCompany,
     private insertEmployeeCompany: InsertEmployeeCompany,
     private findCompanyById: FindCompanyById,
   ) {}
@@ -36,7 +36,7 @@ export class CompanyController {
 
   @Get()
   async list(@User() user: UserProps, @Query() queryParams: ListCompanyDTO) {
-    const companies = await this.findCompany.execute({
+    const companies = await this.listCompany.execute({
       socialName: queryParams?.socialName,
       cnpj: queryParams?.cnpj,
     });
