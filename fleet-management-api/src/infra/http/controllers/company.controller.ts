@@ -30,12 +30,15 @@ export class CompanyController {
   ) {}
 
   @Post()
-  create(@Body() data: CreateCompanyDTO) {
+  addCompany(@Body() data: CreateCompanyDTO) {
     return this.createCompany.execute(data);
   }
 
   @Get()
-  async list(@User() user: UserProps, @Query() queryParams: ListCompanyDTO) {
+  async getCompanies(
+    @User() user: UserProps,
+    @Query() queryParams: ListCompanyDTO,
+  ) {
     const companies = await this.listCompany.execute({
       socialName: queryParams?.socialName,
       cnpj: queryParams?.cnpj,
@@ -44,8 +47,8 @@ export class CompanyController {
     return companies.map(CompanyViewModel.toHttp);
   }
 
-  @Post(':id/insert-employee')
-  async insertEmployee(
+  @Post(':id/add-employee')
+  async addEmployee(
     @Param('id') id: string,
     @Body() body: InsertEmployeeCompanyDto,
   ) {
@@ -56,7 +59,7 @@ export class CompanyController {
   }
 
   @Get(':id')
-  async findById(@Param('id') id: string) {
+  async getById(@Param('id') id: string) {
     const company = await this.findCompanyById.execute({ id });
 
     return CompanyViewModel.toHttp(company);

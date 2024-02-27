@@ -12,7 +12,7 @@ import { Address } from '@app/entities/address';
 export class PrismaCompanyRepository implements CompanyRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(company: Company): Promise<void> {
+  async addCompany(company: Company): Promise<void> {
     const rawCompany = PrismaCompanyMapper.toPrisma(company);
 
     await this.prisma.company.create({
@@ -20,7 +20,9 @@ export class PrismaCompanyRepository implements CompanyRepository {
     });
   }
 
-  async list({ searchParams }: CompanyListQueryParams): Promise<Company[]> {
+  async getCompanies({
+    searchParams,
+  }: CompanyListQueryParams): Promise<Company[]> {
     const rawCompanies = await this.prisma.company.findMany({
       include: {
         address: true,
@@ -43,7 +45,7 @@ export class PrismaCompanyRepository implements CompanyRepository {
     return companies;
   }
 
-  async findById(id: string): Promise<Company> {
+  async getCompanyById(id: string): Promise<Company> {
     const rawCompany = await this.prisma.company.findUnique({
       where: { id },
       include: {
@@ -62,7 +64,7 @@ export class PrismaCompanyRepository implements CompanyRepository {
     return company;
   }
 
-  async insertEmployee(userId: string, companyId: string): Promise<void> {
+  async addCompanyEmployee(userId: string, companyId: string): Promise<void> {
     await this.prisma.company.update({
       where: {
         id: companyId,
@@ -74,6 +76,31 @@ export class PrismaCompanyRepository implements CompanyRepository {
           },
         },
       },
+    });
+  }
+
+  async getCompanyByUser(userId: string): Promise<Company[]> {
+    const companies = await this.prisma.company.findMany({
+      where: {
+        users: {
+          some: {
+            id: userId,
+          },
+        },
+      },
+      include: {
+        address: true,
+      },
+    });
+
+    if (!companies.length) {
+      throw new NotFoundException('Este usuário não possui empresa');
+    }
+
+    return companies.map((c) => {
+      const address = new Address(c.address, c.address.id);
+
+      return new Company({ ...c, address }, c.id);
     });
   }
 }

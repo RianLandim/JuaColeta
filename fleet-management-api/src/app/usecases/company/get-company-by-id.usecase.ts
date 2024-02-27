@@ -10,7 +10,7 @@ export class FindCompanyById {
   constructor(private companyRepository: CompanyRepository) {}
 
   async execute({ id }: FindCompanyByIdRequest) {
-    const company = await this.companyRepository.findById(id);
+    const company = await this.companyRepository.getCompanyById(id);
 
     return company;
   }

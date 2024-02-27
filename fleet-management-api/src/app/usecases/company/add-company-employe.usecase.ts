@@ -17,7 +17,7 @@ export class InsertEmployeeCompany {
   async execute(request: InsertEmployeeCompanyRequest) {
     const { companyId, userId } = request;
 
-    const company = await this.companyRepository.findById(companyId);
+    const company = await this.companyRepository.getCompanyById(companyId);
 
     if (!company) {
       throw new NotFoundException('Empresa não encontrada');
@@ -29,6 +29,6 @@ export class InsertEmployeeCompany {
       throw new NotFoundException('Usuário(a) não encontrado(a)');
     }
 
-    await this.companyRepository.insertEmployee(user.id, company.id);
+    await this.companyRepository.addCompanyEmployee(user.id, company.id);
   }
 }

@@ -18,12 +18,10 @@ export class Address {
   private props: AddressProps;
 
   constructor(
-    props: Replace<
-      AddressProps,
-      { createdAt?: Date; updatedAt?: Date; id?: string }
-    >,
+    props: Replace<AddressProps, { createdAt?: Date; updatedAt?: Date }>,
+    id?: string,
   ) {
-    this._id = props.id ?? createId();
+    this._id = id ?? createId();
     this.props = {
       ...props,
       createdAt: props.createdAt ?? new Date(),

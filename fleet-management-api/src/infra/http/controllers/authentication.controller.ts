@@ -22,6 +22,7 @@ export class AuthenticationController {
     const token = this.jwtService.sign({
       name: user.name,
       sub: user.id,
+      email: user.email,
     });
 
     response.cookie('token', token, {

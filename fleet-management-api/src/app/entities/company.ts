@@ -1,12 +1,14 @@
 import { Replace } from '@utils/helpers/replace';
 import { Address } from './address';
 import { createId } from '@paralleldrive/cuid2';
+import { User } from './user';
 
 interface CompanyProps {
   cnpj: string;
   socialName: string;
   addressId: string;
   address: Address;
+  users?: User[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -16,12 +18,10 @@ export class Company {
   private props: CompanyProps;
 
   constructor(
-    props: Replace<
-      CompanyProps,
-      { createdAt?: Date; updatedAt?: Date; id?: string }
-    >,
+    props: Replace<CompanyProps, { createdAt?: Date; updatedAt?: Date }>,
+    id?: string,
   ) {
-    this._id = props.id ?? createId();
+    this._id = id ?? createId();
     this.props = {
       ...props,
       createdAt: props.createdAt ?? new Date(),
@@ -47,6 +47,10 @@ export class Company {
 
   get address() {
     return this.props.address;
+  }
+
+  get users() {
+    return this.props.users;
   }
 
   get createdAt() {

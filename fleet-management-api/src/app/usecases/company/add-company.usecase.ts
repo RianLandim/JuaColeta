@@ -33,6 +33,6 @@ export class CreateCompany {
       addressId: address.id,
     });
 
-    await this.companyRepository.create(company);
+    await this.companyRepository.addCompany(company);
   }
 }

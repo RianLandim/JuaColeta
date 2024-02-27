@@ -11,7 +11,7 @@ export class ListCompany {
   constructor(private companyRepository: CompanyRepository) {}
 
   async execute(queryParams?: ListCompanyQueryParams) {
-    const companies = await this.companyRepository.list({
+    const companies = await this.companyRepository.getCompanies({
       searchParams: queryParams,
     });
 
