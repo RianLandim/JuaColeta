@@ -29,11 +29,14 @@ export class InMemoryCompanyRepository implements CompanyRepository {
   }
 
   async getCompanies(params: CompanyListQueryParams): Promise<Company[]> {
-    return this.companies.filter((c) => {
-      if (c.cnpj === params.searchParams.cnpj) return true;
-      if (c.socialName === params.searchParams.socialName) return true;
-      return true;
-    });
+    if (params) {
+      return this.companies.filter((c) => {
+        if (c.cnpj === params.searchParams.cnpj) return true;
+        if (c.socialName === params.searchParams.socialName) return true;
+      });
+    }
+
+    return this.companies;
   }
 
   async getCompanyByUser(userId: string): Promise<Company[]> {
