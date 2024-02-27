@@ -14,6 +14,8 @@ import { UserViewModel } from '../view-model/user.view-model';
 import { FindUserById } from '@app/usecases/user/get-by-id.usecase';
 import { User, UserProps } from '@utils/decorator/user.decorator';
 import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
+import { Roles } from '@utils/decorator/role.decorator';
+import { RolesGuard } from '@infra/authentication/guards/role.guard';
 
 @UseGuards(JwtAuthGuard)
 @Controller('user')
@@ -26,9 +28,14 @@ export class UserController {
 
   logger = new Logger(UserController.name);
 
+  @Roles(['ADMIN', 'COMPANY_ADMIN'])
+  @UseGuards(RolesGuard)
   @Post()
   addUser(@Body() data: CreateUserDto, @User() currentUser: UserProps) {
-    return this.createUser.execute(data);
+    return this.createUser.execute({
+      ...data,
+      companyId: currentUser.companyId,
+    });
   }
 
   @Get()

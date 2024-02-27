@@ -10,6 +10,7 @@ interface UserRequestProps {
   name: string;
   license?: string | null;
   cellphone: string;
+  companyId?: string;
   role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER';
 }
 
@@ -26,7 +27,7 @@ export class CreateUser {
 
     const user = new User({ ...request, password: hashedPassword });
 
-    await this.userRepository.create(user);
+    await this.userRepository.create(user, request.companyId);
 
     return {
       id: user.id,

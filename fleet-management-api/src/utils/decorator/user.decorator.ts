@@ -6,6 +6,7 @@ export type UserProps = {
   name: string;
   email: string;
   role: UserRole;
+  companyId?: string;
 };
 
 export const User = createParamDecorator(

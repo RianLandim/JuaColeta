@@ -12,7 +12,7 @@ import { PrismaUserMapper } from '../mappers/prisma.user.mapper';
 export class PrismaUserRepository implements UserRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(user: User): Promise<void> {
+  async create(user: User, companyId?: string): Promise<void> {
     const alreadyUser = await this.prisma.user.findFirst({
       where: {
         email: user.email,
@@ -23,7 +23,7 @@ export class PrismaUserRepository implements UserRepository {
       throw new BadRequestException('Usuário já cadastrado');
     }
 
-    const data = PrismaUserMapper.toPrisma(user);
+    const data = PrismaUserMapper.toPrisma(user, companyId);
 
     await this.prisma.user.create({
       data,

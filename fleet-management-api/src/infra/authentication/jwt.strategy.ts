@@ -35,6 +35,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         name: true,
         email: true,
         role: true,
+        Company: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
 
@@ -42,7 +47,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException('Usuário não autorizado');
     }
 
-    return { id: user.id, name: user.name, email: user.email, role: user.role };
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      companyId: user.Company?.[0].id,
+    };
   }
 
   private static extractJWT(req: Request) {
