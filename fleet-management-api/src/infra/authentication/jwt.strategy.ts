@@ -3,11 +3,13 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
 import { PrismaService } from '@infra/database/prisma/prisma.service';
+import { UserRole } from '@prisma/client';
 
 type PayloadProps = {
   sub: string;
   name: string;
   email: string;
+  role: UserRole;
 };
 
 @Injectable()
@@ -32,6 +34,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         id: true,
         name: true,
         email: true,
+        role: true,
       },
     });
 
@@ -39,7 +42,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException('Usuário não autorizado');
     }
 
-    return { id: user.id, name: user.name, email: user.email };
+    return { id: user.id, name: user.name, email: user.email, role: user.role };
   }
 
   private static extractJWT(req: Request) {
