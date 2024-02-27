@@ -11,8 +11,6 @@ import {
 import { CreateCompanyDTO } from '../dtos/create-company.dto';
 import { ListCompany } from '@app/usecases/company/get-company.usecase';
 import { CompanyViewModel } from '../view-model/company.view-model';
-import { User, UserProps } from '@utils/decorator/user.decorator';
-
 import { InsertEmployeeCompany } from '@app/usecases/company/add-company-employe.usecase';
 import { InsertEmployeeCompanyDto } from '../dtos/insert-employee-company';
 import { ListCompanyDTO } from '../dtos/list-company.dto';
@@ -39,10 +37,7 @@ export class CompanyController {
   @Roles(['ADMIN'])
   @UseGuards(RolesGuard)
   @Get()
-  async getCompanies(
-    @User() user: UserProps,
-    @Query() queryParams: ListCompanyDTO,
-  ) {
+  async getCompanies(@Query() queryParams: ListCompanyDTO) {
     const companies = await this.listCompany.execute({
       socialName: queryParams?.socialName,
       cnpj: queryParams?.cnpj,
@@ -51,6 +46,8 @@ export class CompanyController {
     return companies.map(CompanyViewModel.toHttp);
   }
 
+  @Roles(['ADMIN', 'COMPANY_ADMIN'])
+  @UseGuards(RolesGuard)
   @Post(':id/add-employee')
   async addEmployee(
     @Param('id') id: string,
