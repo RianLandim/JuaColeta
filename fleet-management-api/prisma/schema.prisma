@@ -139,3 +139,14 @@ model Route {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
+
+model Notification {
+  id String @id
+
+  title    String
+  message  String
+  category String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
