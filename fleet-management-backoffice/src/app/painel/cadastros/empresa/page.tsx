@@ -1,5 +1,6 @@
 import { EditCompanyDialog } from "@/components/cadastros/empresa/EditCompanyDialog";
 import { Header } from "./_components/header";
+import { CompanyTable } from "./_components/table";
 
 export default function CompanyRegister() {
   return (
@@ -11,6 +12,8 @@ export default function CompanyRegister() {
       <EditCompanyDialog />
 
       <Header />
+
+      <CompanyTable />
     </main>
   );
 }

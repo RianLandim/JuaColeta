@@ -1,63 +1,102 @@
 "use client";
 
-import { Table } from "@/components/Table";
-import { Button } from "@/components/ui/button";
-import { TableRow, TableCell } from "@/components/ui/table";
-import { useCompaniesList } from "@/hooks/queries/useCompanyList";
+import { DataTable } from "@/components/Table";
+
+import { useCompaniesList, Companies } from "@/hooks/queries/useCompanyList";
 import { useQueryParam } from "@/hooks/useQueryParam";
 import { cnpjMask } from "@/utils/format/cnpj";
-import { Eye } from "lucide-react";
-import { useRouter } from "next/router";
+import { createColumnHelper } from "@tanstack/react-table";
+import { match } from "ts-pattern";
+
+import { useRouter } from "next/navigation";
+import { useMemo } from "react";
+import { LoadingIndicator } from "@/components/ui/loadingIndicator";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Eye, MoreHorizontal, Pencil } from "lucide-react";
+import { useTableFilter } from "@/hooks/useTableFilter";
+
+const columnHelper = createColumnHelper<Companies>();
 
 export function CompanyTable() {
   const router = useRouter();
 
   const companiesQuery = useCompaniesList();
-  const { createQueryString, searchParams } = useQueryParam();
+  const { createQueryString } = useQueryParam();
+  const { columnsFilter, columnFilterChange } = useTableFilter();
 
-  const filteredCompanies = companiesQuery.data?.filter((item) => {
-    if (item.socialName === searchParams.get("name")) {
-      return true;
-    }
-
-    if (item.cnpj === searchParams.get("cnpj")) {
-      return true;
-    }
-
-    return true;
-  });
+  const columns = useMemo(
+    () => [
+      columnHelper.accessor("socialName", {
+        filterFn: "includesString",
+        enableColumnFilter: true,
+        header: "Nome",
+      }),
+      columnHelper.accessor("cnpj", {
+        filterFn: "includesString",
+        enableColumnFilter: true,
+        header: "CNPJ",
+        cell: (info) => cnpjMask(info.getValue()),
+      }),
+      columnHelper.display({
+        id: "actions",
+        cell: (info) => {
+          const companyId = info.row.original.id;
+          return (
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Button variant="ghost">
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>Ações</DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={() =>
+                    createQueryString([{ name: "editId", value: companyId }])
+                  }
+                >
+                  <Pencil className="w-4 h-4 mr-2" /> Editar
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() =>
+                    router.push(
+                      `/painel/cadastros/usuarios?companyId=${companyId}`
+                    )
+                  }
+                >
+                  <Eye className="w-4 h-4 mr-2" /> Ver Usuários
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          );
+        },
+      }),
+    ],
+    []
+  );
 
   return (
-    <Table
-      headers={["nome", "cnpj", "endereço", ""]}
-      rows={filteredCompanies?.map((company) => (
-        <TableRow key={company.id}>
-          <TableCell>{company.socialName}</TableCell>
-          <TableCell>{cnpjMask(company.cnpj)}</TableCell>
-          <TableCell>
-            {company.address.city}-{company.address.state}
-          </TableCell>
-          <TableCell className="w-full flex flex-row items-center justify-center gap-2">
-            <Button
-              onClick={() =>
-                createQueryString([{ name: "editId", value: company.id }])
-              }
-            >
-              Editar
-            </Button>
-            <Button
-              title="Ver Usuários"
-              onClick={() =>
-                router.push(
-                  `/painel/cadastros/usuarios?companyId=${company.id}`
-                )
-              }
-            >
-              <Eye className="w-4 h-4" />
-            </Button>
-          </TableCell>
-        </TableRow>
-      ))}
-    />
+    <>
+      {match(companiesQuery)
+        .with({ isFetching: true }, () => <LoadingIndicator />)
+        .with({ isError: true }, () => (
+          <p>Ocorreu um erro ao carregar os dados</p>
+        ))
+        .otherwise(({ data }) => (
+          <DataTable
+            columns={columns}
+            data={data ?? []}
+            columnFilters={columnsFilter}
+            onColumnFiltersChange={columnFilterChange}
+          />
+        ))}
+    </>
   );
 }

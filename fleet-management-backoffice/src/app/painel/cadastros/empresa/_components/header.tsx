@@ -22,7 +22,7 @@ export function Header() {
   const { register, handleSubmit } = useForm<FilterSchemaProps>({
     resolver: zodResolver(filterSchema),
     values: {
-      name: searchParams.get("name") ?? "",
+      name: searchParams.get("Socialname") ?? "",
       cnpj: searchParams.get("cnpj") ?? "",
     },
   });

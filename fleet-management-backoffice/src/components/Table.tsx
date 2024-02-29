@@ -1,69 +1,92 @@
+"use client";
+
 import {
+  ColumnDef,
+  ColumnFiltersState,
+  OnChangeFn,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+
+import {
+  Table,
   TableBody,
+  TableCell,
   TableHead,
   TableHeader,
-  Table as TablePrimitive,
+  TableRow,
 } from "@/components/ui/table";
-import { Fragment, ReactNode } from "react";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationLink,
-  PaginationNext,
-} from "./ui/pagination";
-import { useQueryParam } from "@/hooks/useQueryParam";
 
-interface TableProps {
-  headers: string[];
-  rows: ReactNode | ReactNode[];
+interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+  columnFilters?: ColumnFiltersState;
+  onColumnFiltersChange?: OnChangeFn<ColumnFiltersState>;
 }
 
-export function Table({ headers, rows }: TableProps) {
-  const { createQueryString, searchParams } = useQueryParam();
+export function DataTable<TData, TValue>({
+  columns,
+  data,
+  columnFilters,
+  onColumnFiltersChange,
+}: DataTableProps<TData, TValue>) {
+  const table = useReactTable({
+    data,
+    columns,
+    state: {
+      columnFilters,
+    },
+    onColumnFiltersChange,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+  });
 
   return (
-    <Fragment>
-      <TablePrimitive className="w-full rounded-md bg-slate-300">
+    <div className="rounded-md border w-full h-full bg-slate-300">
+      <Table>
         <TableHeader>
-          {headers.map((header) => (
-            <TableHead key={header}>{header}</TableHead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                );
+              })}
+            </TableRow>
           ))}
         </TableHeader>
-        <TableBody>{rows}</TableBody>
-      </TablePrimitive>
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              onClick={() =>
-                createQueryString([
-                  {
-                    name: "page",
-                    value: String(Number(searchParams.get("page")) - 1),
-                  },
-                ])
-              }
-            />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink>{searchParams.get("page")}</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext
-              onClick={() =>
-                createQueryString([
-                  {
-                    name: "page",
-                    value: String(Number(searchParams.get("page")) + 1),
-                  },
-                ])
-              }
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
-    </Fragment>
+        <TableBody>
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) => (
+              <TableRow
+                key={row.id}
+                data-state={row.getIsSelected() && "selected"}
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={columns.length} className="h-24 text-center">
+                Sem resultado.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </div>
   );
 }

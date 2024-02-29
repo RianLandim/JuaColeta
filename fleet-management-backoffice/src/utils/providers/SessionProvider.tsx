@@ -8,7 +8,6 @@ import {
 } from "react";
 import { fetchApi } from "../api";
 import { z } from "zod";
-import Cookies from "js-cookie";
 
 type User = {
   id: string;
@@ -76,15 +75,13 @@ export default function SessionProvider({ children }: SessionProvider) {
         validator: userValidator,
       });
 
-      console.log(data);
-
       if (data) {
         setStatus("authenticated");
 
         setUser(data);
-      }
 
-      console.log("error", error);
+        return;
+      }
 
       router.replace("/entrar");
     }
