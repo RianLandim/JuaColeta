@@ -11,7 +11,7 @@ interface UserRequestProps {
   license?: string | null;
   cellphone: string;
   companyId?: string;
-  role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER';
+  role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER' | 'CLIENT';
 }
 
 export interface UserResponseProps {

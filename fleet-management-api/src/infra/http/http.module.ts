@@ -15,6 +15,9 @@ import { VehicleController } from './controllers/vehicle.controller';
 import { CreateVehicle } from '@app/usecases/vehicle/add-vehicle.usecase';
 import { ListVehicle } from '@app/usecases/vehicle/get-vehicle.usecase';
 import { FindCompanyById } from '@app/usecases/company/get-company-by-id.usecase';
+import { NotificationController } from './controllers/notication.controller';
+import { AddNotification } from '@app/usecases/notification/add-notification.usecase';
+import { GetNotifications } from '@app/usecases/notification/get-notification.usecase';
 
 @Module({
   imports: [AuthenticationModule, DatabaseModule],
@@ -23,6 +26,7 @@ import { FindCompanyById } from '@app/usecases/company/get-company-by-id.usecase
     UserController,
     CompanyController,
     VehicleController,
+    NotificationController,
   ],
   providers: [
     CreateUser,
@@ -35,6 +39,8 @@ import { FindCompanyById } from '@app/usecases/company/get-company-by-id.usecase
     CreateVehicle,
     ListVehicle,
     FindCompanyById,
+    AddNotification,
+    GetNotifications,
   ],
 })
 export class HttpModule {}
