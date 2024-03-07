@@ -13,10 +13,6 @@ import {
 } from '@react-email/components';
 import * as React from 'react';
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
-
 const StripeWelcomeEmail = () => (
   <Html>
     <Head />
@@ -25,9 +21,11 @@ const StripeWelcomeEmail = () => (
       <Container style={container}>
         <Section style={box}>
           <Img
-            src={`${baseUrl}/static/stripe-logo.png`}
-            width="49"
-            height="21"
+            src={
+              'https://www.shutterstock.com/shutterstock/photos/2296231067/display_1500/stock-vector-garbage-truck-icon-vector-isolated-2296231067.jpg'
+            }
+            width="50"
+            height="50"
             alt="Stripe"
           />
           <Hr style={hr} />

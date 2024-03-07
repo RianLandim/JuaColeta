@@ -4,18 +4,20 @@ import {
   SendMailParams,
 } from '../repositories/mail.repository';
 import { Transporter, createTransport } from 'nodemailer';
+import { ConfigService } from '@nestjs/config';
+import { ConfigurationProps } from '@utils/configuration.validator';
 
 @Injectable()
 export class NodemailerService implements MailRepository {
   nodemailer: Transporter;
 
-  constructor() {
+  constructor(private configService: ConfigService<ConfigurationProps>) {
     this.nodemailer = createTransport({
       host: 'sandbox.smtp.mailtrap.io',
       port: 2525,
       auth: {
-        user: 'e4e565763bac79',
-        pass: 'c3d02c16fa11bc',
+        user: this.configService.get('MAILER_USER'),
+        pass: this.configService.get('MAILER_PASS'),
       },
     });
   }
