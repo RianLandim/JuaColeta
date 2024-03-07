@@ -18,9 +18,10 @@ import { FindCompanyById } from '@app/usecases/company/get-company-by-id.usecase
 import { NotificationController } from './controllers/notication.controller';
 import { AddNotification } from '@app/usecases/notification/add-notification.usecase';
 import { GetNotifications } from '@app/usecases/notification/get-notification.usecase';
+import { MailModule } from '@infra/mail/mail.module';
 
 @Module({
-  imports: [AuthenticationModule, DatabaseModule],
+  imports: [AuthenticationModule, DatabaseModule, MailModule],
   controllers: [
     AuthenticationController,
     UserController,

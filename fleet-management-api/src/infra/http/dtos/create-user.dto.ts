@@ -19,6 +19,6 @@ export class CreateUserDto {
   cellphone: string;
 
   @IsString()
-  @IsEnum(['ADMIN', 'COMPANY_ADMIN', 'DRIVER'])
-  role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER';
+  @IsEnum(['ADMIN', 'COMPANY_ADMIN', 'DRIVER', 'CLIENT'])
+  role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER' | 'CLIENT';
 }

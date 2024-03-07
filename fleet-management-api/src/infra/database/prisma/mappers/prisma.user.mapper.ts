@@ -13,11 +13,13 @@ export class PrismaUserMapper {
       license: user.license,
       role: user.role,
       updatedAt: user.updatedAt,
-      Company: {
-        connect: {
-          id: companyId,
+      ...(companyId && {
+        Company: {
+          connect: {
+            id: companyId,
+          },
         },
-      },
+      }),
     };
   }
 }
