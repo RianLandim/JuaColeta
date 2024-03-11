@@ -28,8 +28,8 @@ export class PrismaCompanyRepository implements CompanyRepository {
         address: true,
       },
       where: {
-        cnpj: { contains: searchParams.cnpj },
-        socialName: { contains: searchParams.socialName },
+        cnpj: { contains: searchParams?.cnpj },
+        socialName: { contains: searchParams?.socialName },
       },
       orderBy: {
         createdAt: 'desc',

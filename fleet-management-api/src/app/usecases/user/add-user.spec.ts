@@ -5,6 +5,7 @@ import { User } from '@app/entities/user';
 
 describe('create user [usecase]', () => {
   const userRepository = new InMemoryUserRepository();
+
   const createUser = new CreateUser(userRepository);
   const user = makeUser();
 

@@ -2,6 +2,7 @@ import { makeCompany } from '@test/factories/company.factory';
 import { PrismaService } from '../prisma.service';
 import { PrismaCompanyRepository } from './prisma.company.repository';
 import { Test } from '@nestjs/testing';
+import { Company } from '@app/entities/company';
 
 describe('Prisma integration test for companies', () => {
   let prismaService: PrismaService;
@@ -17,25 +18,27 @@ describe('Prisma integration test for companies', () => {
   });
 
   afterAll(async () => {
-    await prismaService.company.deleteMany();
+    await Promise.allSettled([
+      prismaService.company.deleteMany(),
+      prismaService.address.deleteMany(),
+    ]);
   });
 
   describe('add company', () => {
     it('Should be able to create an company on prisma', async () => {
       expect(
         async () => await prismaCompanyRepository.addCompany(makeCompany()),
-      ).rejects.not.toThrow();
+      ).not.toThrow();
     });
   });
 
   describe('get company', () => {
     it('Should be able to list companies on prisma', async () => {
-      expect(
-        async () =>
-          await prismaCompanyRepository.getCompanies({
-            searchParams: undefined,
-          }),
-      ).rejects.not.toThrow();
+      const companies = await prismaCompanyRepository.getCompanies({
+        searchParams: undefined,
+      });
+
+      expect(companies.every((c) => c instanceof Company)).toBeTruthy();
     });
   });
 });

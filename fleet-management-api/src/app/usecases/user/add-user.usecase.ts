@@ -25,7 +25,7 @@ export interface UserResponseProps {
 export class CreateUser {
   constructor(
     private userRepository: UserRepository,
-    private mailRepository: MailRepository,
+    private mailRepository?: MailRepository,
   ) {}
 
   async execute(request: UserRequestProps): Promise<UserResponseProps> {
@@ -35,12 +35,14 @@ export class CreateUser {
 
     await this.userRepository.create(user, request.companyId);
 
-    await this.mailRepository.sendMail({
-      from: 'no-reply@fleetmanagement.com',
-      to: user.email,
-      subject: 'Confirmação',
-      html: render(ConfirmEmail()),
-    });
+    if (this.mailRepository) {
+      await this.mailRepository.sendMail({
+        from: 'no-reply@fleetmanagement.com',
+        to: user.email,
+        subject: 'Confirmação',
+        html: render(ConfirmEmail()),
+      });
+    }
 
     return {
       id: user.id,
