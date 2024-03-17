@@ -2,12 +2,14 @@ import { FormHTMLAttributes, ReactNode } from "react";
 
 type CardProps = {
   children: ReactNode;
+  otherCSS: string
 } & Omit<FormHTMLAttributes<HTMLFormElement>, "className">;
 
-export function Card({ children, ...rest }: CardProps) {
+export function Card({ children, otherCSS,...rest  }: CardProps) {
   return (
     <form
-      className="flex flex-col items-center justify-center p-4 rounded-md bg-slate-400 gap-4 w-3/5"
+      className={`flex flex-col items-center justify-center
+      border  w-3/5 ${otherCSS}`}
       {...rest}
     >
       {children}

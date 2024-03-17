@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { SignInCardFrom } from "./_components/SIgnInCardForm";
+import { SignInCardFrom } from "./_components/SignInCardForm";
 
 export default function SignIn() {
   return (

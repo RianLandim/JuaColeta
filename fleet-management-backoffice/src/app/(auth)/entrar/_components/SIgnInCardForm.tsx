@@ -31,27 +31,35 @@ export function SignInCardFrom() {
   const submit: SubmitHandler<SignInProps> = async (data) => signIn(data);
 
   return (
-    <Card onSubmit={handleSubmit(submit)}>
-      <h2 className="text-black font-bold text-3xl">Entrar</h2>
-      <label
-        htmlFor="email"
-        className="self-start text-lg text-black font-bold"
-      >
-        E-mail
-      </label>
-      <Input type="email" {...register("email")} />
+    <Card
+      otherCSS="border-main text-white border-2
+    px-6 py-10 rounded-[50px] bg-[#1E1E1E] gap-4"
+      onSubmit={handleSubmit(submit)}
+    >
+      <h1 className="text-main font-bold text-3xl pb-5 tracking-widest">
+        ENTRAR
+      </h1>
+
+      <Input
+        className="placeholder:text-main border border-main rounded-[50px]
+        bg-transparent"
+        placeholder="E-mail"
+        type="email"
+        {...register("email")}
+      />
       {errors.email && (
         <label htmlFor="email" className="self-start text-base text-red-700">
           {errors.email.message}
         </label>
       )}
-      <label
-        htmlFor="password"
-        className="self-start text-lg text-black font-bold"
-      >
-        Senha
-      </label>
-      <Input type="password" {...register("password")} />
+
+      <Input
+        className="border border-main placeholder:text-main 
+        bg-transparent rounded-[50px]"
+        placeholder="Senha"
+        type="password"
+        {...register("password")}
+      />
       {errors.password && (
         <label htmlFor="password" className="self-start text-base text-red-700">
           {errors.password.message}
@@ -59,13 +67,23 @@ export function SignInCardFrom() {
       )}
       <Link
         href="/recuperar-senha"
-        className="text-sm self-start text-zinc-800 hover:cursor-pointer hover:underline"
+        className="mt-3 self-end text-sm 
+         text-main hover:cursor-pointer underline"
       >
         Esqueceu a senha?
       </Link>
-      <Button className="w-full" type="submit">
+      <Button className="w-full bg-main rounded-[50px] mt-5" type="submit">
         Entrar
       </Button>
+      <p className="text-ssm font-light">
+        Ainda não tem um conta?{" "}
+        <Link
+          href="/recuperar-senha"
+          className="mt-3 self-end hover:cursor-pointer underline"
+        >
+          Esqueceu a senha?
+        </Link>
+      </p>
     </Card>
   );
 }
