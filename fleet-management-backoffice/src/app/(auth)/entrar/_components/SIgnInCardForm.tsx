@@ -12,7 +12,7 @@ import { UseSession } from "@/utils/providers/SessionProvider";
 const signInFormSchema = z.object({
   email: z
     .string()
-    .email("E-mail invalido")
+    .email("E-mail inválido")
     .min(1, "Email precisa ser preenchido"),
   password: z.string().min(1, "Senha precisa ser preenchida"),
 });

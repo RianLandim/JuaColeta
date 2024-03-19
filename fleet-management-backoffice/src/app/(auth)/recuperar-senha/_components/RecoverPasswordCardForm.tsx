@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 const signInFormSchema = z.object({
   email: z
     .string()
-    .email("E-mail invalido")
+    .email("E-mail inválido")
     .min(1, "Email precisa ser preenchido"),
 });
 
