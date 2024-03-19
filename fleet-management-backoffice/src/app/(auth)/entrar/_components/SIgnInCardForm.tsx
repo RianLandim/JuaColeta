@@ -72,7 +72,10 @@ export function SignInCardFrom() {
       >
         Esqueceu a senha?
       </Link>
-      <Button className="w-full bg-main rounded-[50px] mt-5" type="submit">
+      <Button
+        className="w-full bg-main rounded-[50px] mt-5 hover:bg-[#2b7c25]"
+        type="submit"
+      >
         Entrar
       </Button>
       <p className="text-ssm font-light">
