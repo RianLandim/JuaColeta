@@ -26,8 +26,11 @@ module.exports = {
       "5xl": "3.052rem",
     },
     extend: {
+      fontFamily: {
+        roboto: ["Roboto", "times"],
+      },
       colors: {
-        "main": "#8CC63F",
+        main: "#8CC63F",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -13,7 +13,7 @@ export default function AuthLayout({ children }: LayoutProps) {
         <Image width={250} height={250} src="/logo/logo.svg" alt="Logo" />
         <p className="max-w-md pt-8">
           Bem-vindo ao aplicativo oficial da{" "}
-          <p className="text-main inline-block">JUAColeta!</p>
+          <span className="text-main inline-block">JUAColeta!</span>
         </p>
         <p>O futuro da coleta de lixo em suas mãos</p>
       </aside>

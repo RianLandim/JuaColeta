@@ -31,12 +31,8 @@ export function SignInCardFrom() {
   const submit: SubmitHandler<SignInProps> = async (data) => signIn(data);
 
   return (
-    <Card
-      otherCSS="border-main text-white border-2
-    px-6 py-10 rounded-[50px] bg-[#1E1E1E] gap-4"
-      onSubmit={handleSubmit(submit)}
-    >
-      <h1 className="text-main font-bold text-3xl pb-5 tracking-widest">
+    <Card onSubmit={handleSubmit(submit)}>
+      <h1 className="text-main font-bold text-3xl font-roboto pb-5 tracking-widest">
         ENTRAR
       </h1>
 
