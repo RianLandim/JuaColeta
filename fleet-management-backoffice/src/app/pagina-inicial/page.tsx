@@ -1,24 +1,22 @@
 "use client";
 
-import { LayoutProps } from "@/utils/types/layoutProps";
-import { Metadata } from "next";
 import Image from "next/image";
-import foto from "../../../public/landingPage/foto.png";
 import Navbar from "./_components/Navbar";
 
-export default function LandingPage({ children }: LayoutProps) {
+export default function LandingPage() {
   return (
-    <div className="bg-[#1E1E1E] w-full h-full">
+    <div className="w-full h-screen bg-[#1E1E1E] ">
       <Navbar />
       <Image
         className="pb-9"
         src="/landingPage/foto.png"
         width={1920}
-        height={350}
+        height={1}
         alt="Imagem Coleta de Lixo"
       />
-      <div className="max-w-80 m-auto text-white text-center text-base pb-10">
-        <p>
+
+      <div className="text-white text-base w-full  bg-[#1E1E1E]">
+        <p className="max-w-80 m-auto text-center">
           Bem-vindo ao <span className="text-main">JUA</span>Coleta, um app que
           facilitará a comunicação entre o
           <span className="text-main"> cidadão</span> e a{" "}
@@ -28,10 +26,11 @@ export default function LandingPage({ children }: LayoutProps) {
           caminhão está, há quanto tempo ele está da sua casa e se haverá atraso
           na coleta hoje.
         </p>
-        <p className="pt-3">
+        <p className="max-w-80 m-auto text-center pt-3 pb-10">
           Esse é o<span className="text-main"> JUA</span>Coleta!
         </p>
       </div>
+
     </div>
   );
 }
