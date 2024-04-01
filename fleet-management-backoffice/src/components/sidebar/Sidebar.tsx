@@ -33,18 +33,34 @@ export function SideBar() {
       />
       <ProfileCard />
       <div className="w-full flex flex-col space-y-4 justify-self-start ">
-        <SidebarItem label="Página inicial" href="/painel/pagina-inicial" icon={Home} />
+        <SidebarItem
+          label="Página inicial"
+          href="/painel/pagina-inicial"
+          icon={Home}
+        />
         <SidebarItem
           label="Notificações"
           href="/painel/notificacoes"
           icon={BellDot}
         />
-        <SidebarItem label="Funcionários" href="/painel/funcionarios" icon={Contact2} />
+        <SidebarItem
+          label="Funcionários"
+          href="/painel/funcionarios"
+          icon={Contact2}
+        />
         <SidebarItem label="Caminhões" href="/painel/caminhoes" icon={Truck} />
-        <SidebarItem label="Perfil da Empresa" href="/painel/perfil-da-empresa" icon={Briefcase} />
-        <SidebarItem label="Configurações" href="/painel/configuracoes" icon={Sliders} />
+        <SidebarItem
+          label="Perfil da Empresa"
+          href="/painel/perfil-da-empresa"
+          icon={Briefcase}
+        />
+        <SidebarItem
+          label="Configurações"
+          href="/painel/configuracoes"
+          icon={Sliders}
+        />
 
-        <div className="w-full   justify-center flex h-full">
+        <div className="w-full justify-center flex h-full">
           <ButtonSidebar
             variant={"ghost"}
             onClick={signOut}
@@ -54,7 +70,10 @@ export function SideBar() {
             Sair
           </ButtonSidebar>
         </div>
-
+      </div>
+      <div className="flex text-main text-base w-full justify-between px-4 underline">
+        <p>Suporte</p>
+        <p>Termo de Contrato</p>
       </div>
     </aside>
   );
