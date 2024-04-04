@@ -78,7 +78,10 @@ export default function CompanyRegister() {
           phone="(88) 99999-9999"
         />
       </div>
-      <div className="flex w-full h-full justify-center items-center absolute">
+      <div
+        className={`flex justify-center items-center absolute top-0
+       left-0 w-full h-full ${isModalOpen ? "" : "hidden"} `}
+      >
         {isModalOpen && <ModalAddEmployee closeModal={closeModal} />}
       </div>
     </main>
