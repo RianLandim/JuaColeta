@@ -1,16 +1,32 @@
+"use client";
+
 import { EditCompanyDialog } from "@/components/cadastros/empresa/EditCompanyDialog";
 import { Button } from "../../../components/ui/button";
 import Image from "next/image";
-import CardFuncionario from "./_components/cardFuncionario";
+import CardFuncionario from "./_components/CardEmployee";
+import { useState } from "react";
+import ModalAddEmployee from "./_components/ModalAddEmployee";
 
 export default function CompanyRegister() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
-    <main className="w-full flex flex-col gap-4 p-4 text-main h-full">
+    <main className="w-full flex flex-col gap-4 p-4 text-main h-full relative">
       <div className="flex pt-[2.5%] max-2xl:l:pt-[5%] items-center w-full justify-between">
         <h1 id="title" className="text-5xl ">
           Funcionários
         </h1>
-        <Button className="bg-main rounded-full text-black font-normal w-[30%] ">
+        <Button
+          className="bg-main rounded-full text-black font-normal w-[30%]"
+          onClick={openModal}
+        >
           <Image
             src="/addIcon.svg"
             alt="addIcon"
@@ -61,6 +77,9 @@ export default function CompanyRegister() {
           name="funcionário_name"
           phone="(88) 99999-9999"
         />
+      </div>
+      <div className="flex w-full h-full justify-center items-center absolute">
+        {isModalOpen && <ModalAddEmployee closeModal={closeModal} />}
       </div>
     </main>
   );
