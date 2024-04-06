@@ -4,10 +4,26 @@ import { Input } from "../../../../components/ui/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRef, useState } from "react";
+
+const MAX_FILE_SIZE = 5000000;
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
 
 const AddEmployeeFormSchema = z.object({
   name: z.string().min(1, "Nome é obrigatório!"),
   phoneNumber: z.string().min(1, "Número de telefone obragatório!"),
+  truck: z.string().min(1, "Selecione o ID do caminhão!"),
+  photo: z
+    .any()
+    .refine((file) => file === undefined, "Selecione uma foto")
+    .refine(
+      (file) => file?.size <= MAX_FILE_SIZE,
+      `Tamanho máximo para a imagem é 5MB.`
+    )
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      "Somente .jpg, .jpeg, .png são os formatos aceitos."
+    ),
 });
 
 type AddEmployee = z.infer<typeof AddEmployeeFormSchema>;
@@ -16,65 +32,198 @@ interface InterfaceModalAddEmployee {
   closeModal: () => void;
 }
 
+const onSubmit = async () => {
+  try {
+  } catch (e) {}
+};
+
 export default function ModalAddEmployee({
   closeModal,
 }: InterfaceModalAddEmployee) {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // const handleImageClick = () => {
+  //   if (fileInputRef.current) {
+  //     fileInputRef.current.click();
+  //   }
+  // };
+
+  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setSelectedImage(reader.result as string);
+  //     };
+  //     reader.readAsDataURL(file);
+  //     setValue("photo", file)
+  //   }
+  // };
+
+  const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedImage(URL.createObjectURL(file));
+      setValue("photo", file);
+    }
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<AddEmployee>({ resolver: zodResolver(AddEmployeeFormSchema) });
 
   return (
-    <div
-      className="w-2/3 h-1/2 bg-backgroundApp border-main 
-    border-2 rounded-md text-main py-5 px-3 flex flex-col space-y-3
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-3/5 max-h-[600px] max-w-[930px] bg-backgroundApp border-main 
+    border-2 rounded-md text-main py-10 px-3 flex flex-col space-y-11 
     items-center"
     >
       <div className="flex items-center justify-between w-full">
-        <Button variant={"ghost"} onClick={closeModal}>
+        <Button
+          className="rounded-full hover:bg-transparent"
+          variant={"ghost"}
+          onClick={closeModal}
+        >
           <Image src={"/arrowBack.svg"} alt="" height={38} width={38} />
         </Button>
 
-        <h1 className="mr-20 text-2xl">Adicionando Funcionário</h1>
+        <h1 className="mr-20 text-[38px]">Adicionando Funcionário</h1>
       </div>
 
-      <div className="flex space-x-11  ">
-        <div className="py-8 bg-[#D9D9D9] px-7 rounded-lg">
-          <Image
-            alt=""
-            src={"/iconAddProfilePhoto.svg"}
-            height={68}
-            width={68}
-          />
+      <div className="flex-col w-full justify-center items-center text-xl space-y-14">
+        <div className="flex space-x-12 justify-center">
+          {/* IMAGE INPUT */}
+          <div className="flex-col">
+            <label
+              htmlFor="fileInput"
+              className="w-[192px] h-[240px] bg-[#D9D9D9] rounded-lg flex items-center justify-center relative"
+            >
+              {selectedImage ? (
+                <Image
+                  src={selectedImage}
+                  alt="Pré-vizualização da Foto"
+                  width={10000}
+                  height={10000}
+                />
+              ) : (
+                <Image
+                  src={"/iconAddProfilePhoto.svg"}
+                  alt="Pré-vizualização da Foto"
+                  width={100}
+                  height={100}
+                />
+              )}
+
+              {/* Campo de entrada de arquivo invisível */}
+              <Input
+                type="file"
+                accept="image/*"
+                className="absolute opacity-0 w-full h-full z-10 cursor-pointer"
+                {...register("photo")}
+                onChange={onImageChange}
+              />
+            </label>
+
+            {/* <Button
+              
+              type="button"
+              onClick={handleImageClick}
+            >
+              
+            </Button> */}
+
+            {/* Pq esse print do erro teve que ter o && typeof errors.photo.message === "string"??? Nn entendi... */}
+            {errors.photo && typeof errors.photo.message === "string" && (
+              <p className="pt-3 text-center text-base text-red-700 font-medium">
+                {errors.photo.message}
+              </p>
+            )}
+          </div>
+
+          {/* Botão de imagem para selecionar */}
+
+          <div className="flex flex-col space-y-6 w-2/5 text-xl">
+            <div>
+              <Input
+                className="border border-main rounded-[50px] text-xl"
+                placeholder="Nome"
+                type="text"
+                {...register("name")}
+              />
+              {errors.name && (
+                <label className="self-start text-base text-red-700 font-medium">
+                  {errors.name.message}
+                </label>
+              )}
+            </div>
+            <div>
+              <Input
+                className="border border-main rounded-[50px] w-full text-xl"
+                placeholder="Número do Celular"
+                type="text"
+                {...register("phoneNumber")}
+              />
+              {errors.phoneNumber && (
+                <label className="self-start text-base text-red-700 font-medium">
+                  {errors.phoneNumber.message}
+                </label>
+              )}
+            </div>
+
+            <div className="flex flex-col">
+              <div className="flex-col ">
+                <div className="flex space-x-4">
+                  <p>Caminhão: </p>
+                  <select
+                    required
+                    className=" border-main rounded-[50px] text-gray-900 border px-4 shadow focus:outline-none focus:shadow-outline
+                    w-full pl-2 text-xl"
+                    {...register("truck")}
+                  >
+                    <option
+                      className="rounded-full"
+                      value=""
+                      disabled
+                      selected
+                      hidden
+                    >
+                      Id
+                    </option>
+
+                    {/* Aqui falta criar as options:
+                  - Vão ser os IDs dos caminhões retornados
+                  do BANCO DE DADOS */}
+                    <option className="rounded-full" value="1">
+                      1
+                    </option>
+                  </select>
+                </div>
+
+                {errors.truck && (
+                  <label className="self-start text-base text-red-700 font-medium">
+                    {errors.truck.message}
+                  </label>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col space-y-6">
-          <Input
-            className="placeholder:text-main border border-main rounded-[50px]
-        bg-transparent"
-            placeholder="E-mail"
-            type="email"
-            {...register("name")}
-          />
-          {errors.name && (
-            <label className="self-start text-base text-red-700">
-              {errors.name.message}
-            </label>
-          )}
-          <Input
-            className="placeholder:text-main border border-main rounded-[50px]
-        bg-transparent"
-            placeholder="E-mail"
-            type="email"
-            {...register("phoneNumber")}
-          />
-          {errors.phoneNumber && (
-            <label className="self-start text-base text-red-700">
-              {errors.phoneNumber.message}
-            </label>
-          )}
+        <div className="flex pr-5 justify-end">
+          <Button
+            type="submit"
+            className="bg-main hover:bg-main
+        rounded-full w-1/2 text-black shadow-CustomButton text-xl font-normal"
+          >
+            Confirmar Dados
+          </Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
