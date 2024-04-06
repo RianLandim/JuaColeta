@@ -123,13 +123,6 @@ export default function ModalAddEmployee({
               )}
 
               {/* Campo de entrada de arquivo invisível */}
-              {/* <Input
-                type="file"
-                accept="image/*"
-                {...register("photo")}
-                className="absolute opacity-0 w-full h-full z-10 cursor-pointer"
-                onChange={onImageChange}
-              /> */}
               <Controller
                 control={control}
                 name="photo"
