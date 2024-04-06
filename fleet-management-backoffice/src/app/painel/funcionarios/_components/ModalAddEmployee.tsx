@@ -2,9 +2,9 @@ import Image from "next/image";
 import { Button } from "../../../../components/ui/button";
 import { Input } from "../../../../components/ui/input";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
@@ -13,17 +13,16 @@ const AddEmployeeFormSchema = z.object({
   name: z.string().min(1, "Nome é obrigatório!"),
   phoneNumber: z.string().min(1, "Número de telefone obragatório!"),
   truck: z.string().min(1, "Selecione o ID do caminhão!"),
-  photo: z
-    .any()
-    .refine((file) => file === undefined, "Selecione uma foto")
-    .refine(
-      (file) => file?.size <= MAX_FILE_SIZE,
-      `Tamanho máximo para a imagem é 5MB.`
-    )
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      "Somente .jpg, .jpeg, .png são os formatos aceitos."
-    ),
+  photo: z.custom<File>(),
+  // .refine((file) => file === null, "Selecione uma foto")
+  // .refine(
+  //   (file) => file?.size <= MAX_FILE_SIZE,
+  //   `Tamanho máximo para a imagem é 5MB.`
+  // )
+  // .refine(
+  //   (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+  //   "Somente .jpg, .jpeg, .png são os formatos aceitos."
+  // ),
 });
 
 type AddEmployee = z.infer<typeof AddEmployeeFormSchema>;
@@ -32,9 +31,8 @@ interface InterfaceModalAddEmployee {
   closeModal: () => void;
 }
 
-const onSubmit = async () => {
-  try {
-  } catch (e) {}
+const onSubmit: SubmitHandler<AddEmployee> = async (data) => {
+  console.log(data);
 };
 
 export default function ModalAddEmployee({
@@ -42,7 +40,15 @@ export default function ModalAddEmployee({
 }: InterfaceModalAddEmployee) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    control,
+  } = useForm<AddEmployee>({ resolver: zodResolver(AddEmployeeFormSchema) });
+
+  // const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // const handleImageClick = () => {
   //   if (fileInputRef.current) {
@@ -66,16 +72,12 @@ export default function ModalAddEmployee({
     const file = event.target.files?.[0];
     if (file) {
       setSelectedImage(URL.createObjectURL(file));
+      // console.log(file.type);
       setValue("photo", file);
+    } else {
+      setSelectedImage(null);
     }
   };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm<AddEmployee>({ resolver: zodResolver(AddEmployeeFormSchema) });
 
   return (
     <form
@@ -121,22 +123,33 @@ export default function ModalAddEmployee({
               )}
 
               {/* Campo de entrada de arquivo invisível */}
-              <Input
+              {/* <Input
                 type="file"
                 accept="image/*"
-                className="absolute opacity-0 w-full h-full z-10 cursor-pointer"
                 {...register("photo")}
+                className="absolute opacity-0 w-full h-full z-10 cursor-pointer"
                 onChange={onImageChange}
+              /> */}
+              <Controller
+                control={control}
+                name="photo"
+                render={({ field: { onChange } }) => (
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    {...register("photo")}
+                    className="absolute opacity-0 w-full h-full z-10 cursor-pointer"
+                    onChange={({ target }) => {
+                      const file = target.files?.[0];
+                      if (file) {
+                        setSelectedImage(URL.createObjectURL(file));
+                      }
+                      onChange(target.files?.[0]);
+                    }}
+                  />
+                )}
               />
             </label>
-
-            {/* <Button
-              
-              type="button"
-              onClick={handleImageClick}
-            >
-              
-            </Button> */}
 
             {/* Pq esse print do erro teve que ter o && typeof errors.photo.message === "string"??? Nn entendi... */}
             {errors.photo && typeof errors.photo.message === "string" && (
@@ -181,27 +194,19 @@ export default function ModalAddEmployee({
                 <div className="flex space-x-4">
                   <p>Caminhão: </p>
                   <select
-                    required
                     className=" border-main rounded-[50px] text-gray-900 border px-4 shadow focus:outline-none focus:shadow-outline
                     w-full pl-2 text-xl"
+                    defaultValue={""}
                     {...register("truck")}
                   >
-                    <option
-                      className="rounded-full"
-                      value=""
-                      disabled
-                      selected
-                      hidden
-                    >
-                      Id
-                    </option>
-
                     {/* Aqui falta criar as options:
                   - Vão ser os IDs dos caminhões retornados
                   do BANCO DE DADOS */}
-                    <option className="rounded-full" value="1">
-                      1
+                    <option value="" disabled>
+                      Selecione...
                     </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
                   </select>
                 </div>
 

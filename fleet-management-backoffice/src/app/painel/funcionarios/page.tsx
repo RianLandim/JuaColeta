@@ -42,7 +42,7 @@ export default function CompanyRegister() {
         <p>Filtros</p>
       </div>
       <div className="grid grid-rows-3 min-[1900px]:grid-rows-4 grid-flow-col lg:gap-6 md:gap-4 h-full w-full">
-        {/* Aqui os elemenrtos serão mostrados com o card do funcionário.
+        {/* Aqui os elementos serão mostrados com o card do funcionário.
         - Falta fazer a rota para trazer os dados do BANCO DE DADOS.  */}
         <CardFuncionario
           plate="12X21-12X"
