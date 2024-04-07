@@ -30,7 +30,6 @@ export default function LandingPage() {
           Esse é o<span className="text-main"> JUA</span>Coleta!
         </p>
       </div>
-
     </div>
   );
 }
