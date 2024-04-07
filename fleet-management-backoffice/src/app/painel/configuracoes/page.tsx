@@ -37,7 +37,7 @@ export default function Settings() {
             width={30}
             height={30}
           />
-          <p>Acessibilidade</p>
+          <p>Ajuda</p>
         </div>
       </div>
     </main>
