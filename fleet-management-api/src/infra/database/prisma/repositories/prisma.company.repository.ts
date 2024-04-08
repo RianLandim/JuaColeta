@@ -20,9 +20,10 @@ export class PrismaCompanyRepository implements CompanyRepository {
     });
   }
 
-  async getCompanies({
-    searchParams,
-  }: CompanyListQueryParams): Promise<Company[]> {
+  async getCompanies({ searchParams }: CompanyListQueryParams): Promise<{
+    companies: Company[];
+    pagesCount: number;
+  }> {
     const rawCompanies = await this.prisma.company.findMany({
       include: {
         address: true,
@@ -34,6 +35,9 @@ export class PrismaCompanyRepository implements CompanyRepository {
       orderBy: {
         createdAt: 'desc',
       },
+      take: Number(searchParams.offset) || undefined,
+      skip:
+        Number(searchParams.offset) * Number(searchParams.page) || undefined,
     });
 
     const companies = rawCompanies.map((comp) => {
@@ -42,7 +46,9 @@ export class PrismaCompanyRepository implements CompanyRepository {
       return new Company({ ...comp, address });
     });
 
-    return companies;
+    const pagesCount = await this.prisma.company.count();
+
+    return { companies, pagesCount: pagesCount / Number(searchParams.offset) };
   }
 
   async getCompanyById(id: string): Promise<Company> {

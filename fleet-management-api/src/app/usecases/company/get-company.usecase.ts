@@ -2,8 +2,10 @@ import { CompanyRepository } from '@app/repositories/company.repository';
 import { Injectable } from '@nestjs/common';
 
 interface ListCompanyQueryParams {
-  socialName?: string;
   cnpj?: string;
+  socialName?: string;
+  offset?: string;
+  page?: string;
 }
 
 @Injectable()
