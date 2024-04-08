@@ -5,6 +5,19 @@ import Image from "next/image";
 import CardFuncionario from "./_components/CardEmployee";
 import { useState } from "react";
 import ModalAddEmployee from "./_components/ModalAddEmployee";
+import { useQuery } from "@tanstack/react-query";
+import DashboardLoading, { DashboardError } from "../loading";
+
+interface EmployeeProps {
+  email: string;
+  password: string;
+  name: string;
+  cellphone: string;
+  license?: string | null;
+  role: "ADMIN" | "COMPANY_ADMIN" | "DRIVER" | "CLIENT";
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 export default function CompanyRegister() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,6 +29,19 @@ export default function CompanyRegister() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const {
+    isPending,
+    error,
+    data: employees,
+  } = useQuery({
+    queryFn: () =>
+      fetch("http://localhost:3333/user").then((res) => res.json()),
+    queryKey: ["getEmployees"],
+  });
+  if (isPending) return <DashboardLoading />;
+  // if (error) return <DashboardError errorMessage={error.message} />;
+
   return (
     <main className="w-full flex flex-col gap-4 p-4 text-main h-full relative">
       <div className="flex pt-[2.5%] max-2xl:l:pt-[5%] items-center w-full justify-between">
@@ -44,12 +70,16 @@ export default function CompanyRegister() {
       <div className="grid grid-rows-3 min-[1900px]:grid-rows-4 grid-flow-col lg:gap-6 md:gap-4 h-full w-full">
         {/* Aqui os elementos serão mostrados com o card do funcionário.
         - Falta fazer a rota para trazer os dados do BANCO DE DADOS.  */}
-        <CardFuncionario
-          plate="12X21-12X"
-          idTruck={1}
-          name="funcionário_name"
-          phone="(88) 99999-9999"
-        />
+
+        {/* {employees.map((employees: employees) => {
+          <CardFuncionario
+            plate={employees.plate}
+            idTruck={employees.idTruck}
+            name={employees.name}
+            phone={employees.phone}
+          />;
+        })} */}
+
         <CardFuncionario
           plate="12X21-12X"
           idTruck={1}

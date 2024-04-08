@@ -5,6 +5,8 @@ import { z } from "zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import DashboardLoading from "../../loading";
+import { useQuery } from "@tanstack/react-query";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
@@ -31,8 +33,17 @@ interface InterfaceModalAddEmployee {
   closeModal: () => void;
 }
 
+interface truckProps {
+  id: number;
+}
+
 const onSubmit: SubmitHandler<AddEmployee> = async (data) => {
   console.log(data);
+  // try {
+  //   await fetch()
+  // } catch(error){
+  //   console.error(error)
+  // }
 };
 
 export default function ModalAddEmployee({
@@ -48,36 +59,29 @@ export default function ModalAddEmployee({
     control,
   } = useForm<AddEmployee>({ resolver: zodResolver(AddEmployeeFormSchema) });
 
-  // const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  // const handleImageClick = () => {
-  //   if (fileInputRef.current) {
-  //     fileInputRef.current.click();
-  //   }
-  // };
-
-  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  // const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   const file = event.target.files?.[0];
   //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setSelectedImage(reader.result as string);
-  //     };
-  //     reader.readAsDataURL(file);
-  //     setValue("photo", file)
+  //     setSelectedImage(URL.createObjectURL(file));
+  //     // console.log(file.type);
+  //     setValue("photo", file);
+  //   } else {
+  //     setSelectedImage(null);
   //   }
   // };
 
-  const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setSelectedImage(URL.createObjectURL(file));
-      // console.log(file.type);
-      setValue("photo", file);
-    } else {
-      setSelectedImage(null);
-    }
-  };
+  // Como passa company ID nesse caso
+  const {
+    isPending,
+    error,
+    data: truck,
+  } = useQuery({
+    queryFn: () =>
+      fetch("http://localhost:3333/vehicle/").then((res) => res.json()),
+    queryKey: ["getVehicle"],
+  });
+  if (isPending) return <DashboardLoading />;
+  // if (error) return <DashboardError errorMessage={error.message} />;
 
   return (
     <form
@@ -195,6 +199,11 @@ export default function ModalAddEmployee({
                     {/* Aqui falta criar as options:
                   - Vão ser os IDs dos caminhões retornados
                   do BANCO DE DADOS */}
+
+                    {truck.map((truck: truckProps) => {
+                      <option value={truck.id}>{truck.id}</option>;
+                    })}
+
                     <option value="" disabled>
                       Selecione...
                     </option>
