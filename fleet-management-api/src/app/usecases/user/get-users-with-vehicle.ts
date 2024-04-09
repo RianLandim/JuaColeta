@@ -8,6 +8,7 @@ export class GetUsersWithVehicle {
   async execute() {
     const users = await this.userRepository.findUsersWithVehicle();
 
+    console.log(users);
     return users;
   }
 }
