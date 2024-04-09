@@ -16,11 +16,11 @@ export default function DashboardLoading(): ReactElement {
 //   <span className="text-red-500 text-3xl font-bold">Carregando...</span>
 // </div>
 
-interface error {
-  errorMessage: string;
+interface errorProps {
+  errorMessage?: string;
 }
 
-export function DashboardError({ errorMessage }: error): ReactElement {
+export function DashboardError({ errorMessage }: errorProps): ReactElement {
   return (
     <section className="w-full h-full flex-col flex text-red-600 text-3xl font-medium pl-52 justify-center">
       <div className="flex-col space-y-4 flex w-fit items-center">

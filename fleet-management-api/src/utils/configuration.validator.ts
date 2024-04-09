@@ -10,6 +10,7 @@ export const configurationValidationSchema = z.object({
     process.env.NODE_ENV === 'development' ? z.string() : z.undefined(),
   MAILER_PASS:
     process.env.NODE_ENV === 'development' ? z.string() : z.undefined(),
+  RESEND_KEY: z.string(),
 });
 
 export type ConfigurationProps = z.infer<typeof configurationValidationSchema>;

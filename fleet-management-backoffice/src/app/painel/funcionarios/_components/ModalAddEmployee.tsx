@@ -5,8 +5,9 @@ import { z } from "zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import DashboardLoading from "../../loading";
+import DashboardLoading, { DashboardError } from "../../loading";
 import { useQuery } from "@tanstack/react-query";
+import { fetchApi } from "../../../../utils/api";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
@@ -33,7 +34,7 @@ interface InterfaceModalAddEmployee {
   closeModal: () => void;
 }
 
-interface truckProps {
+export interface VehicleProps {
   id: number;
 }
 
@@ -45,6 +46,20 @@ const onSubmit: SubmitHandler<AddEmployee> = async (data) => {
   //   console.error(error)
   // }
 };
+
+const fetchTruckId = async () => {
+  const [data, _] = await fetchApi("vehicle", {
+    method: "GET",
+  });
+
+  return data as VehicleProps[];
+};
+
+const useTruckIdList = () =>
+  useQuery({
+    queryKey: ["FETCH_TRUCK_ID_KEY"],
+    queryFn: () => fetchTruckId(),
+  });
 
 export default function ModalAddEmployee({
   closeModal,
@@ -59,29 +74,14 @@ export default function ModalAddEmployee({
     control,
   } = useForm<AddEmployee>({ resolver: zodResolver(AddEmployeeFormSchema) });
 
-  // const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = event.target.files?.[0];
-  //   if (file) {
-  //     setSelectedImage(URL.createObjectURL(file));
-  //     // console.log(file.type);
-  //     setValue("photo", file);
-  //   } else {
-  //     setSelectedImage(null);
-  //   }
-  // };
-
-  // Como passa company ID nesse caso
   const {
-    isPending,
-    error,
-    data: truck,
-  } = useQuery({
-    queryFn: () =>
-      fetch("http://localhost:3333/vehicle/").then((res) => res.json()),
-    queryKey: ["getVehicle"],
-  });
-  if (isPending) return <DashboardLoading />;
-  // if (error) return <DashboardError errorMessage={error.message} />;
+    data: truckData,
+    isPending: truckIsPending,
+    error: truckError,
+  } = useTruckIdList();
+
+  if (truckIsPending) return <DashboardLoading />;
+  if (truckError) return <DashboardError errorMessage={truckError.message} />;
 
   return (
     <form
@@ -199,16 +199,15 @@ export default function ModalAddEmployee({
                     {/* Aqui falta criar as options:
                   - Vão ser os IDs dos caminhões retornados
                   do BANCO DE DADOS */}
-
-                    {truck.map((truck: truckProps) => {
-                      <option value={truck.id}>{truck.id}</option>;
-                    })}
-
                     <option value="" disabled>
                       Selecione...
                     </option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
+                    {truckData !== null &&
+                      truckData.map((truck: VehicleProps) => (
+                        <option key={truck.id} value={truck.id}>
+                          {truck.id}
+                        </option>
+                      ))}
                   </select>
                 </div>
 

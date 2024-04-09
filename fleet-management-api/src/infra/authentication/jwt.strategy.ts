@@ -60,17 +60,17 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException('Usuário não autorizado');
     }
 
-    if (payload.companyId) {
-      const company = user.Company.find((c) => c.id === payload.companyId);
+    // if (payload.companyId) {
+    //   const company = user.Company.find((c) => c.id === payload.companyId);
 
-      if (company && !company.Billing.length) {
-        throw new UnauthorizedException('Assinatura expirada');
-      }
-    }
+    //   if (company && !company.Billing.length) {
+    //     throw new UnauthorizedException('Assinatura expirada');
+    //   }
+    // }
 
-    if (!user.Company[0].Billing.length) {
-      throw new UnauthorizedException('Assinatura expirada');
-    }
+    // if (!user.Company[0].Billing.length) {
+    //   throw new UnauthorizedException('Assinatura expirada');
+    // }
 
     return {
       id: user.id,
