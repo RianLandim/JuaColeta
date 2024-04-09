@@ -19,6 +19,7 @@ import { NotificationController } from './controllers/notication.controller';
 import { AddNotification } from '@app/usecases/notification/add-notification.usecase';
 import { GetNotifications } from '@app/usecases/notification/get-notification.usecase';
 import { MailModule } from '@infra/mail/mail.module';
+import { GetUsersWithVehicle } from '@app/usecases/user/get-users-with-vehicle';
 
 @Module({
   imports: [AuthenticationModule, DatabaseModule, MailModule],
@@ -42,6 +43,7 @@ import { MailModule } from '@infra/mail/mail.module';
     FindCompanyById,
     AddNotification,
     GetNotifications,
+    GetUsersWithVehicle,
   ],
 })
 export class HttpModule {}
