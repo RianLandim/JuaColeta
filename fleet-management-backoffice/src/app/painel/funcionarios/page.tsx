@@ -5,9 +5,7 @@ import Image from "next/image";
 import CardFuncionario from "./_components/CardEmployee";
 import { useState } from "react";
 import ModalAddEmployee from "./_components/ModalAddEmployee";
-import { useQuery } from "@tanstack/react-query";
 import DashboardLoading, { DashboardError } from "../loading";
-import { fetchApi } from "../../../utils/api";
 import { useEmployeesList } from "../../../hooks/queries/useEmployee";
 import { match } from "ts-pattern";
 
@@ -30,20 +28,6 @@ export default function CompanyRegister() {
   };
 
   const EmployeesQuery = useEmployeesList();
-
-  // const {
-  //   isPending,
-  //   error,
-  //   data: employees,
-  // } = useQuery({
-  //   queryFn: async () => {
-  //     const [data, _] = await fetchApi("user");
-  //     return data as any[];
-  //   },
-  //   queryKey: ["getEmployees"],
-  // });
-  // if (isPending) return <DashboardLoading />;
-  // if (error) return <DashboardError errorMessage={error.message} />;
 
   return (
     <>
@@ -92,7 +76,7 @@ export default function CompanyRegister() {
               <CardFuncionario
                 plate="12X21-12X"
                 idTruck={1}
-                name="funcionário_name"
+                name="ai pai"
                 phone="(88) 99999-9999"
               />
             </div>

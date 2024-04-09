@@ -27,7 +27,7 @@ const fetchEmployees = async (queryParams?: EmployeeQueryParams) => {
     queryParams,
   });
 
-  return data as Employee[];
+  return data;
 
 };
 
