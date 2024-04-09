@@ -15,8 +15,27 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    fontSize: {
+      ssm: ".65rem",
+      sm: "0.8rem",
+      base: "1rem",
+      xl: "1.25rem",
+      "2xl": "1.563rem",
+      "3xl": "1.953rem",
+      "4xl": "2.441rem",
+      "5xl": "3.052rem",
+    },
     extend: {
+      boxShadow: {
+        CustomButton: "0 4px 4px 0 rgba(0, 0, 0, 0.25)",
+        
+      },
+      fontFamily: {
+        roboto: ["Roboto", "times"],
+      },
       colors: {
+        main: "#8CC63F",
+        backgroundApp: "#01371B",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
