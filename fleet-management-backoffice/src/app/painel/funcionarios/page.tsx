@@ -73,12 +73,12 @@ export default function CompanyRegister() {
                   />
                 ))}
 
-              <CardFuncionario
+              {/* <CardFuncionario
                 plate="12X21-12X"
                 idTruck={1}
                 name="ai pai"
                 phone="(88) 99999-9999"
-              />
+              /> */}
             </div>
             <div
               className={`flex justify-center items-center absolute top-0
