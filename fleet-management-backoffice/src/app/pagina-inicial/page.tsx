@@ -15,7 +15,7 @@ export default function LandingPage() {
         alt="Imagem Coleta de Lixo"
       />
 
-      <div className="text-white text-base w-full  bg-[#1E1E1E]">
+      <div className="text-white text-base w-full bg-[#1E1E1E]">
         <p className="max-w-80 m-auto text-center">
           Bem-vindo ao <span className="text-main">JUA</span>Coleta, um app que
           facilitará a comunicação entre o
@@ -30,7 +30,6 @@ export default function LandingPage() {
           Esse é o<span className="text-main"> JUA</span>Coleta!
         </p>
       </div>
-
     </div>
   );
 }

@@ -63,7 +63,7 @@ export function SignInCardFrom() {
       )}
       <Link
         href="/recuperar-senha"
-        className="mt-3 self-end text-sm 
+        className="mt-3 self-center text-sm 
          text-main hover:cursor-pointer underline"
       >
         Esqueceu a senha?
