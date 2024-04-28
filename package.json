@@ -6,5 +6,8 @@
   },
   "scripts": {
     "prepare": "husky"
+  },
+  "dependencies": {
+    "expo": "^50.0.14"
   }
 }
