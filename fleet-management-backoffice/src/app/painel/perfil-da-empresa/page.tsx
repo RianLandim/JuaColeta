@@ -52,7 +52,7 @@ export default function CompanyProfile() {
               </div>
             </div>
 
-            <table className="table-fixed mt-[4%] mb-[3%]">
+            <table className="table-fixed mt-[4%] mb-[3%] border-separate border-spacing-2">
               <thead>
                 <tr className="font-extrabold gap-5">
                   <th className="text-left pb-5">Caminhões</th>
@@ -66,7 +66,18 @@ export default function CompanyProfile() {
                   <td className="py-[3%] pr-20 pl-4 text-left border-l-8 border-main">
                     Caminhão 1
                   </td>
-                  <td className="px-8">José Oliveira</td>
+                  <td className="px-5">
+                    <div className="flex items-center">
+                      <Image
+                        src="/companyProfile/fotoPerfil.svg"
+                        alt="Foto de José Oliveira"
+                        width={40}
+                        height={20}
+                        className="mr-2"
+                      />
+                      <span>José Oliveira</span>
+                    </div>
+                  </td>
                   <td className="px-8">XXXXXXX</td>
                   <td className="bg-[#39B54A] text-white px-6">Operante</td>
                 </tr>
@@ -75,7 +86,18 @@ export default function CompanyProfile() {
                   <td className="py-[3.5%] pl-4 text-left border-l-8 border-main">
                     Caminhão 2
                   </td>
-                  <td>Pablo Neruda</td>
+                  <td className="px-5">
+                    <div className="flex items-center">
+                      <Image
+                        src="/companyProfile/fotoPerfil.svg"
+                        alt="Foto de Pablo Neruda"
+                        width={40}
+                        height={20}
+                        className="mr-2"
+                      />
+                      <span>Pablo Neruda</span>
+                    </div>
+                  </td>
                   <td>XXXXXXX</td>
                   <td className="bg-[#CC3030] text-white">
                     Em <br /> manutenção
@@ -86,7 +108,18 @@ export default function CompanyProfile() {
                   <td className="py-[3.5%] pl-4 text-left border-l-8 border-main">
                     Caminhão 3
                   </td>
-                  <td>Maria Vieira</td>
+                  <td className="px-5">
+                    <div className="flex items-center">
+                      <Image
+                        src="/companyProfile/fotoPerfil.svg"
+                        alt="Foto de José Oliveira"
+                        width={40}
+                        height={20}
+                        className="mr-2"
+                      />
+                      <span>Maria Vieira</span>
+                    </div>
+                  </td>
                   <td>XXXXXXX</td>
                   <td className="bg-[#FF6B00] text-white">
                     Com <br /> atraso
