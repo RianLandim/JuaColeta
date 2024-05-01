@@ -20,6 +20,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/mudarEmail",
+        destination: "/painel/configuracoes/mudarEmail",
+        permanent: false,
+      },
+      {
         source: "/",
         destination: "/painel",
         permanent: true,
