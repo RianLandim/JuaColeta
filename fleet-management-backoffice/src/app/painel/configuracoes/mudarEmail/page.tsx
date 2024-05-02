@@ -1,6 +1,8 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
-import { Button } from "../../../../components/ui/button";
+import { Button } from "@/components/ui/button";
 
 interface ChangeEmail {
   email: string;
@@ -17,19 +19,21 @@ export default function ChangeEmail({ email }: ChangeEmail) {
         height={50}
         className="py-[4%]"
       />
+
       <div className="font-light">
         <p>
           Vamos precisar verificar seu antigo e-mail,
-          <br /> <span>{email}</span>,<br />
+          <br /> <span className="font-bold">{email}</span>,<br />
           para podermos mudá-lo.
         </p>
         <p className="pt-[4%] pb-[10%]">
-          Perdeu o acesso ao seu e-mail, por favor, entre em contato
+          Perdeu o acesso ao seu e-mail, por favor, entre em contatos
           <br />
           com o provedor do e-mail.
         </p>
       </div>
-      <Button className="bg-main rounded-full text-black font-medium w-[70%] hover:bg-[#39B54A]j">
+
+      <Button className="bg-main rounded-full text-black font-medium w-[70%] hover:bg-[#39B54A]">
         Enviar código de verificação
       </Button>
     </main>

@@ -1,4 +1,4 @@
-"use Client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -44,16 +44,18 @@ export default function Settings({ email, company }: Settings) {
         </Link>
         <hr className="my-4 border-main" />
 
-        <div className="hover:cursor-pointer hover:text-[#39B54A] hover:underline flex justify-between items-center">
-          <p>Senha</p>
-          <Image
-            src="/settingsIcons/arrowIcon.svg"
-            alt="Seta"
-            width={20}
-            height={20}
-            className="hover:filter hover:brightness-125"
-          />
-        </div>
+        <Link href="/mudarSenha">
+          <div className="hover:cursor-pointer hover:text-[#39B54A] hover:underline flex justify-between items-center">
+            <p>Senha</p>
+            <Image
+              src="/settingsIcons/arrowIcon.svg"
+              alt="Seta"
+              width={20}
+              height={20}
+              className="hover:filter hover:brightness-125"
+            />
+          </div>
+        </Link>
         <hr className="my-4 border-main" />
 
         <div className="text-[#CC3030] hover:cursor-pointer hover:font-extrabold hover:underline">

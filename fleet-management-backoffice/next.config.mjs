@@ -25,6 +25,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: "/mudarSenha",
+        destination: "/painel/configuracoes/mudarSenha",
+        permanent: false,
+      },
+      {
         source: "/",
         destination: "/painel",
         permanent: true,
