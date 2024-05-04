@@ -20,6 +20,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/mudarNomeEmpresa",
+        destination: "/painel/configuracoes/mudarNomeEmpresa",
+        permanent: false,
+      },
+      {
         source: "/mudarEmail",
         destination: "/painel/configuracoes/mudarEmail",
         permanent: false,

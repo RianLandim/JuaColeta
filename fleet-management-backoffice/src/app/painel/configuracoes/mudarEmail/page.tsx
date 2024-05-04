@@ -27,9 +27,9 @@ export default function ChangeEmail({ email }: ChangeEmail) {
           para podermos mudá-lo.
         </p>
         <p className="pt-[4%] pb-[10%]">
-          Perdeu o acesso ao seu e-mail, por favor, entre em contatos
+          Perdeu o acesso ao seu e-mail?
           <br />
-          com o provedor do e-mail.
+          Por favor, entre em contato com o provedor do e-mail.
         </p>
       </div>
 
