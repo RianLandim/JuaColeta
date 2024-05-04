@@ -5,7 +5,8 @@ export default function MainScreen() {
   return (
     <ImageBackground
       source={require("../../assets/bgimage.png")}
-      style={{ width: "100%", height: "100%" }}>
+      // style={{ width: "100%", height: "100%" }}
+      className="text-white w-full h-full">
 
       <Image source={require("../../assets/logos/logo1.png")}/>
 
