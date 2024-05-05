@@ -2,19 +2,17 @@ import { ImageBackground, View, Image } from "react-native";
 import { LayoutProps } from "../../../utils/types/layoutProps";
 import Navbar from "../components/navbar";
 import CardNotification from "../components/cardNotification";
+import { useNotificationList } from "../../../hooks/queries/useNotificationList";
 
-
+// Use on .map render for notification
 interface NotificationProps {
   text: string;
   isNew?: boolean
 }
 
-// TO DO : QUERY
+const NotificationQuery = useNotificationList()
 
-
-
-
-
+// TO DO: match render for return
 export default function Notification() {
   return (
     <ImageBackground
