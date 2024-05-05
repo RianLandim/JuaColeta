@@ -9,7 +9,7 @@ interface NotificationProps {
   isNew?: boolean;
 }
 
-const NotificationQuery = useNotificationList();
+// const NotificationQuery = useNotificationList();
 
 // TO DO: match render for return
 export default function Notification() {
