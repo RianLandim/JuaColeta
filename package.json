@@ -8,6 +8,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.34.1",
     "expo": "^50.0.14"
   }
 }
