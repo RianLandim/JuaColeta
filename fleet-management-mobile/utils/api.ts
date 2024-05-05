@@ -1,4 +1,4 @@
-import { env } from "@/env";
+import { env } from "@/.env" ;
 import { z } from "zod";
 
 type FetchApiOptions<TValidator extends z.ZodTypeAny> = (
