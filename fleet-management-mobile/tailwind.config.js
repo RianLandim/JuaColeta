@@ -14,7 +14,8 @@ module.exports = {
         LightGrayApp: "#8CC63F",
         DarkGrayApp: "#2A5C43",
         whiteApp: "#F9F9F9",
-        redApp: "#FF1C18"
+        redApp: "#FF1C18",
+        juaGreen: "#8CC63F"
       }
     },
   },
