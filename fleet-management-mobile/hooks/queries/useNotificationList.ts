@@ -1,4 +1,4 @@
-import { fetchApi } from "../../utils/api";
+// import { fetchApi } from "../../utils/api";
 import { useQuery } from "@tanstack/react-query";
 
 type NotificationQueryParams = {
@@ -10,10 +10,10 @@ const FETCH_NOTIFICATION = ["fetch-notification"];
 
 // TO DO: PUT THE ROUTE!
 const fetchNotification = async (queryParams?: NotificationQueryParams) => {
-  const [data, _] = await fetchApi(``, {
-    method: "GET",
-  });
-  return data;
+  // const [data, _] = await fetchApi(``, {
+  //   method: "GET",
+  // });
+  // return data;
 };
 
 const useNotificationList = (queryParams?: NotificationQueryParams) => {
