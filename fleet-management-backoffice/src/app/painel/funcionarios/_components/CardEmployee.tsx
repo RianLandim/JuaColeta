@@ -45,8 +45,8 @@ export default function CardFuncionario({
             Nome:{" "}
             {isEditing ? (
               <input
-                className={`rounded-md bg-transparent pl-2 border`}
-                style={{ width: `${editedName.length}ch` }}
+                className={`rounded-md bg-transparent pl-2 border `}
+                // style={{ width: `${editedName.length}ch` }}
                 type="text"
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}
@@ -55,14 +55,6 @@ export default function CardFuncionario({
               name
             )}
           </p>
-          <Image
-            onClick={() => setIsEditing(!isEditing)}
-            src={"/employee/pencilEdit.svg"}
-            height={20}
-            width={20}
-            alt=""
-            className="hover:cursor-pointer absolute right-10  hover:contrast-200"
-          />
         </div>
         <p>
           Telefone:{" "}
@@ -71,7 +63,7 @@ export default function CardFuncionario({
               className="rounded-md bg-transparent pl-2 border"
               type="text"
               value={editedPhone}
-              style={{ width: `${editedPhone.length}ch` }}
+              // style={{ width: `${editedPhone.length}ch` }}
               onChange={(e) => setEditedPhone(e.target.value)}
             />
           ) : (
@@ -117,15 +109,23 @@ export default function CardFuncionario({
             )}
           </p>
         </div>
-          {isEditing && (
-            <button
-              onClick={handleSave}
-              className="px-3 py-1 border rounded-md self-end hover:bg-white hover:text-black absolute bottom-6 right-10"
-            >
-              Salvar
-            </button>
-          )}
+        {isEditing && (
+          <button
+            onClick={handleSave}
+            className="px-3 py-1 border rounded-md self-end hover:bg-white hover:text-black absolute bottom-6 right-10"
+          >
+            Salvar
+          </button>
+        )}
       </div>
+      <Image
+        onClick={() => setIsEditing(!isEditing)}
+        src={"/employee/pencilEdit.svg"}
+        height={20}
+        width={20}
+        alt=""
+        className="hover:cursor-pointer absolute right-10 top-8  hover:contrast-200 hover:h-7 hover:w-7 ease-in-out"
+      />
     </div>
   );
 }
