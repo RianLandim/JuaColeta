@@ -30,7 +30,7 @@ export default function CardFuncionario({
   };
 
   return (
-    <div className="rounded-lg bg-[#1E1E1E]/75 border-main flex items-center space-x-7 border-2 px-6 py-5 max-h-[169px] w-full relative">
+    <div className="rounded-lg bg-[#1E1E1E]/75 border-main flex items-center space-x-7 border-2 px-6 py-5 max-h-[169px] min-h-[159px] w-full relative">
       <div className="py-8 bg-[#D9D9D9] px-7 rounded-lg">
         <Image
           src={"/employee/profileNone.svg"}

@@ -61,7 +61,7 @@ export default function CompanyRegister() {
           <DashboardError errorMessage={EmployeesQuery.error?.message} />
         ))
         .otherwise((employees) => (
-          <main className="w-full flex flex-col gap-4 p-4 text-main h-full relative">
+          <main className="w-full flex flex-col gap-4 p-4 text-main h-screen relative">
             <div className="flex pt-[2.5%] max-2xl:pt-[5%] items-center w-full justify-between">
               <h1 id="title" className="text-5xl ">
                 Funcionários
@@ -120,14 +120,13 @@ export default function CompanyRegister() {
               )}
             </div>
 
-            <div className="grid grid-rows-3 min-[1900px]:grid-rows-4 grid-flow-col lg:gap-6 md:gap-4 h-full w-full">
+            <div className="grid grid-cols-2 h-full lg:gap-6 md:gap-4 w-full overflow-auto">
               <CardFuncionario
                 key={1}
                 plate={"11111"}
                 idTruck={46657688}
                 name={"Michael de Santa"}
                 phone={"+1 555 432-9999"}
-                
               />
               <CardFuncionario
                 key={1}
@@ -135,45 +134,84 @@ export default function CompanyRegister() {
                 idTruck={46657688}
                 name={"Michael de Santa"}
                 phone={"+1 555 432-9999"}
-                
-              /><CardFuncionario
-              key={1}
-              plate={"11111"}
-              idTruck={46657688}
-              name={"Michael de Santa"}
-              phone={"+1 555 432-9999"}
-              
-            /><CardFuncionario
-            key={1}
-            plate={"11111"}
-            idTruck={46657688}
-            name={"Michael de Santa"}
-            phone={"+1 555 432-9999"}
-            
-          /><CardFuncionario
-          key={1}
-          plate={"11111"}
-          idTruck={46657688}
-          name={"Michael de Santa"}
-          phone={"+1 555 432-9999"}
-          
-        />
+              />
               <CardFuncionario
                 key={1}
                 plate={"11111"}
                 idTruck={46657688}
                 name={"Michael de Santa"}
                 phone={"+1 555 432-9999"}
-                
-              /><CardFuncionario
-              key={1}
-              plate={"11111"}
-              idTruck={46657688}
-              name={"Michael de Santa"}
-              phone={"+1 555 432-9999"}
-              
-            />
-
+              />
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+              />
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+              />{" "}
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+              />{" "}
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+              />
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+              />
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+              />
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+              />
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+              />
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+              />
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+              />
               {employees.data !== null &&
                 filteredEmployees().map((employee: EmployeeProps, index) => (
                   <CardFuncionario
@@ -182,7 +220,6 @@ export default function CompanyRegister() {
                     idTruck={employee.idTruck}
                     name={employee.name}
                     phone={employee.phone}
-                    
                   />
                 ))}
             </div>
