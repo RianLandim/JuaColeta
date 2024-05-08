@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "../../../../components/ui/button";
+import { z } from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface CardFuncionario {
   name: string;
@@ -12,6 +15,19 @@ interface CardFuncionario {
 // To do: chamar rota de editar
 // To do: chamar rota para listar os ids dos caminhoes
 
+const EditEmployeeFormSchema = z.object({
+  name: z.string(),
+  phoneNumber: z.string(),
+  idTruck: z.number(),
+  plate: z.string(),
+});
+
+type EditEmployee = z.infer<typeof EditEmployeeFormSchema>;
+
+const onSubmit: SubmitHandler<EditEmployee> = async (data) => {
+  console.log(data);
+};
+
 export default function CardFuncionario({
   name,
   idTruck,
@@ -19,18 +35,37 @@ export default function CardFuncionario({
   plate,
 }: CardFuncionario) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedName, setEditedName] = useState(name);
-  const [editedPhone, setEditedPhone] = useState(phone);
-  const [editedPlate, setEditedPlate] = useState(plate);
-  // const [editedIdTruck, setEditedIdTruck] = useState(idTruck);
 
-  const handleSave = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    control,
+  } = useForm<EditEmployee>({
+    defaultValues: {
+      name: name,
+      idTruck: idTruck,
+      phoneNumber: phone,
+      plate: plate,
+    }, resolver: zodResolver(EditEmployeeFormSchema)} );
+
+  const handleSave: SubmitHandler<EditEmployee> = async (data, event) => {
+    event?.preventDefault();
+    onSubmit(data); // Chama a função onSubmit com os dados do formulário
+    setIsEditing(false);
+  };
+
+  const handleDelete = () => {
     // Implementar lógica de salvar aqui
     setIsEditing(false);
   };
 
   return (
-    <div className="rounded-lg bg-[#1E1E1E]/75 border-main flex items-center space-x-7 border-2 px-6 py-5 max-h-[169px] min-h-[159px] w-full relative">
+    <form
+      className="rounded-lg bg-[#1E1E1E]/75 border-main flex items-center space-x-7 border-2 px-6 py-5 max-h-[169px] min-h-[159px] w-full relative"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className="py-8 bg-[#D9D9D9] px-7 rounded-lg">
         <Image
           src={"/employee/profileNone.svg"}
@@ -45,11 +80,12 @@ export default function CardFuncionario({
             Nome:{" "}
             {isEditing ? (
               <input
+              // setValue={editedName}
                 className={`rounded-md bg-transparent pl-2 border `}
+                required
                 // style={{ width: `${editedName.length}ch` }}
                 type="text"
-                value={editedName}
-                onChange={(e) => setEditedName(e.target.value)}
+                {...register("name")}
               />
             ) : (
               name
@@ -60,11 +96,11 @@ export default function CardFuncionario({
           Telefone:{" "}
           {isEditing ? (
             <input
+              required
               className="rounded-md bg-transparent pl-2 border"
               type="text"
-              value={editedPhone}
               // style={{ width: `${editedPhone.length}ch` }}
-              onChange={(e) => setEditedPhone(e.target.value)}
+              {...register("phoneNumber")}
             />
           ) : (
             phone
@@ -75,11 +111,12 @@ export default function CardFuncionario({
             Placa:{" "}
             {isEditing ? (
               <input
-                className="rounded-md bg-transparent px-2 border w-24 "
+                required
+                className="rounded-md bg-transparent px-2 border w-24"
                 type="text"
-                value={editedPlate}
                 // style={{ width: `${editedPlate.length}ch` }}
-                onChange={(e) => setEditedPlate(e.target.value)}
+                
+                {...register("plate")}
               />
             ) : (
               plate
@@ -89,9 +126,10 @@ export default function CardFuncionario({
             ID Caminhão: {/* TO DO: RENDER THE SELECT */}
             {isEditing ? (
               <select
+                
                 className=" border-main rounded-[50px] text-gray-900 border px-2 shadow focus:outline-none focus:shadow-outline"
                 defaultValue={""}
-                // {...register("truck")}
+                {...register("idTruck")}
               >
                 {/*- Vão ser os IDs dos caminhões retornados do BANCO DE DADOS */}
                 <option value="" disabled>
@@ -110,12 +148,20 @@ export default function CardFuncionario({
           </p>
         </div>
         {isEditing && (
-          <button
-            onClick={handleSave}
-            className="px-3 py-1 border rounded-md self-end hover:bg-white hover:text-black absolute bottom-6 right-10"
-          >
-            Salvar
-          </button>
+          <div className="flex absolute bottom-6 right-10 space-x-2">
+            <button
+              onClick={handleDelete}
+              className="px-3 py-1 rounded-md bg-red-500 text-white hover:text-black"
+            >
+              Deletar
+            </button>
+            <button
+              className="px-3 py-1 border rounded-md hover:bg-white hover:text-black"
+              type="submit"
+            >
+              Salvar
+            </button>
+          </div>
         )}
       </div>
       <Image
@@ -126,6 +172,6 @@ export default function CardFuncionario({
         alt=""
         className="hover:cursor-pointer absolute right-10 top-8  hover:contrast-200 hover:h-7 hover:w-7 ease-in-out"
       />
-    </div>
+    </form>
   );
 }
