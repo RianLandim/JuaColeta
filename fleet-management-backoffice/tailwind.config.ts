@@ -26,9 +26,16 @@ module.exports = {
       "5xl": "3.052rem",
     },
     extend: {
+      maxWidth: {
+        "1/4": "25%",
+        "1/2": "50%",
+        "3/5": "60%",
+        "7/10": "70%",
+        "4/5": "80%",
+        "9/10": "90%",
+      },
       boxShadow: {
         CustomButton: "0 4px 4px 0 rgba(0, 0, 0, 0.25)",
-        
       },
       fontFamily: {
         roboto: ["Roboto", "times"],

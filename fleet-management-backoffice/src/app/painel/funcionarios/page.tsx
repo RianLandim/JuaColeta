@@ -121,6 +121,59 @@ export default function CompanyRegister() {
             </div>
 
             <div className="grid grid-rows-3 min-[1900px]:grid-rows-4 grid-flow-col lg:gap-6 md:gap-4 h-full w-full">
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+                
+              />
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+                
+              /><CardFuncionario
+              key={1}
+              plate={"11111"}
+              idTruck={46657688}
+              name={"Michael de Santa"}
+              phone={"+1 555 432-9999"}
+              
+            /><CardFuncionario
+            key={1}
+            plate={"11111"}
+            idTruck={46657688}
+            name={"Michael de Santa"}
+            phone={"+1 555 432-9999"}
+            
+          /><CardFuncionario
+          key={1}
+          plate={"11111"}
+          idTruck={46657688}
+          name={"Michael de Santa"}
+          phone={"+1 555 432-9999"}
+          
+        />
+              <CardFuncionario
+                key={1}
+                plate={"11111"}
+                idTruck={46657688}
+                name={"Michael de Santa"}
+                phone={"+1 555 432-9999"}
+                
+              /><CardFuncionario
+              key={1}
+              plate={"11111"}
+              idTruck={46657688}
+              name={"Michael de Santa"}
+              phone={"+1 555 432-9999"}
+              
+            />
+
               {employees.data !== null &&
                 filteredEmployees().map((employee: EmployeeProps, index) => (
                   <CardFuncionario
@@ -129,6 +182,7 @@ export default function CompanyRegister() {
                     idTruck={employee.idTruck}
                     name={employee.name}
                     phone={employee.phone}
+                    
                   />
                 ))}
             </div>
@@ -139,7 +193,6 @@ export default function CompanyRegister() {
             >
               {isModalOpen && <ModalAddEmployee closeModal={closeModal} />}
             </div>
-            
           </main>
         ))}
     </>
