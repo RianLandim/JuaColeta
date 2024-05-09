@@ -1,15 +1,17 @@
 import Image from "next/image";
 import { useState } from "react";
-import { Button } from "../../../../components/ui/button";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEditEmployeeMutation } from "../../../../hooks/mutations/useEditEmployee";
+import { useDeleteEmployeeMutation } from "../../../../hooks/mutations/useDeleteEmployee";
 
 interface CardFuncionario {
   name: string;
   phone: string;
   plate: string;
   idTruck: number;
+  id: string;
 }
 
 // To do: chamar rota de editar
@@ -24,40 +26,37 @@ const EditEmployeeFormSchema = z.object({
 
 type EditEmployee = z.infer<typeof EditEmployeeFormSchema>;
 
-const onSubmit: SubmitHandler<EditEmployee> = async (data) => {
-  console.log(data);
-};
-
 export default function CardFuncionario({
   name,
   idTruck,
   phone,
   plate,
+  id,
 }: CardFuncionario) {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    control,
-  } = useForm<EditEmployee>({
+  const { register, handleSubmit } = useForm<EditEmployee>({
     defaultValues: {
       name: name,
       idTruck: idTruck,
       phoneNumber: phone,
       plate: plate,
-    }, resolver: zodResolver(EditEmployeeFormSchema)} );
+    },
+    resolver: zodResolver(EditEmployeeFormSchema),
+  });
 
-  const handleSave: SubmitHandler<EditEmployee> = async (data, event) => {
-    event?.preventDefault();
-    onSubmit(data); // Chama a função onSubmit com os dados do formulário
+  const EmployeeEditMutation = useEditEmployeeMutation();
+
+  const onSubmit: SubmitHandler<EditEmployee> = async (data) => {
+    EmployeeEditMutation.mutate({ ...data, phone: data.phoneNumber, id });
     setIsEditing(false);
   };
 
-  const handleDelete = () => {
-    // Implementar lógica de salvar aqui
+  const EmployeeDeleteMutation = useDeleteEmployeeMutation();
+
+  const onDelete = async (id: string) => {
+    console.log("deletou");
+    EmployeeDeleteMutation.mutate(id);
     setIsEditing(false);
   };
 
@@ -80,12 +79,11 @@ export default function CardFuncionario({
             Nome:{" "}
             {isEditing ? (
               <input
-              // setValue={editedName}
                 className={`rounded-md bg-transparent pl-2 border `}
                 required
-                // style={{ width: `${editedName.length}ch` }}
                 type="text"
                 {...register("name")}
+                // style={{ width: `${editedName.length}ch` }}
               />
             ) : (
               name
@@ -99,7 +97,6 @@ export default function CardFuncionario({
               required
               className="rounded-md bg-transparent pl-2 border"
               type="text"
-              // style={{ width: `${editedPhone.length}ch` }}
               {...register("phoneNumber")}
             />
           ) : (
@@ -114,8 +111,6 @@ export default function CardFuncionario({
                 required
                 className="rounded-md bg-transparent px-2 border w-24"
                 type="text"
-                // style={{ width: `${editedPlate.length}ch` }}
-                
                 {...register("plate")}
               />
             ) : (
@@ -126,7 +121,6 @@ export default function CardFuncionario({
             ID Caminhão: {/* TO DO: RENDER THE SELECT */}
             {isEditing ? (
               <select
-                
                 className=" border-main rounded-[50px] text-gray-900 border px-2 shadow focus:outline-none focus:shadow-outline"
                 defaultValue={""}
                 {...register("idTruck")}
@@ -150,8 +144,10 @@ export default function CardFuncionario({
         {isEditing && (
           <div className="flex absolute bottom-6 right-10 space-x-2">
             <button
-              onClick={handleDelete}
-              className="px-3 py-1 rounded-md bg-red-500 text-white hover:text-black"
+              onClick={() => {
+                onDelete;
+              }}
+              className="px-3 py-1 rounded-md hover:font-medium border hover:border-none hover:bg-red-500 text-red-500 hover:text-black"
             >
               Deletar
             </button>

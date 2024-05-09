@@ -14,6 +14,7 @@ interface EmployeeProps {
   phone: string;
   plate: string;
   idTruck: number;
+  id: string;
 }
 
 export default function CompanyRegister() {
@@ -121,8 +122,8 @@ export default function CompanyRegister() {
             </div>
 
             <div className="grid grid-cols-2 h-full lg:gap-6 md:gap-4 w-full overflow-auto">
-              
               <CardFuncionario
+                id={"1"}
                 key={1}
                 plate={"11111"}
                 idTruck={46657688}
@@ -133,6 +134,7 @@ export default function CompanyRegister() {
                 filteredEmployees().map((employee: EmployeeProps, index) => (
                   <CardFuncionario
                     key={index}
+                    id={employee.id}
                     plate={employee.plate}
                     idTruck={employee.idTruck}
                     name={employee.name}
