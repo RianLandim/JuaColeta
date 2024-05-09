@@ -80,7 +80,7 @@ export default function Settings({ email, company }: Settings) {
         </div>
 
         {isDeleteModalOpen && (
-          <div className="fixed bg-gray-700 bg-opacity-50 justify-center items-center">
+          <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-75 flex justify-center items-center">
             <DeleteCompany closeModal={closeDeleteModal} />
           </div>
         )}
