@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 interface ChangeEmail {
@@ -10,8 +11,21 @@ interface ChangeEmail {
 
 export default function ChangeEmail({ email }: ChangeEmail) {
   return (
-    <main className="bg-[#181D1A]/60 border-2 border-[#8CC63F] py-[6%] px-[7%] rounded-xl text-main text-center flex flex-col justify-center items-center">
-      <h1 className="font-semibold text-3xl">E-mail</h1>
+    <main className="bg-[#181D1A]/60 border-2 border-[#8CC63F] pb-[6.5%] pt-[4%] px-[3%] rounded-xl text-main text-center flex flex-col justify-center items-center">
+      <div className="flex items-center">
+        <Link href="/configuracoes">
+          <div className="pr-44">
+            <Image
+              src="/settingsIcons/arrowBack.svg"
+              alt="Seta voltar"
+              width={35}
+              height={80}
+            />
+          </div>
+        </Link>
+        <h1 className="font-semibold text-3xl pr-52">E-mail</h1>
+      </div>
+
       <Image
         src="/settingsIcons/pencil-email.svg"
         alt="Editar e-mail"
@@ -33,7 +47,7 @@ export default function ChangeEmail({ email }: ChangeEmail) {
         </p>
       </div>
 
-      <Button className="bg-main rounded-full text-black font-medium w-[70%] hover:bg-[#39B54A]">
+      <Button className="bg-main rounded-full text-black text-base font-medium w-[85%] hover:bg-[#39B54A]">
         Enviar código de verificação
       </Button>
     </main>
