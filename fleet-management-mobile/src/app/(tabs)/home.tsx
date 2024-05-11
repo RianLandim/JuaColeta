@@ -1,5 +1,4 @@
 import { ImageBackground, View, Image } from "react-native";
-// import { LayoutProps } from "../../../utils/types/layoutProps";
 import Navbar from "../components/navbar";
 import {
   requestBackgroundPermissionsAsync,
@@ -23,7 +22,7 @@ export default function Home() {
   useEffect(() => {
     requesLocationdPermissions();
   }, []);
-  
+
   return (
     <ImageBackground
       className="w-full h-full"

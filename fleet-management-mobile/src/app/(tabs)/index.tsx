@@ -31,7 +31,7 @@ export default function LoginScreen() {
         <Text className="text-juaGreen underline font-semibol text-center">
           Trabalha usando o app? 
         </Text>
-        <Text className="text-juaGreen underline font-semibold text-center font-bold">
+        <Text className="text-juaGreen underline font-semibold text-center">
         Cadastre-se Aqui!
         </Text>
       </TouchableOpacity>
