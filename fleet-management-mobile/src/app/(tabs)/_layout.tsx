@@ -5,9 +5,9 @@ export default function TabRouterLayout() {
     <Tabs screenOptions={{headerShown: false,}}>
       <Tabs.Screen name="index" options={{ title: "Login" }} />
       <Tabs.Screen name="home" options={{ title: "Home" }} />
-      <Tabs.Screen name="notification" options={{ title: "Notification" }} 
-
-      />
+      <Tabs.Screen name="notification" options={{ title: "Notification" }} />
+      <Tabs.Screen name="workerLogin" options={{ title: "WorkerLogin" }} />
+      
     </Tabs>
   );
 }

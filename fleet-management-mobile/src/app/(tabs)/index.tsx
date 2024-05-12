@@ -15,7 +15,7 @@ export default function LoginScreen() {
       </View>
 
       <View>
-        <Text className="w-80 h-10 text-white text-center">
+        <Text className="w-90 h-10 text-white text-center">
         Bem Vindo ao Aplicativo oficial da <Text className="text-juaGreen font-semibold">JUAColeta</Text>!</Text>
         <Text className="w-80 h-10 text-white text-center"> 
         O Futuro da coleta coletiva em suas mãos</Text>
@@ -27,14 +27,16 @@ export default function LoginScreen() {
         </TouchableOpacity>
       </Link>
 
-      <TouchableOpacity>
-        <Text className="text-juaGreen underline font-semibol text-center">
+      <Link href="/(tabs)/workerLogin" asChild>
+        <TouchableOpacity>
+          <Text className="text-juaGreen underline font-semibol text-center">
           Trabalha usando o app? 
-        </Text>
-        <Text className="text-juaGreen underline font-semibold text-center font-bold">
-        Cadastre-se Aqui!
-        </Text>
-      </TouchableOpacity>
+          </Text>
+          <Text className="text-juaGreen underline font-semibold text-center font-bold">
+          Cadastre-se Aqui!
+          </Text>
+        </TouchableOpacity>
+      </Link>
 
     </ImageBackground>
   );

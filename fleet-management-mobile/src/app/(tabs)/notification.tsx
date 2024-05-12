@@ -1,6 +1,6 @@
 import { ImageBackground, View, Image } from "react-native";
-import Navbar from "../components/navbar";
-import CardNotification from "../components/cardNotification";
+import Navbar from "../_components/navbar";
+import CardNotification from "../_components/cardNotification";
 import { useNotificationList } from "../../../hooks/queries/useNotificationList";
 
 // Use on .map render for notification
