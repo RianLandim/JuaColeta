@@ -1,10 +1,6 @@
 // import { fetchApi } from "../../utils/api";
-import { useQuery } from "@tanstack/react-query";
 
-// type AdressQueryParams = {
-//   text: string;
-//   isNew: boolean;
-// };
+// import { useQuery } from "@tanstack/react-query";
 
 const FETCH_ADRESS= ["fetch-adress"];
 
@@ -16,11 +12,11 @@ const fetchAdress = async () => {
   // return data;
 };
 
-const useNotificationList = () => {
-  useQuery({
-    queryKey: FETCH_ADRESS,
-    queryFn: () => fetchAdress(),
-  });
+const UseGetAdress = () => {
+  // useQuery({
+  //   queryKey: FETCH_ADRESS,
+  //   queryFn: () => fetchAdress(),
+  // });
 };
 
-export { useNotificationList, FETCH_ADRESS};
+export { UseGetAdress, FETCH_ADRESS};

@@ -5,32 +5,59 @@ import {
   TextInput,
   Pressable,
 } from "react-native";
+import { useEffect } from "react";
 import Navbar from "../components/navbar";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { UseGetAdress } from "../../../hooks/queries/useGetAdress";
+import { UseEditAdressMutation } from "../../../hooks/mutation/useEditAdress";
 
-const editAdressFormSchema = z.object({
-  street: z.string().min(1, "Rua precisa ser preenchido."),
-  neighborhood: z.string().min(1, "Bairro precisa ser preenchido."),
-  number: z.string().min(1, "Número da residência deve ser preenchido. "),
-});
-
-type editAdressProps = z.infer<typeof editAdressFormSchema>;
-
-const onSubmit: SubmitHandler<editAdressProps> = async (data) => {
-  // EmployeeEditMutation.mutate({ ...data, phone: data.phoneNumber, id });
-  console.log(data);
-};
+// const onSubmit: SubmitHandler<editAdressProps> = async (data) => {
+//   // EmployeeEditMutation.mutate({ ...data, phone: data.phoneNumber, id });
+//   EditAdressMutation
+//   console.log(data);
+// };
 
 export default function EditAdressScreen() {
+  const editAdressFormSchema = z.object({
+    street: z.string().min(1),
+    neighborhood: z.string().min(1),
+    number: z.string().min(1),
+  });
+  type editAdressProps = z.infer<typeof editAdressFormSchema>;
+
   const {
+    reset,
     control,
     handleSubmit,
-    formState: { errors },
-  } = useForm<editAdressProps>({ resolver: zodResolver(editAdressFormSchema) });
-  // console.log(route.name);
-  // const routeToGoBack = route.name
+    formState: { errors, isSubmitSuccessful },
+  } = useForm<editAdressProps>({
+    defaultValues: {
+      street: "",
+      number: "",
+      neighborhood: "",
+    },
+    resolver: zodResolver(editAdressFormSchema),
+  });
+
+  // TO DO: CHAMAR ROTA DE VER ENDEREÇO ATUAL
+  const GetAdressQuery = UseGetAdress();
+
+  // TO DO: CHAMAR ROTA DE EDITAR
+  const EditAdressMutation = UseEditAdressMutation();
+
+  const onSubmit: SubmitHandler<editAdressProps> = async (data) => {
+    // EmployeeEditMutation.mutate({ ...data, phone: data.phoneNumber, id });
+    EditAdressMutation;
+    console.log(data);
+    reset({...data})
+  };
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset({ street: "", number: "", neighborhood: "" })
+    }
+  }, [GetAdressQuery])
 
   return (
     <ImageBackground
@@ -77,8 +104,7 @@ export default function EditAdressScreen() {
               }}
               render={({ field: { value, onChange } }) => (
                 <TextInput
-                value={value}
-
+                  value={value}
                   onChangeText={onChange}
                   placeholder={"Número da sua casa"}
                   placeholderTextColor={"#FFF"}
@@ -103,8 +129,7 @@ export default function EditAdressScreen() {
               }}
               render={({ field: { value, onChange } }) => (
                 <TextInput
-                value={value}
-
+                  value={value}
                   onChangeText={onChange}
                   placeholder={"Nome do seu bairro"}
                   placeholderTextColor={"#FFF"}

@@ -9,9 +9,6 @@ import Navbar from "../components/navbar";
 import { Link } from "expo-router";
 
 export default function AdressScreen() {
-  // const route = useRoute();
-  // console.log(route.name);
-  // const routeToGoBack = route.name
 
   return (
     <ImageBackground
@@ -45,7 +42,6 @@ export default function AdressScreen() {
         <Text className="text-LightGrayApp text-2xl">
           Entrar como funcionário
         </Text>
-        {/* <View className="h-[1px] w-full bg-LightGrayApp"></View> */}
       </View>
     </ImageBackground>
   );
