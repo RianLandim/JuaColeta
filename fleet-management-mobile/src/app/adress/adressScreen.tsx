@@ -3,17 +3,17 @@ import {
   View,
   Text,
   Image,
-  TouchableWithoutFeedback,
 } from "react-native";
 import Navbar from "../components/navbar";
 import { Link } from "expo-router";
+import image from '../../../assets/bgimage.png'
 
 export default function AdressScreen() {
 
   return (
     <ImageBackground
       className="flex space-y-10 w-full h-full"
-      source={require("../../../assets/bgimage.png")}
+      source={image}
     >
       <Navbar isRouteToGoBack />
 
