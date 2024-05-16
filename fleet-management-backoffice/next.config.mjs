@@ -20,6 +20,26 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/configuracoes",
+        destination: "/painel/configuracoes",
+        permanent: false,
+      },
+      {
+        source: "/mudarNomeEmpresa",
+        destination: "/painel/configuracoes/mudarNomeEmpresa",
+        permanent: false,
+      },
+      {
+        source: "/mudarEmail",
+        destination: "/painel/configuracoes/mudarEmail",
+        permanent: false,
+      },
+      {
+        source: "/mudarSenha",
+        destination: "/painel/configuracoes/mudarSenha",
+        permanent: false,
+      },
+      {
         source: "/",
         destination: "/entrar",
         permanent: true,
