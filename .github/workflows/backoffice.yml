@@ -18,3 +18,4 @@ jobs:
 
       - name: Lint
         run: npm run lint
+        working-directory: ./fleet-management-backoffice
