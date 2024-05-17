@@ -12,18 +12,9 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
 
-      - run: npm i
-        working-directory: ./fleet-management-api
-
-      - run: npm run lint
-        working-directory: ./fleet-management-backoffice
+      - name: Lint
+        run: npm run lint
