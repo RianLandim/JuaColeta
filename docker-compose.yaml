@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  database:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USERNAME=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DATABASE=app
+    volumes:
+      - postgresql_data:/bitnami/postgresql
+    networks:
+      - fleet_net
+  minio-storage:
+    image: minio/minio
+    ports:
+      - 9000:9000
+      - 41277:41277
+    environment:
+      MINIO_ACCESS_KEY: be6b156f1127338b0bc9c6de77279fb5 # generated using node's crypto.randomBytes
+      MINIO_SECRET_KEY: 311c8c64ce7ea4d686cb6921ee69eaea # generated using node's crypto.randomBytes
+      MINIO_REGION: us-east-2
+      MINIO_HTTP_PORT: 9000
+    command: minio server /data --console-address 0.0.0.0:41277
+    volumes:
+      - ./minio-data:/data
+
+networks:
+  fleet_net:
+    driver: bridge
+
+volumes:
+  postgresql_data:
+    driver: local
