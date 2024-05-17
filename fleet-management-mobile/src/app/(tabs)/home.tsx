@@ -1,6 +1,8 @@
-import { ImageBackground, View, Image } from "react-native";
+import { ImageBackground, Image } from "react-native";
 // import { LayoutProps } from "../../../utils/types/layoutProps";
 import Navbar from "../_components/navbar";
+import ActionButton from "../_components/actionButton";
+
 import {
   requestBackgroundPermissionsAsync,
   getCurrentPositionAsync,
@@ -23,7 +25,7 @@ export default function Home() {
   useEffect(() => {
     requesLocationdPermissions();
   }, []);
-  
+
   return (
     <ImageBackground
       className="w-full h-full"
@@ -31,6 +33,8 @@ export default function Home() {
     >
       <Navbar />
       <Image source={require("../../../assets/Mapa.jpg")} />
+
+      <ActionButton />
     </ImageBackground>
   );
 }
