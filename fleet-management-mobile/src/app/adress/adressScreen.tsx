@@ -15,17 +15,17 @@ export default function AdressScreen() {
       <Navbar isRouteToGoBack />
 
       <View className="flex h-full w-full px-10 space-y-5">
-        <Text className="text-LightGrayApp text-2xl">Endereço</Text>
+        <Text className="text-LightGreenApp text-2xl">Endereço</Text>
 
         <View className="flex flex-row items-center space-x-5">
           <Link href={"/adress/editAdressScreen"}>
             <View className="flex items-center flex-row space-x-10">
               <View className="flex flex-col">
-                <Text className="text-lg text-LightGrayApp">
+                <Text className="text-lg text-LightGreenApp">
                   Rua Avenida Presidente da Ditadura
                 </Text>
-                <Text className="text-lg text-LightGrayApp">NUmero Xyz</Text>
-                <Text className="text-lg text-LightGrayApp">Bairo Fulano</Text>
+                <Text className="text-lg text-LightGreenApp">NUmero Xyz</Text>
+                <Text className="text-lg text-LightGreenApp">Bairo Fulano</Text>
               </View>
 
               <Image source={require("@/assets/Buttons/ArrowToRight.png")} />
@@ -33,25 +33,25 @@ export default function AdressScreen() {
           </Link>
         </View>
 
-        <View className="h-[1px] w-full bg-LightGrayApp"></View>
+        <View className="h-[1px] w-full bg-LightGreenApp"></View>
 
         <View>
           <TouchableWithoutFeedback>
-            <Text className="text-LightGrayApp text-2xl">
+            <Text className="text-LightGreenApp text-2xl">
               Entrar como funcionário
             </Text>
           </TouchableWithoutFeedback>
         </View>
 
-
-
         <View>
-          <Link href={"/employee-notification/EmployeeNotificationScreen"} asChild>
+          <Link
+            href={"/employee-notification/EmployeeNotificationScreen"}
+            asChild
+          >
             <TouchableWithoutFeedback>
-              <Text className="text-LightGrayApp text-2xl underline">
+              <Text className="text-LightGreenApp text-2xl underline">
                 Ver notificaçoes do Motorista
               </Text>
-              {/* <Image source={require("@/assets/Buttons/menuBurguer.png")} /> */}
             </TouchableWithoutFeedback>
           </Link>
         </View>

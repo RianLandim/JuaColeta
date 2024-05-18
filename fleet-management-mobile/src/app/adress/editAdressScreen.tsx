@@ -13,11 +13,6 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { UseGetAdress } from "../../../hooks/queries/useGetAdress";
 import { UseEditAdressMutation } from "../../../hooks/mutation/useEditAdress";
 
-// const onSubmit: SubmitHandler<editAdressProps> = async (data) => {
-//   // EmployeeEditMutation.mutate({ ...data, phone: data.phoneNumber, id });
-//   EditAdressMutation
-//   console.log(data);
-// };
 
 export default function EditAdressScreen() {
   const editAdressFormSchema = z.object({
@@ -51,13 +46,13 @@ export default function EditAdressScreen() {
     // EmployeeEditMutation.mutate({ ...data, phone: data.phoneNumber, id });
     EditAdressMutation;
     console.log(data);
-    reset({...data})
+    reset({ ...data });
   };
   useEffect(() => {
     if (isSubmitSuccessful) {
-      reset({ street: "", number: "", neighborhood: "" })
+      reset({ street: "", number: "", neighborhood: "" });
     }
-  }, [GetAdressQuery])
+  }, [GetAdressQuery]);
 
   return (
     <ImageBackground
@@ -68,7 +63,7 @@ export default function EditAdressScreen() {
 
       <View className="flex h-full w-full px-10 space-y-12">
         <View className="flex flex-col space-y-6">
-          <Text className="text-LightGrayApp text-2xl">Endereço</Text>
+          <Text className="text-LightGreenApp text-2xl">Endereço</Text>
 
           <View>
             <Controller
@@ -82,7 +77,7 @@ export default function EditAdressScreen() {
                   onChangeText={onChange}
                   placeholder={"Nome da sua rua"}
                   placeholderTextColor={"#FFF"}
-                  className=" text-LightGrayApp border border-LightGrayApp
+                  className=" text-LightGreenApp border border-LightGreenApp
             h-12 px-4 rounded-md"
                 />
               )}
@@ -108,7 +103,7 @@ export default function EditAdressScreen() {
                   onChangeText={onChange}
                   placeholder={"Número da sua casa"}
                   placeholderTextColor={"#FFF"}
-                  className=" text-LightGrayApp border border-LightGrayApp h-12 px-4 rounded-md"
+                  className=" text-LightGreenApp border border-LightGreenApp h-12 px-4 rounded-md"
                 />
               )}
               name="number"
@@ -133,7 +128,7 @@ export default function EditAdressScreen() {
                   onChangeText={onChange}
                   placeholder={"Nome do seu bairro"}
                   placeholderTextColor={"#FFF"}
-                  className=" text-LightGrayApp border border-LightGrayApp h-12 px-4 rounded-md"
+                  className=" text-LightGreenApp border border-LightGreenApp h-12 px-4 rounded-md"
                 />
               )}
               name="neighborhood"
@@ -149,7 +144,7 @@ export default function EditAdressScreen() {
 
         <Pressable
           onPress={handleSubmit(onSubmit)}
-          className="w-full flex items-center bg-LightGrayApp rounded-full py-2"
+          className="w-full flex items-center bg-LightGreenApp rounded-full py-2"
         >
           <Text className="text-2xl font-semibold">Salvar</Text>
         </Pressable>

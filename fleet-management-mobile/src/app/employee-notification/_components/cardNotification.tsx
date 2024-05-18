@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, TextInput } from "react-native";
 
 interface backgroundColorInterface {
   color: "red" | "green" | "yellow";
@@ -22,8 +22,8 @@ export default function EmployeeCardNotification({
     case "green":
       mainText = "Pequeno Imprevisto";
       textExample = "Ex: Engarrafamento";
-      textColor = "text-LightGrayApp";
-      borderColor = "border-LightGrayApp";
+      textColor = "text-LightGreenApp";
+      borderColor = "border-LightGreenApp";
       break;
     case "yellow":
       mainText = "Médio imprevisto";
@@ -35,11 +35,10 @@ export default function EmployeeCardNotification({
 
   return (
     <View
-      className={`h-28 max-h-42 w-full space-x-4 items-center flex flex-row rounded-md px-3 py-3 relative border-2 ${borderColor}`}
+      className={`h-26 max-h-42 w-full space-x-4 items-center flex flex-row rounded-md px-3 py-3 relative border-2 ${borderColor}`}
     >
       <View className="flex w-5/6 justify-center items-center">
         <Text className={`${textColor} font-bold text-xl`}>{mainText}</Text>
-
         <Text className={`${textColor}`}>{textExample}</Text>
       </View>
     </View>
