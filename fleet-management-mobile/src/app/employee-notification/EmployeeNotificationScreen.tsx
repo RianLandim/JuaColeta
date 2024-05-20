@@ -3,7 +3,6 @@ import {
   View,
   Text,
   Alert,
-  TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
 import Navbar from "../components/navbar";
@@ -18,22 +17,24 @@ export default function EmployeeNotificationScreen() {
   const [selectedColor, setSelectedColor] = useState<
     BackgroundColorInterface["color"] | null
   >(null);
-  console.log(selectedColor);
+  // const [dataNotification, setDataNotification] = useState();
 
-  // const handleSubmit = async () => {
-  //   if (!selectedColor) {
-  //     Alert.alert("Por favor, selecione um tipo de aviso.");
-  //     return;
-  //   }
+  const handleSubmit = async () => {
+    if (!selectedColor) {
+      Alert.alert("Por favor, selecione um tipo de aviso.");
+      return;
+    }
 
-  //   try {
-  //     console.log(data)
+    try {
+      // TO DO: devo enviar só o color para o back end?
+      const data = selectedColor;
+      console.log(data);
 
-  //     Alert.alert("Aviso enviado com sucesso!");
-  //   } catch (error) {
-  //     Alert.alert(console.log("Erro: ", error));
-  //   }
-  // };
+      Alert.alert("Aviso enviado com sucesso!");
+    } catch (error) {
+      Alert.alert("Erro: ");
+    }
+  };
 
   return (
     <ImageBackground
@@ -67,7 +68,10 @@ export default function EmployeeNotificationScreen() {
       </View>
 
       {selectedColor && (
-        <TouchableOpacity className="bg-LightGreenApp px-20 py-3 rounded-lg text-center">
+        <TouchableOpacity
+          onPress={handleSubmit}
+          className="bg-LightGreenApp px-20 py-3 rounded-lg text-center"
+        >
           <Text className="text-lg font-semibold">Enviar</Text>
         </TouchableOpacity>
       )}
