@@ -2,7 +2,14 @@
 
 import Image from "next/image";
 
-export default function CompanyProfile() {
+type CompanyProfileProps = {
+  name: string;
+  company: string;
+  plate: string;
+  idTruck: number;
+};
+
+export default function CompanyProfile({ name, company, plate, idTruck }: CompanyProfileProps) {
   return (
     <main className="font-normal text-main self-start justify-self-start pl-[5%] h-screen overflow-y-auto w-full">
       <div>
@@ -15,7 +22,7 @@ export default function CompanyProfile() {
               width={200}
               height={200}
             />
-            <p className="font-semibold text-4xl">Ex.Empresa1</p>
+            <p className="font-semibold text-4xl">{company}</p>
           </div>
 
           <div>
@@ -84,7 +91,7 @@ export default function CompanyProfile() {
 
                 <tr>
                   <td className="py-[3.5%] pl-4 text-left border-l-8 border-main">
-                    Caminhão 2
+                    {idTruck}
                   </td>
                   <td className="px-5">
                     <div className="flex items-center">
@@ -95,10 +102,10 @@ export default function CompanyProfile() {
                         height={20}
                         className="mr-2"
                       />
-                      <span>Pablo Neruda</span>
+                      <span>{name}</span>
                     </div>
                   </td>
-                  <td>XXXXXXX</td>
+                  <td>{plate}</td>
                   <td className="bg-[#CC3030] text-white">
                     Em <br /> manutenção
                   </td>
