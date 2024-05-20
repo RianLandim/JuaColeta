@@ -3,8 +3,8 @@ import Image from "next/image";
 interface CardFuncionario {
   name: string;
   phone: string;
-  plate: string;
-  idTruck: number;
+  plate?: string;
+  idTruck?: number;
 }
 
 export default function CardFuncionario({
@@ -25,8 +25,8 @@ export default function CardFuncionario({
         <p>Nome: {name}</p>
         <p>Telefone: {phone}</p>
         <div className="flex space-x-5">
-          <p>Placa: {plate}</p>
-          <p>ID Caminhão: {idTruck}</p>
+          <p>Placa: {plate ?? ""}</p>
+          <p>ID Caminhão: {idTruck ?? ""}</p>
         </div>
       </div>
     </div>
