@@ -1,11 +1,11 @@
 import { ImageBackground } from "react-native";
 import Navbar from "../components/navbar";
 import {
-  requestBackgroundPermissionsAsync,
   getCurrentPositionAsync,
   LocationObject,
-  useForegroundPermissions,
   requestForegroundPermissionsAsync,
+  watchPositionAsync,
+  LocationAccuracy,
 } from "expo-location";
 import MapView, { Marker } from "react-native-maps";
 import { useEffect, useState } from "react";
@@ -16,31 +16,30 @@ export default function Home() {
   async function requesLocationdPermissions() {
     const { status } = await requestForegroundPermissionsAsync();
 
-    console.log({ status });
-
-    if (status !== "granted") {
-      console.log("nothing");
+    if (status === "granted") {
+      const currentPosition = await getCurrentPositionAsync();
+      setLocation(currentPosition);
     }
-    const currentPosition = await getCurrentPositionAsync({});
-    console.log("aqui");
-    console.log(currentPosition);
-    setLocation(currentPosition);
   }
 
   useEffect(() => {
-    (async () => {
-      let { status } = await requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log("Permission to access location was denied");
-        return;
-      }
-
-      let location = await getCurrentPositionAsync({});
-      setLocation(location);
-    })();
+    requesLocationdPermissions();
   }, []);
 
-  console.log({ location });
+  useEffect(() => {
+    watchPositionAsync(
+      {
+        accuracy: LocationAccuracy.Highest,
+        timeInterval: 1000,
+        distanceInterval: 1,
+      },
+      (response) => {
+        // console.log("New Location: ", response);
+        setLocation(response);
+      }
+    );
+  }, []);
+
   return (
     <ImageBackground
       className="w-full h-full"
