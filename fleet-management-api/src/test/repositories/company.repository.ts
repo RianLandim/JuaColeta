@@ -28,15 +28,19 @@ export class InMemoryCompanyRepository implements CompanyRepository {
     throw new Error('Not implemented yet');
   }
 
-  async getCompanies(params: CompanyListQueryParams): Promise<Company[]> {
+  async getCompanies(
+    params: CompanyListQueryParams,
+  ): Promise<{ companies: Company[]; pagesCounst?: number }> {
     if (params) {
-      return this.companies.filter((c) => {
+      const companies = this.companies.filter((c) => {
         if (c.cnpj === params.searchParams.cnpj) return true;
         if (c.socialName === params.searchParams.socialName) return true;
       });
+
+      return { companies };
     }
 
-    return this.companies;
+    return { companies: this.companies };
   }
 
   async getCompanyByUser(userId: string): Promise<Company[]> {

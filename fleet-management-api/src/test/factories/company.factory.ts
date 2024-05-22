@@ -1,6 +1,6 @@
-import { Address } from '@app/entities/address';
 import { Company } from '@app/entities/company';
 import { fakerPT_BR as faker } from '@faker-js/faker';
+import { makeAddress } from './address.factory';
 
 type Override = Partial<Company>;
 
@@ -14,21 +14,13 @@ export const fakerCNPJ = () =>
   );
 
 export function makeCompany(override?: Override) {
-  const address = new Address({
-    city: faker.location.city(),
-    country: faker.location.country(),
-    district: faker.location.county(),
-    number: faker.number.int(),
-    state: faker.location.state(),
-    street: faker.location.street(),
-    zipCode: faker.location.zipCode('#####-###'),
-  });
+  const address = makeAddress();
 
   return new Company({
     socialName: faker.company.name(),
     cnpj: fakerCNPJ(),
-    addressId: faker.string.nanoid(),
-    address: address,
+    addressId: address.id,
+    address,
     ...override,
   });
 }

@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import {
   ReactNode,
   createContext,
@@ -6,8 +5,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import { fetchApi } from "../api";
 import { z } from "zod";
+import api from "../api";
 
 type User = {
   id: string;
@@ -66,11 +65,11 @@ export default function SessionProvider({ children }: SessionProvider) {
   const [status, setStatus] = useState<SessionStatus>("unathenticated");
   const [user, setUser] = useState<User>({} as User);
 
-  const router = useRouter();
+  // const router = useRouter();
 
   useEffect(() => {
     async function validate() {
-      const [data, error] = await fetchApi("user/current-user", {
+      const [data, error] = await api("user/current-user", {
         method: "GET",
         validator: userValidator,
       });
@@ -83,14 +82,14 @@ export default function SessionProvider({ children }: SessionProvider) {
         return;
       }
 
-      router.replace("/entrar");
+      // router.replace("/entrar");
     }
 
     void validate();
   }, []);
 
   async function signIn({ email, password }: SignInParams) {
-    const [data, error] = await fetchApi("authentication/login", {
+    const [data, error] = await api("authentication/login", {
       method: "POST",
       body: { email, password },
       validator: userValidator,
@@ -104,15 +103,15 @@ export default function SessionProvider({ children }: SessionProvider) {
 
     setStatus("authenticated");
 
-    router.replace("/painel");
+    // router.replace("/painel");
   }
 
   async function signOut() {
-    await fetchApi("authentication/logout");
+    await api("authentication/logout");
 
     setStatus("unathenticated");
 
-    router.replace("/entrar");
+    // router.replace("/entrar");
   }
 
   return (

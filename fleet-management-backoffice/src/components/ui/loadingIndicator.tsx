@@ -13,10 +13,12 @@ const spinner = cva("animate-spin rounded-full border-r-transparent", {
       lg: "h-10 w-10",
       xl: "h-12 w-12",
       "2xl": "h-16 w-16",
+      forMainContents: "h-48 w-48",
     },
     thickness: {
       thin: "border",
       thick: "border-2",
+      normal: "border-4",
     },
   },
   defaultVariants: {
