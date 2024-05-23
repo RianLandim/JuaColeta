@@ -41,7 +41,7 @@ const nextConfig = {
       },
       {
         source: "/",
-        destination: "/painel",
+        destination: "/entrar",
         permanent: true,
       },
     ];
