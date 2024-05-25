@@ -17,7 +17,6 @@ import { FindCompanyById } from '@app/usecases/company/get-company-by-id.usecase
 import { RolesGuard } from '@infra/authentication/guards/role.guard';
 import { Roles } from '@utils/decorator/role.decorator';
 
-@UseGuards(JwtAuthGuard)
 @Controller('company')
 export class CompanyController {
   constructor(
@@ -31,16 +30,16 @@ export class CompanyController {
     return this.createCompany.execute(data);
   }
 
-  @Roles(['ADMIN'])
-  @UseGuards(RolesGuard)
   @Get()
   async getCompanies(@Query() queryParams: ListCompanyDTO) {
-    const companies = await this.listCompany.execute({
+    const { companies, pagesCount } = await this.listCompany.execute({
       socialName: queryParams?.socialName,
       cnpj: queryParams?.cnpj,
+      offset: queryParams?.offset,
+      page: queryParams?.page,
     });
 
-    return companies.map(CompanyViewModel.toHttp);
+    return { companies: companies.map(CompanyViewModel.toHttp), pagesCount };
   }
 
   @Get(':id')

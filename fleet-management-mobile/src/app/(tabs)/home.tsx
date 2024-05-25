@@ -1,4 +1,4 @@
-import { ImageBackground } from "react-native";
+import { ImageBackground, View, Image } from "react-native";
 import Navbar from "../components/navbar";
 import {
   getCurrentPositionAsync,

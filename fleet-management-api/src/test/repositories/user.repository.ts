@@ -35,4 +35,8 @@ export class InMemoryUserRepository implements UserRepository {
 
     return user;
   }
+
+  async findUsersWithVehicle(): Promise<User[]> {
+    throw new Error('Method not implemented yet');
+  }
 }

@@ -16,25 +16,27 @@ import { User, UserProps } from '@utils/decorator/user.decorator';
 import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
 import { Roles } from '@utils/decorator/role.decorator';
 import { RolesGuard } from '@infra/authentication/guards/role.guard';
+import { GetUsersWithVehicle } from '@app/usecases/user/get-users-with-vehicle';
 
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 @Controller('user')
 export class UserController {
   constructor(
     private createUser: CreateUser,
     private listUsers: ListUsers,
     private findUserById: FindUserById,
+    private getUsersWithVehicle: GetUsersWithVehicle,
   ) {}
 
   logger = new Logger(UserController.name);
 
-  @Roles(['ADMIN', 'COMPANY_ADMIN'])
-  @UseGuards(RolesGuard)
+  // @Roles(['ADMIN', 'COMPANY_ADMIN'])
+  // @UseGuards(RolesGuard)
   @Post()
   addUser(@Body() data: CreateUserDto, @User() currentUser: UserProps) {
     return this.createUser.execute({
       ...data,
-      companyId: currentUser.companyId,
+      companyId: currentUser?.companyId,
     });
   }
 
@@ -57,5 +59,10 @@ export class UserController {
     const user = await this.findUserById.execute({ id });
 
     return UserViewModel.toHttp(user);
+  }
+
+  @Get('user-with-vehicles')
+  async findUsersWithVehicle() {
+    return this.getUsersWithVehicle.execute();
   }
 }
