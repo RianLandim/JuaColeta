@@ -1,5 +1,21 @@
 {
   "expo": {
+    "name": "fleet-management-mobile",
+    "slug": "fleet-management-mobile",
+    "scheme": "fleet-management-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+
     "ios": {
       "infoPlist": {
         "UIBackgroundModes": ["location", "fetch", "remote-notification"],
