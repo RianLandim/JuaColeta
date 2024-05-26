@@ -9,9 +9,8 @@ import { useDeleteEmployeeMutation } from "../../../../hooks/mutations/useDelete
 interface CardFuncionario {
   name: string;
   phone: string;
-  plate: string;
-  idTruck: number;
-  id: string;
+  plate?: string;
+  idTruck?: number;
 }
 
 // To do: chamar rota de editar
@@ -31,7 +30,6 @@ export default function CardFuncionario({
   idTruck,
   phone,
   plate,
-  id,
 }: CardFuncionario) {
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
@@ -48,7 +46,7 @@ export default function CardFuncionario({
   const EmployeeEditMutation = useEditEmployeeMutation();
 
   const onSubmit: SubmitHandler<EditEmployee> = async (data) => {
-    EmployeeEditMutation.mutate({ ...data, phone: data.phoneNumber, id });
+    // EmployeeEditMutation.mutate({ ...data, phone: data.phoneNumber });
     setIsEditing(false);
   };
 
@@ -62,7 +60,7 @@ export default function CardFuncionario({
 
   return (
     <form
-      className="rounded-lg bg-[#1E1E1E]/75 border-main flex items-center space-x-7 border-2 px-6 py-5 max-h-[169px] min-h-[159px] w-full relative"
+      className="rounded-lg bg-[#1E1E1E]/75 border-main flex items-center space-x-7 border-2 px-6 py-5 max-h-[169px] min-h-[159px] relative "
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="py-8 bg-[#D9D9D9] px-7 rounded-lg">
@@ -95,7 +93,7 @@ export default function CardFuncionario({
           {isEditing ? (
             <input
               required
-              className="rounded-md bg-transparent pl-2 border"
+              className="rounded-md bg-transparent pl-2 border w-40"
               type="text"
               {...register("phoneNumber")}
             />
