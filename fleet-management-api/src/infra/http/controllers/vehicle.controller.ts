@@ -3,8 +3,9 @@ import { ListVehicle } from '@app/usecases/vehicle/get-vehicle.usecase';
 import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CreateVehicleDTO } from '../dtos/create-vehicle.dto';
+import { VehicleViewModel } from '../view-model/vehicle.view-model';
 
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 @Controller('vehicle')
 export class VehicleController {
   constructor(
@@ -19,6 +20,8 @@ export class VehicleController {
 
   @Get(':companyId')
   async list(@Param('companyId') companyId: string) {
-    return this.listVehicle.execute({ companyId });
+    const vehicles = await this.listVehicle.execute({ companyId });
+
+    return vehicles.map(VehicleViewModel.toHttp);
   }
 }

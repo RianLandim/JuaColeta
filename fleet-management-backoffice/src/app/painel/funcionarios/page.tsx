@@ -1,7 +1,5 @@
 "use client";
 
-import { Button } from "../../../components/ui/button";
-import Image from "next/image";
 import CardFuncionario from "./_components/CardEmployee";
 import { useState } from "react";
 import ModalAddEmployee from "./_components/ModalAddEmployee";

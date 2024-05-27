@@ -1,6 +1,6 @@
 import { fetchApi } from "../../utils/api";
 import { useQuery } from "@tanstack/react-query";
-import { number, string, z } from "zod";
+import { z } from "zod";
 
 const employeeValidator = z.object({
   id: z.string(),
