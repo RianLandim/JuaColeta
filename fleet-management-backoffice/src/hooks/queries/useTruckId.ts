@@ -4,6 +4,7 @@ import { number, string, z } from "zod";
 
 const truckIdValidator = z.object({
   idTruck: number(),
+  status: string()
 });
 
 type TruckId = z.infer<typeof truckIdValidator>;

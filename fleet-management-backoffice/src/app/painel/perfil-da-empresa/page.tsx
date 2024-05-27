@@ -1,15 +1,42 @@
 "use client";
 
 import Image from "next/image";
+import { useEmployeesList } from "@/hooks/queries/useEmployee";
+import { useTruckIdList } from "@/hooks/queries/useTruckId";
+import DashboardLoading, { DashboardError } from "../loading";
 
 type CompanyProfileProps = {
-  name: string;
   company: string;
-  plate: string;
-  idTruck: number;
 };
 
-export default function CompanyProfile({ name, company, plate, idTruck }: CompanyProfileProps) {
+export default function CompanyProfile({ company }: CompanyProfileProps) {
+  const EmployeeQuery = useEmployeesList();
+  const TruckIdQuery = useTruckIdList();
+
+  if (EmployeeQuery.isPending || TruckIdQuery.isPending) {
+    return <DashboardLoading />;
+  }
+
+  if (EmployeeQuery.isError || TruckIdQuery.isError) {
+    return (
+      <DashboardError
+        errorMessage={
+          EmployeeQuery.error?.message || TruckIdQuery.error?.message
+        }
+      />
+    );
+  }
+
+  const employees = EmployeeQuery.data || [];
+  const trucks = TruckIdQuery.data || [];
+
+  const operantTrucks = trucks.filter(
+    (truck) => truck.status === "operante"
+  ).length;
+  const problematicTrucks = trucks.filter(
+    (truck) => truck.status === "em manutenção" || truck.status === "com atraso"
+  ).length;
+
   return (
     <main className="font-normal text-main self-start justify-self-start pl-[5%] h-screen overflow-y-auto w-full">
       <div>
@@ -38,7 +65,7 @@ export default function CompanyProfile({ name, company, plate, idTruck }: Compan
                 />
                 <div className="flex flex-col">
                   <p className="font-extrabold text-xl">Caminhões operantes</p>
-                  <p className="text-3xl font-normal">36</p>
+                  <p className="text-3xl font-normal">{operantTrucks}</p>
                 </div>
               </div>
 
@@ -54,7 +81,7 @@ export default function CompanyProfile({ name, company, plate, idTruck }: Compan
                   <p className="font-extrabold text-xl">
                     Caminhões com problemas
                   </p>
-                  <p className="text-3xl font-medium">7</p>
+                  <p className="text-3xl font-medium">{problematicTrucks}</p>
                 </div>
               </div>
             </div>
@@ -69,69 +96,117 @@ export default function CompanyProfile({ name, company, plate, idTruck }: Compan
                 </tr>
               </thead>
               <tbody className="font-medium text-center bg-[#587158]">
+                {employees.map((employee, index) => {
+                  const truck = trucks.find(t => t.idTruck === employee.idTruck);
+
+                  let statusClass = "";
+                  let statusText = "";
+
+                  if (truck && truck.status) {
+                    if (truck.status === "operante") {
+                      statusClass = "bg-[#39B54A]";
+                      statusText = "Operante";
+                    } else if (truck.status === "em manutenção") {
+                      statusClass = "bg-[#CC3030]";
+                      statusText = "Em manutenção";
+                    } else if (truck.status === "com atraso") {
+                      statusClass = "bg-[#FF6B00]";
+                      statusText = "Com atraso";
+                    }
+                  }
+
+                  return (
+                    <tr key={index}>
+                      <td className="py-[3%] pr-20 pl-4 text-left border-l-8 border-main">
+                        {employee.idTruck}
+                      </td>
+                      <td className="px-5">
+                        <div className="flex items-center">
+                          <Image
+                            src="/companyProfile/fotoPerfil.svg"
+                            alt={`Foto de ${employee.name}`}
+                            width={40}
+                            height={20}
+                            className="mr-2"
+                          />
+                          <span>{employee.name}</span>
+                        </div>
+                      </td>
+                      <td>{employee.plate}</td>
+                      <td className={`text-white px-6 ${statusClass}`}>
+                        {statusText}
+                      </td>
+                    </tr>
+                  );
+                })}
+
+                {/* <tr>
+                  <td className="py-[3%] pr-20 pl-4 text-left border-l-8 border-main">
+                    {123456}
+                  </td>
+                  <td className="px-5">
+                    <div className="flex items-center">
+                      <Image
+                        src="/companyProfile/fotoPerfil.svg"
+                        alt={`Foto de`}
+                        width={40}
+                        height={20}
+                        className="mr-2"
+                      />
+                      <span>Bryan</span>
+                    </div>
+                  </td>
+                  <td>9999-avm</td>
+                  <td className={`text-white px-6 bg-[#39B54A]}`}>Operante</td>
+                  <td className={`text-white px-6 bg-[#CC3030]}`}>
+                    COM ATRASO
+                  </td>
+                </tr>
                 <tr>
                   <td className="py-[3%] pr-20 pl-4 text-left border-l-8 border-main">
-                    Caminhão 1
+                    {123456}
                   </td>
                   <td className="px-5">
                     <div className="flex items-center">
                       <Image
                         src="/companyProfile/fotoPerfil.svg"
-                        alt="Foto de José Oliveira"
+                        alt={`Foto de`}
                         width={40}
                         height={20}
                         className="mr-2"
                       />
-                      <span>José Oliveira</span>
+                      <span>Bryan</span>
                     </div>
                   </td>
-                  <td className="px-8">XXXXXXX</td>
-                  <td className="bg-[#39B54A] text-white px-6">Operante</td>
+                  <td>9999-avm</td>
+                  <td className={`text-white px-6 bg-[#39B54A]}`}>Operante</td>
+                  <td className={`text-white px-6 bg-[#CC3030]}`}>
+                    Em manutenção
+                  </td>
                 </tr>
-
                 <tr>
-                  <td className="py-[3.5%] pl-4 text-left border-l-8 border-main">
-                    {idTruck}
+                  <td className="py-[3%] pr-20 pl-4 text-left border-l-8 border-main">
+                    {123456}
                   </td>
                   <td className="px-5">
                     <div className="flex items-center">
                       <Image
                         src="/companyProfile/fotoPerfil.svg"
-                        alt="Foto de Pablo Neruda"
+                        alt={`Foto de`}
                         width={40}
                         height={20}
                         className="mr-2"
                       />
-                      <span>{name}</span>
+                      <span>Bryan</span>
                     </div>
                   </td>
-                  <td>{plate}</td>
-                  <td className="bg-[#CC3030] text-white">
-                    Em <br /> manutenção
-                  </td>
-                </tr>
+                  <td>9999-avm</td>
+                  <td className={`text-white px-6 bg-[#39B54A]}`}>Operante</td>
 
-                <tr>
-                  <td className="py-[3.5%] pl-4 text-left border-l-8 border-main">
-                    Caminhão 3
+                  <td className={`text-white px-6 bg-[#FF6B00]}`}>
+                    "Com atraso"
                   </td>
-                  <td className="px-5">
-                    <div className="flex items-center">
-                      <Image
-                        src="/companyProfile/fotoPerfil.svg"
-                        alt="Foto de José Oliveira"
-                        width={40}
-                        height={20}
-                        className="mr-2"
-                      />
-                      <span>Maria Vieira</span>
-                    </div>
-                  </td>
-                  <td>XXXXXXX</td>
-                  <td className="bg-[#FF6B00] text-white">
-                    Com <br /> atraso
-                  </td>
-                </tr>
+                </tr> */}
               </tbody>
             </table>
           </div>
