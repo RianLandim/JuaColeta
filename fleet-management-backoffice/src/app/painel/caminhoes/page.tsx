@@ -15,6 +15,12 @@ export default function Trucks() {
       columnHelper.accessor("model", {
         header: "Modelo",
       }),
+      columnHelper.accessor("plate", {
+        header: "Placa",
+      }),
+      columnHelper.accessor("category", {
+        header: "Categoria",
+      }),
     ],
     []
   );
@@ -23,6 +29,7 @@ export default function Trucks() {
 
   return (
     <main>
+      <div id="header"></div>
       {match(truckQuery)
         .with({ isLoading: true }, () => <LoadingIndicator />)
         .with({ isError: true }, () => (
