@@ -8,7 +8,7 @@ export default function TabRouterLayout() {
       <Tabs.Screen name="notification" options={{ title: "Notification" }} />
       <Tabs.Screen name="workerLogin" options={{ title: "WorkerLogin" }} />
       <Tabs.Screen name="Calendar" options={{ title: "calendar" }} />
-      <Tabs.Screen name="Timer" options={{ title: "timer" }} />
+      <Tabs.Screen name="timer" options={{ title: "timer" }} />
     </Tabs>
   );
 }

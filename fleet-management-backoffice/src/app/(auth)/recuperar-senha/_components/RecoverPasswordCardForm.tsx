@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 const signInFormSchema = z.object({
   email: z
     .string()
-    .email("E-mail invalido")
+    .email("E-mail inválido")
     .min(1, "Email precisa ser preenchido"),
 });
 
@@ -29,21 +29,27 @@ export function RecoverPasswordCardForm() {
 
   return (
     <Card onSubmit={handleSubmit(submit)}>
-      <h2 className="text-black font-bold text-3xl">Recuperar</h2>
-      <label
-        htmlFor="email"
-        className="self-start text-lg text-black font-bold"
-      >
-        E-mail
+      <h2 className=" font-bold text-3xl">Recuperar Conta</h2>
+      <label htmlFor="email" className="self-start text-lg mt-5 font-bold">
+        Digite seu e-mail:
       </label>
-      <Input type="email" {...register("email")} />
+      <Input
+        className="border border-main placeholder:text-main 
+      bg-transparent rounded-[50px]"
+        placeholder="E-mail"
+        type="email"
+        {...register("email")}
+      />
       {errors.email && (
         <label htmlFor="email" className="self-start text-base text-red-700">
           {errors.email.message}
         </label>
       )}
 
-      <Button className="w-full" type="submit">
+      <Button
+        className="w-full bg-main rounded-[50px] mt-10 hover:bg-[#2b7c25]"
+        type="submit"
+      >
         Enviar
       </Button>
     </Card>

@@ -23,12 +23,10 @@ export class Vehicle {
   private props: VehicleProps;
 
   constructor(
-    props: Replace<
-      VehicleProps,
-      { id?: string; createdAt?: Date; updatedAt?: Date }
-    >,
+    props: Replace<VehicleProps, { createdAt?: Date; updatedAt?: Date }>,
+    id?: string,
   ) {
-    this._id = props?.id ?? createId();
+    this._id = id ?? createId();
     this.props = {
       ...props,
       createdAt: props.createdAt ?? new Date(),

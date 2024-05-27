@@ -2,6 +2,8 @@ import { SideBar } from "@/components/sidebar/Sidebar";
 import { LayoutProps } from "@/utils/types/layoutProps";
 
 import { Metadata } from "next";
+import Image from "next/image";
+import { Fragment } from "react";
 
 export const metadata: Metadata = {
   title: "Painel",
@@ -9,10 +11,19 @@ export const metadata: Metadata = {
 
 export default function DashboardLayout({ children }: LayoutProps) {
   return (
-    <main className="w-full h-screen bg-slate-200 flex flex-row">
-      <SideBar />
-      <div className="w-4/5 flex flex-col items-center justify-center">
-        {children}
+    <main className="w-full h-screen bg-backgroundApp">
+      <div className=" flex flex-row relative z-10 ">
+        <SideBar />
+        <div className="w-4/5 flex flex-col items-center justify-center">
+          {children}
+        </div>
+        <Image
+          src={"/backgroundLayoutLogo.svg"}
+          alt=""
+          height={800}
+          width={800}
+          className="absolute bottom-0 right-0 -z-10 "
+        />
       </div>
     </main>
   );

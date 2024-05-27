@@ -26,6 +26,7 @@ export default function Home() {
     requesLocationdPermissions();
   }, []);
 
+
   return (
     <ImageBackground
       className="w-full h-full"

@@ -7,6 +7,7 @@ import {
 import { PrismaService } from '../prisma.service';
 import { User } from '@app/entities/user';
 import { PrismaUserMapper } from '../mappers/prisma.user.mapper';
+import { Vehicle } from '@app/entities/vehicle';
 
 @Injectable()
 export class PrismaUserRepository implements UserRepository {
@@ -68,5 +69,24 @@ export class PrismaUserRepository implements UserRepository {
     const user = new User(rawUser, rawUser.id);
 
     return user;
+  }
+
+  async findUsersWithVehicle(): Promise<User[]> {
+    const rawUser = await this.prisma.user.findMany({
+      where: {
+        role: 'DRIVER',
+      },
+      include: {
+        Vehicle: true,
+      },
+    });
+
+    const users = rawUser.map((user) => {
+      const vehicle = new Vehicle(user.Vehicle[0], user.Vehicle[0].id);
+
+      return new User({ ...user, vehicle: vehicle ?? undefined }, user.id);
+    });
+
+    return users;
   }
 }

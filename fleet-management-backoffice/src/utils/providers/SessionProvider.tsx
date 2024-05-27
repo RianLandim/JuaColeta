@@ -68,26 +68,26 @@ export default function SessionProvider({ children }: SessionProvider) {
 
   const router = useRouter();
 
-  useEffect(() => {
-    async function validate() {
-      const [data, error] = await fetchApi("user/current-user", {
-        method: "GET",
-        validator: userValidator,
-      });
+  // useEffect(() => {
+  //   async function validate() {
+  //     const [data, error] = await fetchApi("user/current-user", {
+  //       method: "GET",
+  //       validator: userValidator,
+  //     });
 
-      if (data) {
-        setStatus("authenticated");
+  //     if (data) {
+  //       setStatus("authenticated");
 
-        setUser(data);
+  //       setUser(data);
 
-        return;
-      }
+  //       return;
+  //     }
 
-      router.replace("/entrar");
-    }
+  //     router.replace("/entrar");
+  //   }
 
-    void validate();
-  }, []);
+  //   void validate();
+  // }, []);
 
   async function signIn({ email, password }: SignInParams) {
     const [data, error] = await fetchApi("authentication/login", {

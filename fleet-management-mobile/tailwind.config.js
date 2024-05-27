@@ -15,7 +15,8 @@ module.exports = {
         DarkGrayApp: "#2A5C43",
         whiteApp: "#F9F9F9",
         redApp: "#FF1C18",
-        juaGreen: "#8CC63F"
+        juaGreen: "#8CC63F",
+        juaDGreen: "#2C612C"
       }
     },
   },

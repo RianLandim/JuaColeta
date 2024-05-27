@@ -1,5 +1,6 @@
 import { createId } from '@paralleldrive/cuid2';
 import { Replace } from 'src/utils/helpers/replace';
+import { Vehicle } from './vehicle';
 
 interface UserProps {
   email: string;
@@ -7,7 +8,8 @@ interface UserProps {
   name: string;
   cellphone: string;
   license?: string | null;
-  role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER';
+  role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER' | 'CLIENT';
+  vehicle?: Vehicle;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -54,6 +56,10 @@ export class User {
 
   get cellphone() {
     return this.props.cellphone;
+  }
+
+  get vehicle() {
+    return this.props.vehicle;
   }
 
   get createdAt() {
