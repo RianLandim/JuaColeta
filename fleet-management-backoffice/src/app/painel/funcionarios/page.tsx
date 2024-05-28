@@ -1,7 +1,4 @@
 "use client";
-
-import { Button } from "../../../components/ui/button";
-import Image from "next/image";
 import CardFuncionario from "./_components/CardEmployee";
 import { useState } from "react";
 import ModalAddEmployee from "./_components/ModalAddEmployee";
@@ -38,14 +35,23 @@ export default function CompanyRegister() {
   // };
 
   return (
-    <main className="w-full flex flex-col gap-4 p-4 text-main h-full relative">
+    <main className="w-full flex flex-col gap-4 p-4 text-main h-screen relative">
       {match(EmployeesQuery)
         .with({ isLoading: true }, () => <DashboardLoading />)
         .with({ isError: true }, () => (
           <DashboardError errorMessage={EmployeesQuery.error?.message} />
         ))
         .with({ data: P.nullish }, () => (
-          <span>Nenhum funcionario encontrado</span>
+        <>
+          <div className="flex pt-[2.5%] max-2xl:pt-[5%] items-center w-full justify-between">
+              <h1 id="title" className="text-5xl ">
+                Funcionários
+              </h1>
+              <ModalAddEmployee />
+            </div>
+            <span>Nenhum funcionario encontrado</span>
+        </>
+          
         ))
         .with({ data: P.not(undefined).and(P.not(P.nullish)) }, ({ data }) => (
           <>
@@ -93,7 +99,7 @@ export default function CompanyRegister() {
               )}
             </div>
 
-            <div className="grid grid-rows-3 min-[1900px]:grid-rows-4 grid-flow-col lg:gap-6 md:gap-4 h-full w-full">
+            <div className="grid grid-cols-2 h-full lg:gap-6 md:gap-4 w-full overflow-auto">
               {data.map((employee) => (
                 <CardFuncionario
                   key={employee.id}
