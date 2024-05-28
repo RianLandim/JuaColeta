@@ -2,6 +2,7 @@ import { ImageBackground, View, Image } from "react-native";
 import Navbar from "../_components/navbar";
 import CardNotification from "../_components/cardNotification";
 import { useNotificationList } from "../../../hooks/queries/useNotificationList";
+import ActionButton from "../_components/actionButton";
 
 // Use on .map render for notification
 interface NotificationProps {
@@ -21,6 +22,7 @@ export default function Notification() {
       <Navbar />
       <View className="flex items-center space-y-5 h-full">
         <View>
+     
           <CardNotification
             color="light"
             text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
@@ -48,6 +50,7 @@ export default function Notification() {
           />
         </View>
       </View>
+          <ActionButton />
     </ImageBackground>
   );
 }

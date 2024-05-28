@@ -1,6 +1,8 @@
-import { ImageBackground, View, Image } from "react-native";
+import { ImageBackground, Image } from "react-native";
 // import { LayoutProps } from "../../../utils/types/layoutProps";
 import Navbar from "../_components/navbar";
+import ActionButton from "../_components/actionButton";
+
 import {
   getCurrentPositionAsync,
   LocationObject,

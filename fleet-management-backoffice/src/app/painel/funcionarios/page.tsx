@@ -42,16 +42,15 @@ export default function CompanyRegister() {
           <DashboardError errorMessage={EmployeesQuery.error?.message} />
         ))
         .with({ data: P.nullish }, () => (
-        <>
-          <div className="flex pt-[2.5%] max-2xl:pt-[5%] items-center w-full justify-between">
+          <>
+            <div className="flex pt-[2.5%] max-2xl:pt-[5%] items-center w-full justify-between">
               <h1 id="title" className="text-5xl ">
                 Funcionários
               </h1>
               <ModalAddEmployee />
             </div>
             <span>Nenhum funcionario encontrado</span>
-        </>
-          
+          </>
         ))
         .with({ data: P.not(undefined).and(P.not(P.nullish)) }, ({ data }) => (
           <>
