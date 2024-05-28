@@ -3,15 +3,18 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity,
 } from "react-native";
 import Navbar from "../_components/navbar";
 import { Link } from "expo-router";
-import image from "../../../assets/bgimage.png";
+import image from '../../../assets/bgimage.png'
 
 export default function AdressScreen() {
+
   return (
-    <ImageBackground className="flex space-y-10 w-full h-full" source={image}>
+    <ImageBackground
+      className="flex space-y-10 w-full h-full"
+      source={image}
+    >
       <Navbar isRouteToGoBack />
 
       <View className="flex h-full w-full px-10 space-y-5">
@@ -34,7 +37,9 @@ export default function AdressScreen() {
         </View>
 
         <View className="h-[1px] w-full bg-LightGrayApp"></View>
-        <Text className="text-juaDGreen text-lg">Entrar como funcionário</Text>
+        <Text className="text-LightGrayApp text-2xl">
+          Entrar como funcionário
+        </Text>
       </View>
     </ImageBackground>
   );

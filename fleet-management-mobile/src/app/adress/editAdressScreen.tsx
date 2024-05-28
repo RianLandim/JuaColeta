@@ -68,7 +68,7 @@ export default function EditAdressScreen() {
 
       <View className="flex h-full w-full px-10 space-y-12">
         <View className="flex flex-col space-y-6">
-          <Text className="text-LightGrayApp text-2xl">Editar Endereço</Text>
+          <Text className="text-LightGrayApp text-2xl">Endereço</Text>
 
           <View>
             <Controller
@@ -81,8 +81,8 @@ export default function EditAdressScreen() {
                   value={value}
                   onChangeText={onChange}
                   placeholder={"Nome da sua rua"}
-                  placeholderTextColor="hwb(0, 100%, 100%)"
-                  className=" text-white border border-LightGrayApp
+                  placeholderTextColor={"#FFF"}
+                  className=" text-LightGrayApp border border-LightGrayApp
             h-12 px-4 rounded-md"
                 />
               )}
@@ -107,8 +107,8 @@ export default function EditAdressScreen() {
                   value={value}
                   onChangeText={onChange}
                   placeholder={"Número da sua casa"}
-                  placeholderTextColor="hwb(0, 100%, 100%)"
-                  className=" text-white border border-LightGrayApp h-12 px-4 rounded-md"
+                  placeholderTextColor={"#FFF"}
+                  className=" text-LightGrayApp border border-LightGrayApp h-12 px-4 rounded-md"
                 />
               )}
               name="number"
@@ -132,8 +132,8 @@ export default function EditAdressScreen() {
                   value={value}
                   onChangeText={onChange}
                   placeholder={"Nome do seu bairro"}
-                  placeholderTextColor="hwb(0, 100%, 100%)"
-                  className=" text-white border border-LightGrayApp h-12 px-4 rounded-md"
+                  placeholderTextColor={"#FFF"}
+                  className=" text-LightGrayApp border border-LightGrayApp h-12 px-4 rounded-md"
                 />
               )}
               name="neighborhood"
@@ -151,7 +151,7 @@ export default function EditAdressScreen() {
           onPress={handleSubmit(onSubmit)}
           className="w-full flex items-center bg-LightGrayApp rounded-full py-2"
         >
-          <Text className="text-xl font-semibold">Salvar</Text>
+          <Text className="text-2xl font-semibold">Salvar</Text>
         </Pressable>
       </View>
     </ImageBackground>
