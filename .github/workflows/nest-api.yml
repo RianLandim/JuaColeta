@@ -5,28 +5,34 @@ name: Api CI
 
 on:
   push:
-    branches: ["master"]
+    branches: ["master", "develop"]
   pull_request:
-    branches: ["master"]
+    branches: ["master", "develop"]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        run: npm i
+        working-directory: ./fleet-management-api
+
+      - name: Lint
+        run: npm run lint
+        working-directory: ./fleet-management-api
+
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
 
-      - uses: pnpm/action-setup@v3
-        name: Install pnpm
-        with:
-          version: 8
-          run_install: true
-      - run: pnpm test
+      - name: Install dependencies
+        run: npm i
+        working-directory: ./fleet-management-api
+
+      - run: npm run test
         working-directory: ./fleet-management-api

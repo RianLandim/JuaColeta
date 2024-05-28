@@ -21,7 +21,7 @@ import { PrismaNotificationRepository } from './prisma/repositories/prisma.notif
     UserRepository,
     CompanyRepository,
     VehicleRepository,
-    PrismaNotificationRepository,
+    NotificationRepository,
   ],
 })
 export class DatabaseModule {}

@@ -68,6 +68,26 @@ model Address {
   company Company?
 }
 
+enum BillingStatus {
+  DEMO
+  SUBSCRIBED
+}
+
+model Billing {
+  id String @id
+
+  status BillingStatus
+  dueIn  DateTime
+
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@map("billing")
+}
+
 model Company {
   id String @id
 
@@ -81,6 +101,7 @@ model Company {
 
   users   User[]
   Vehicle Vehicle[]
+  Billing Billing[]
 
   @@map("company")
 }

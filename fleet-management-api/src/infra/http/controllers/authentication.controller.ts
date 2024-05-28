@@ -14,7 +14,7 @@ export class AuthenticationController {
 
   @Post('login')
   async login(
-    @Body() data: Required<LoginDTO>,
+    @Body() data: LoginDTO,
     @Res({ passthrough: true }) response: Response,
   ) {
     const user = await this.loginUsecase.execute(data);
