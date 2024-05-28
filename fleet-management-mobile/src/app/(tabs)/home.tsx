@@ -1,5 +1,6 @@
 import { ImageBackground, View, Image } from "react-native";
-import Navbar from "../components/navbar";
+// import { LayoutProps } from "../../../utils/types/layoutProps";
+import Navbar from "../_components/navbar";
 import {
   getCurrentPositionAsync,
   LocationObject,
