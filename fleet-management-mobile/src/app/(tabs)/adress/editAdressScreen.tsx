@@ -6,12 +6,14 @@ import {
   Pressable,
 } from "react-native";
 import { useEffect } from "react";
-import Navbar from "../_components/navbar";
+import Navbar from "../../_components/navbar";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { UseGetAdress } from "../../../hooks/queries/useGetAdress";
-import { UseEditAdressMutation } from "../../../hooks/mutation/useEditAdress";
+import { UseGetAdress } from "../../../../hooks/queries/useGetAdress";
+import { UseEditAdressMutation } from "../../../../hooks/mutation/useEditAdress";
+import image from "@/assets/bgimage.png"
+
 
 // const onSubmit: SubmitHandler<editAdressProps> = async (data) => {
 //   // EmployeeEditMutation.mutate({ ...data, phone: data.phoneNumber, id });
@@ -62,7 +64,7 @@ export default function EditAdressScreen() {
   return (
     <ImageBackground
       className="flex space-y-10 w-full h-full"
-      source={require("../../../assets/bgimage.png")}
+      source={image}
     >
       <Navbar isRouteToGoBack />
 

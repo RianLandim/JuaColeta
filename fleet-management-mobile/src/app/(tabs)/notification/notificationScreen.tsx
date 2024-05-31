@@ -1,8 +1,11 @@
-import { ImageBackground, View } from "react-native";
-import Navbar from "../_components/navbar";
-import CardNotification from "../_components/cardNotification";
+import { ImageBackground, View, TouchableWithoutFeedback } from "react-native";
+import Navbar from "../../_components/navbar";
+import CardNotification from "../../_components/cardNotification";
 // import { useNotificationList } from "../../../hooks/queries/useNotificationList";
-import ActionButton from "../_components/actionButton";
+import ActionButton from "../../_components/actionButton";
+import image from "@/assets/bgimage.png";
+import { ArrowCircleLeft } from "iconsax-react-native";
+import { useNavigation } from "expo-router";
 
 interface NotificationProps {
   id: number;
@@ -13,6 +16,8 @@ interface NotificationProps {
 
 // TO DO: match render for return
 export default function Notification() {
+  const navigation = useNavigation();
+
   // const { data: notifications, isLoading, isError } = useNotificationList();
 
   // if (isLoading) {
@@ -34,9 +39,17 @@ export default function Notification() {
   return (
     <ImageBackground
       className="flex space-y-10 w-full h-full items-center"
-      source={require("../../../assets/bgimage.png")}
+      source={image}
     >
       <Navbar />
+      <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+        <ArrowCircleLeft
+          className="bg-LightGrayApp rounded-full px-2 py-2 shadow-md self-end mr-4"
+          size={46}
+          color="#000"
+        />
+      </TouchableWithoutFeedback>
+
       {/* {notifications.map((notification, index) => (
           <View key={index}>
             <CardNotification
@@ -46,7 +59,8 @@ export default function Notification() {
             />
           </View>
         ))} */}
-      {/* <View className="flex items-center space-y-5 h-full">
+
+      <View className="flex items-center space-y-5">
         <View>
           <CardNotification
             color="light"
@@ -74,8 +88,7 @@ export default function Notification() {
             color="dark"
           />
         </View>
-      </View> */}
-      <ActionButton />
+      </View>
     </ImageBackground>
   );
 }

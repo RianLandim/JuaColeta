@@ -1,7 +1,7 @@
 import { ImageBackground, View, Text, Image } from "react-native";
-import Navbar from "../_components/navbar";
+import Navbar from "../../_components/navbar";
 import { Link } from "expo-router";
-import image from "../../../assets/bgimage.png";
+import image from "@/assets/bgimage.png"
 
 export default function AdressScreen() {
   return (

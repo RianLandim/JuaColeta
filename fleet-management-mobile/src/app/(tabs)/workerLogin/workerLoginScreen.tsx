@@ -7,17 +7,19 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import image from "@/assets/bgimage.png";
+import logo1 from "@/assets/logos/logo1.png";
 
 export default function WorkerLogin() {
   const navigation = useNavigation();
-  
+
   return (
     <ImageBackground
       className="h-full w-full items-center justify-center flex space-y-5"
-      source={require("../../../assets/bgimage.png")}
+      source={image}
     >
       <View>
-        <Image source={require("../../../assets/logos/logo1.png")} />
+        <Image source={logo1} />
       </View>
 
       <View>
@@ -47,11 +49,11 @@ export default function WorkerLogin() {
         />
       </View>
 
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text className="text-juaGreen underline rounded-md px-2 text-center text-2xl bg-bgGrayApp ">
-            Continuar como usuário
-          </Text>
-        </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Text className="text-juaGreen underline rounded-md px-2 text-center text-2xl bg-bgGrayApp ">
+          Continuar como usuário
+        </Text>
+      </TouchableOpacity>
     </ImageBackground>
   );
 }
