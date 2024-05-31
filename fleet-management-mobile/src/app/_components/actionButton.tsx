@@ -51,7 +51,7 @@ export default function ActionButton() {
   return (
     <View style={{ position: "absolute", bottom: 25, right: 25 }}>
       <Animated.View style={{ marginBottom: noti }}>
-        <Link href="/(tabs)/notification" asChild>
+        <Link href="notification/notificationScreen" asChild>
           <TouchableOpacity>
             <Image
               source={require("../../../assets/ActionButton/notiButton.png")}
@@ -62,7 +62,7 @@ export default function ActionButton() {
       </Animated.View>
 
       <Animated.View style={{ marginBottom: cal }}>
-        <Link href="/(tabs)/calendar" asChild>
+        <Link href="calendar/calendarScreen" asChild>
           <TouchableOpacity>
             <Image
               source={require("../../../assets/ActionButton/calButton.png")}
@@ -73,7 +73,7 @@ export default function ActionButton() {
       </Animated.View>
 
       <Animated.View style={{ marginBottom: timer }}>
-        <Link href="/(tabs)/timer" asChild>
+        <Link href="timer/timerScreen" asChild>
           <TouchableOpacity>
             <Image
               source={require("../../../assets/ActionButton/timerButton.png")}

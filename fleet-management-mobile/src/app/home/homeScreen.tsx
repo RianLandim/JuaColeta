@@ -68,6 +68,7 @@ export default function Home() {
           />
         </MapView>
       )}
+      <ActionButton />
     </ImageBackground>
   );
 }

@@ -1,7 +1,7 @@
 import { Image, ImageBackground, Text, View } from "react-native";
 import Navbar from "../_components/navbar";
 import ActionButton from "../_components/actionButton";
-import { Watch } from "iconsax-react-native";
+
 //TO DO: Lógica ainda não implementada, tem que ver com o backend
 export default function Timer() {
   return (

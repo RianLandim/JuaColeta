@@ -1,28 +1,53 @@
-import { ImageBackground, View, Image } from "react-native";
+import { ImageBackground, View } from "react-native";
 import Navbar from "../_components/navbar";
 import CardNotification from "../_components/cardNotification";
-import { useNotificationList } from "../../../hooks/queries/useNotificationList";
+// import { useNotificationList } from "../../../hooks/queries/useNotificationList";
 import ActionButton from "../_components/actionButton";
 
-// Use on .map render for notification
 interface NotificationProps {
+  id: number;
   text: string;
   isNew?: boolean;
 }
-
 // const NotificationQuery = useNotificationList();
 
 // TO DO: match render for return
 export default function Notification() {
+  // const { data: notifications, isLoading, isError } = useNotificationList();
+
+  // if (isLoading) {
+  //   return (
+  //     <View>
+  //       <Text>Loading...</Text>
+  //     </View>
+  //   );
+  // }
+
+  // if (isError) {
+  //   return (
+  //     <View>
+  //       <Text>Error fetching notifications</Text>
+  //     </View>
+  //   );
+  // }
+
   return (
     <ImageBackground
       className="flex space-y-10 w-full h-full items-center"
       source={require("../../../assets/bgimage.png")}
     >
       <Navbar />
-      <View className="flex items-center space-y-5 h-full">
+      {/* {notifications.map((notification, index) => (
+          <View key={index}>
+            <CardNotification
+              color={notification.isNew ? 'light' : 'dark'}
+              text={notification.text}
+              isNew={notification.isNew}
+            />
+          </View>
+        ))} */}
+      {/* <View className="flex items-center space-y-5 h-full">
         <View>
-     
           <CardNotification
             color="light"
             text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
@@ -49,8 +74,8 @@ export default function Notification() {
             color="dark"
           />
         </View>
-      </View>
-          <ActionButton />
+      </View> */}
+      <ActionButton />
     </ImageBackground>
   );
 }
