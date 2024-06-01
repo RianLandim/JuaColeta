@@ -1,0 +1,3 @@
+packages:
+  - "fleet-management-backoffice"
+  - "fleet-management-api"
