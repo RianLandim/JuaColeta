@@ -6,7 +6,7 @@ import {
   Pressable,
 } from "react-native";
 import { useEffect } from "react";
-import Navbar from "../components/navbar";
+import Navbar from "../_components/navbar";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -51,13 +51,13 @@ export default function EditAdressScreen() {
     // EmployeeEditMutation.mutate({ ...data, phone: data.phoneNumber, id });
     EditAdressMutation;
     console.log(data);
-    reset({...data})
+    reset({ ...data });
   };
   useEffect(() => {
     if (isSubmitSuccessful) {
-      reset({ street: "", number: "", neighborhood: "" })
+      reset({ street: "", number: "", neighborhood: "" });
     }
-  }, [GetAdressQuery])
+  }, [GetAdressQuery]);
 
   return (
     <ImageBackground

@@ -4,7 +4,7 @@ import {
   Text,
   Image,
 } from "react-native";
-import Navbar from "../components/navbar";
+import Navbar from "../_components/navbar";
 import { Link } from "expo-router";
 import image from '../../../assets/bgimage.png'
 
@@ -23,7 +23,6 @@ export default function AdressScreen() {
         <View className="flex flex-row items-center space-x-5">
           <Link href={"/adress/editAdressScreen"}>
             <View className="flex items-center flex-row space-x-10">
-
               <View className="flex flex-col">
                 <Text className="text-lg text-LightGrayApp">
                   Rua Avenida Presidente da Ditadura
@@ -33,7 +32,6 @@ export default function AdressScreen() {
               </View>
 
               <Image source={require("@/assets/Buttons/ArrowToRight.png")} />
-
             </View>
           </Link>
         </View>
