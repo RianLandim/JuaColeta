@@ -1,6 +1,6 @@
 # Fleet management
 
-## Instalation
+## Installation
 
 First install pnpm to be able to use monorepo features:
 
