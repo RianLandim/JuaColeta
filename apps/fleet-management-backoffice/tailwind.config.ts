@@ -50,6 +50,7 @@ module.exports = {
       },
       colors: {
         main: "#8CC63F",
+        "main-dark": "#1E1E1E",
         backgroundApp: "#01371B",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }: LayoutProps) {
     <main className="w-full h-screen bg-backgroundApp">
       <div className=" flex flex-row relative z-10 ">
         <SideBar />
-        <div className="w-4/5 flex flex-col items-center justify-center">
+        <div className="w-4/5 flex flex-col items-center justify-center px-12">
           {children}
         </div>
         <Image
