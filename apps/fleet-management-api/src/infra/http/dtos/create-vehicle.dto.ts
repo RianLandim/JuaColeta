@@ -38,8 +38,10 @@ export class CreateVehicleDTO implements VehicleProps {
   companyId: string;
 
   @IsDate()
+  @IsOptional()
   createdAt: Date;
 
+  @IsOptional()
   @IsDate()
   updatedAt: Date;
 

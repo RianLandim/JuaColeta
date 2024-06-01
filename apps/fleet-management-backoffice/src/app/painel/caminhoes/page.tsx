@@ -15,6 +15,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { useMemo } from "react";
 import { match, P } from "ts-pattern";
 import { CircleEllipsisIcon } from "lucide-react";
+import { CreateTruckDialog } from "./_components/CreateTruckDialog";
 
 const columnHelper = createColumnHelper<Truck>();
 
@@ -51,19 +52,24 @@ export default function Trucks() {
         ),
       }),
     ],
-    []
+    [],
   );
 
   const truckQuery = useTruckList();
 
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center gap-4 p-4">
-      <div id="header" className="self-start">
-        <h1 className="font-bold text-white">Caminhoẽs</h1>
-        <desc className="font-bold text-white text-sm">
-          Visualize todos os caminhões registrados
-        </desc>
-      </div>
+      <header className="w-full flex items-center justify-between">
+        <div id="header" className="self-start">
+          <h1 className="font-bold text-white">Caminhoẽs</h1>
+          <desc className="font-bold text-white text-sm">
+            Visualize todos os caminhões registrados
+          </desc>
+        </div>
+
+        <CreateTruckDialog />
+      </header>
+
       <div className="w-full h-2/3">
         {match(truckQuery)
           .with({ isLoading: true }, () => <LoadingIndicator />)
@@ -75,7 +81,8 @@ export default function Trucks() {
           ))
           .with(
             { data: P.not(undefined).and(P.not(P.nullish)) },
-            ({ data }) => <DataTable columns={columns} data={data} />
+            //@ts-ignore due an bug
+            ({ data }) => <DataTable columns={columns} data={data} />,
           )
           .exhaustive()}
       </div>
