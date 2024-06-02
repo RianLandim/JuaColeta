@@ -18,9 +18,9 @@ export default function LoginScreen() {
       </View>
 
       <View>
-        <Text className="w-80 h-10 text-white text-center">
+        <Text className="w-90 h-10 text-white text-center">
           Bem Vindo ao Aplicativo oficial da{" "}
-          <Text className="text-LightGreenApp font-semibold">JUAColeta</Text>!
+          <Text className="text-juaGreen font-semibold">JUAColeta</Text>!
         </Text>
         <Text className="w-80 h-10 text-white text-center">
           O Futuro da coleta coletiva em suas mãos
@@ -28,19 +28,23 @@ export default function LoginScreen() {
       </View>
 
       <Link href="/home" asChild>
-        <TouchableOpacity className="bg-LightGreenApp px-20 py-3 rounded-lg text-center">
-          <Text className="text-lg font-semibold">Entrar</Text>
+        <TouchableOpacity>
+          <Text className="bg-juaGreen text-lg font-semibold px-20 py-3 rounded-lg text-center">
+            Entrar
+          </Text>
         </TouchableOpacity>
       </Link>
 
-      <TouchableOpacity>
-        <Text className="text-LightGreenApp underline font-semibol text-center">
-          Trabalha usando o app?
-        </Text>
-        <Text className="text-LightGreenApp underline font-semibold text-center">
-          Cadastre-se Aqui!
-        </Text>
-      </TouchableOpacity>
+      <Link href="/workerLogin/workerLogin" asChild>
+        <TouchableOpacity>
+          <Text className="text-juaGreen underline font-semibol text-center">
+            Trabalha usando o app?
+          </Text>
+          <Text className="text-juaGreen underline text-center font-bold">
+            Cadastre-se Aqui!
+          </Text>
+        </TouchableOpacity>
+      </Link>
     </ImageBackground>
   );
 }

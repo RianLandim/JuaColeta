@@ -5,11 +5,19 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from "react-native";
-import Navbar from "../components/navbar";
+import Navbar from "../../_components/navbar";
 import { Link } from "expo-router";
-import image from "../../../assets/bgimage.png";
+import image from "@/assets/bgimage.png";
+import { useAuth } from "../../../../utils/context/AuthContext";
 
 export default function AdressScreen() {
+  const { isAdmin, setIsAdmin } = useAuth();
+
+  const handleAcessChange = () => {
+    setIsAdmin(false);
+    console.log("false--admin--secessful");
+  };
+
   return (
     <ImageBackground className="flex space-y-10 w-full h-full" source={image}>
       <Navbar isRouteToGoBack />
@@ -33,28 +41,23 @@ export default function AdressScreen() {
           </Link>
         </View>
 
-        <View className="h-[1px] w-full bg-LightGreenApp"></View>
+        <View className="h-[1px] w-full bg-LightGrayApp"></View>
 
-        <View>
-          <TouchableWithoutFeedback>
-            <Text className="text-LightGreenApp text-2xl">
-              Entrar como funcionário
-            </Text>
-          </TouchableWithoutFeedback>
-        </View>
-
-        <View>
-          <Link
-            href={"/employee-notification/EmployeeNotificationScreen"}
-            asChild
-          >
-            <TouchableWithoutFeedback>
-              <Text className="text-LightGreenApp text-2xl underline">
-                Ver notificaçoes do Motorista
+        {isAdmin ? (
+          <View>
+            <TouchableWithoutFeedback onPress={handleAcessChange}>
+              <Text className="text-LightGrayApp text-2xl">
+                Sair do modo funcionário
               </Text>
             </TouchableWithoutFeedback>
+          </View>
+        ) : (
+          <Link href={"workerLogin/workerLoginScreen"} asChild>
+            <Text className="text-LightGrayApp text-2xl">
+              Entrar como funcionário
+            </Text>
           </Link>
-        </View>
+        )}
       </View>
     </ImageBackground>
   );
