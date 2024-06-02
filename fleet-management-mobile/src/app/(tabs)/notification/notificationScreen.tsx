@@ -1,94 +1,160 @@
-import { ImageBackground, View, TouchableWithoutFeedback } from "react-native";
+import {
+  ImageBackground,
+  View,
+  TouchableWithoutFeedback,
+  ScrollView,
+  Text,
+} from "react-native";
 import Navbar from "../../_components/navbar";
 import CardNotification from "../../_components/cardNotification";
-// import { useNotificationList } from "../../../hooks/queries/useNotificationList";
-import ActionButton from "../../_components/actionButton";
 import image from "@/assets/bgimage.png";
-import { ArrowCircleLeft } from "iconsax-react-native";
-import { useNavigation } from "expo-router";
+import GoBackButton from "../../_components/goBackButton";
+import { UseNotificationList } from "../../../../hooks/queries/useNotificationList";
+import { ArrowDown } from "iconsax-react-native";
 
 interface NotificationProps {
   id: number;
   text: string;
   isNew?: boolean;
 }
-// const NotificationQuery = useNotificationList();
 
 // TO DO: match render for return
 export default function Notification() {
-  const navigation = useNavigation();
+  var Animatable = require("react-native-animatable");
 
-  // const { data: notifications, isLoading, isError } = useNotificationList();
+  const { data: notifications, isPending, isError } = UseNotificationList();
 
-  // if (isLoading) {
-  //   return (
-  //     <View>
-  //       <Text>Loading...</Text>
-  //     </View>
-  //   );
-  // }
+  if (isPending) {
+    return (
+      <ImageBackground
+        className="animate-pulse flex space-y-5 w-full h-full items-center justify-center"
+        source={image}
+      >
+        <Text className="text-white text-xl">
+          Carregando, por favor aguarde.
+        </Text>
+        <Animatable.View
+          animation="flipInX"
+          iterationCount={10}
+          duration={1100}
+        >
+          <ArrowDown size="48" color="#fff" />
+        </Animatable.View>
+      </ImageBackground>
+    );
+  }
 
   // if (isError) {
   //   return (
-  //     <View>
-  //       <Text>Error fetching notifications</Text>
-  //     </View>
+  //     <ImageBackground
+  //       className="flex space-y-5 w-full h-full items-center justify-center"
+  //       source={image}
+  //     >
+  //       <Text className="text-white text-xl">Erro!</Text>
+  //       <GoBackButton css="mt-5" />
+  //     </ImageBackground>
   //   );
   // }
 
   return (
     <ImageBackground
-      className="flex space-y-10 w-full h-full items-center"
+      className="flex space-y-5 w-full h-full items-center"
       source={image}
     >
       <Navbar />
-      <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
-        <ArrowCircleLeft
-          className="bg-LightGrayApp rounded-full px-2 py-2 shadow-md self-end mr-4"
-          size={46}
-          color="#000"
-        />
-      </TouchableWithoutFeedback>
 
-      {/* {notifications.map((notification, index) => (
-          <View key={index}>
+      {/* <ScrollView className="w-full">
+        <View className="flex items-center space-y-5 overflow-scroll pt-2">
+          {notifications.map(
+            (notification: NotificationProps, index: number) => (
+              <View key={index}>
+                <CardNotification
+                  color={notification.isNew ? "light" : "dark"}
+                  text={notification.text}
+                  isNew={notification.isNew}
+                />
+              </View>
+            )
+          )}
+        </View>
+      </ScrollView> */}
+
+      {/* Static model bellow */}
+      <ScrollView className="w-full">
+        <View className="flex items-center space-y-5 overflow-scroll pt-2">
+          <View>
             <CardNotification
-              color={notification.isNew ? 'light' : 'dark'}
-              text={notification.text}
-              isNew={notification.isNew}
+              color="light"
+              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
+              isNew
             />
           </View>
-        ))} */}
+          <View>
+            <CardNotification
+              color="dark"
+              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
+              isNew
+            />
+          </View>
+          <View>
+            <CardNotification
+              color="light"
+              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
+              isNew
+            />
+          </View>
+          <View>
+            <CardNotification
+              color="dark"
+              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
+              isNew
+            />
+          </View>
+          <View>
+            <CardNotification
+              color="light"
+              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
+              isNew
+            />
+          </View>
+          <View>
+            <CardNotification
+              color="dark"
+              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
+              isNew
+            />
+          </View>
+          <View>
+            <CardNotification
+              color="light"
+              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
+              isNew
+            />
+          </View>
 
-      <View className="flex items-center space-y-5">
-        <View>
-          <CardNotification
-            color="light"
-            text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
-            isNew
-          />
+          <View>
+            <CardNotification
+              color="dark"
+              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised "
+              isNew
+            />
+          </View>
+          <View>
+            <CardNotification
+              color="light"
+              text="There are many variations of passages of Lorem Ipsum available, but the majority"
+            />
+          </View>
+          <View>
+            <CardNotification
+              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form"
+              color="dark"
+            />
+          </View>
         </View>
+      </ScrollView>
 
-        <View>
-          <CardNotification
-            color="dark"
-            text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised "
-            isNew
-          />
-        </View>
-        <View>
-          <CardNotification
-            color="light"
-            text="There are many variations of passages of Lorem Ipsum available, but the majority"
-          />
-        </View>
-        <View>
-          <CardNotification
-            text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form"
-            color="dark"
-          />
-        </View>
-      </View>
+      <GoBackButton css="mb-5 mt-5" />
     </ImageBackground>
   );
 }

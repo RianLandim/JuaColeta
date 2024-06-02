@@ -27,11 +27,10 @@ export default function LoginScreen() {
         </Text>
       </View>
 
-      <Link href="home/homeScreen" asChild>
+      <Link href="/home" asChild>
         <TouchableOpacity>
           <Text className="bg-juaGreen text-lg font-semibold px-20 py-3 rounded-lg text-center">
-            {" "}
-            Entrar{" "}
+            Entrar
           </Text>
         </TouchableOpacity>
       </Link>
