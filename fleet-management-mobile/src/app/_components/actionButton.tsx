@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { View, Image, TouchableOpacity, Animated } from "react-native";
 import { Link } from "expo-router";
+import { useAuth } from "../../../utils/context/AuthContext";
 
 export default function ActionButton() {
+  const { isAdmin } = useAuth();
   const [noti] = useState(new Animated.Value(-40));
   const [cal] = useState(new Animated.Value(-40));
   const [timer] = useState(new Animated.Value(-40));
@@ -51,14 +53,25 @@ export default function ActionButton() {
   return (
     <View style={{ position: "absolute", bottom: 25, right: 25 }}>
       <Animated.View style={{ marginBottom: noti }}>
-        <Link href="notification/notificationScreen" asChild>
-          <TouchableOpacity>
-            <Image
-              source={require("../../../assets/ActionButton/notiButton.png")}
-              style={{ width: 50, height: 50, bottom: -35, right: -25 }}
-            />
-          </TouchableOpacity>
-        </Link>
+        {isAdmin ? (
+          <Link href="employeeNotification" asChild>
+            <TouchableOpacity>
+              <Image
+                source={require("../../../assets/ActionButton/notiButton.png")}
+                style={{ width: 50, height: 50, bottom: -35, right: -25 }}
+              />
+            </TouchableOpacity>
+          </Link>
+        ) : (
+          <Link href="notification/notificationScreen" asChild>
+            <TouchableOpacity>
+              <Image
+                source={require("../../../assets/ActionButton/notiButton.png")}
+                style={{ width: 50, height: 50, bottom: -35, right: -25 }}
+              />
+            </TouchableOpacity>
+          </Link>
+        )}
       </Animated.View>
 
       <Animated.View style={{ marginBottom: cal }}>

@@ -18,7 +18,7 @@ export default function CardNotification({
   return (
     <View
       className={`min-h-20 max-h-42  ${
-        color === "light" ? "bg-LightGrayApp" : "bg-DarkGrayApp"
+        color === "light" ? "bg-LightGreenApp" : "bg-DarkGreenApp"
       } w-[85%] space-x-4 items-center flex flex-row rounded-md px-3 py-3 relative`}
     >
       <View
@@ -32,8 +32,8 @@ export default function CardNotification({
         <Text
           className={`${
             color === "light"
-              ? "bg-LightGrayApp"
-              : "bg-DarkGrayApp text-whiteApp"
+              ? "bg-LightGreenApp"
+              : "bg-DarkGreenApp text-whiteApp"
           } font-bold`}
         >
           Aviso
@@ -41,8 +41,8 @@ export default function CardNotification({
         <Text
           className={`${
             color === "light"
-              ? "bg-LightGrayApp"
-              : "bg-DarkGrayApp text-whiteApp"
+              ? "bg-LightGreenApp"
+              : "bg-DarkGreenApp text-whiteApp"
           } flex-shrink`}
         >
           {text}

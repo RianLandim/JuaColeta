@@ -1,6 +1,8 @@
 import { Image, ImageBackground, Text, View } from "react-native";
-import Navbar from "../_components/navbar";
-import ActionButton from "../_components/actionButton";
+import Navbar from "../../_components/navbar";
+import ActionButton from "../../_components/actionButton";
+import image from "@/assets/bgimage.png"
+import gariImage from "@/assets/Fotos/Garis.jpg"
 import { TruckTick } from "iconsax-react-native";
 
 //TO DO: Lógica ainda não implementada, tem que ver com o backend
@@ -8,13 +10,13 @@ export default function Timer() {
   return (
     <ImageBackground
       className="h-full w-full items-center justify-center flex space-y-5"
-      source={require("../../../assets/bgimage.png")}
+      source={image}
     >
       <View className="absolute left-0 top-0">
         <Navbar />
       </View>
       <Image
-        source={require("../../../assets/Fotos/Garis.jpg")}
+        source={gariImage}
         className="h-56 w-96 rounded-lg "
       />
       <Text className="text-white w-80 text-center text-xl">
