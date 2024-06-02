@@ -16,23 +16,23 @@ export default function Timer() {
         <Navbar />
       </View>
 
-      <Text className="text-white w-80 text-center text-xl">
+      <Text className="text-white w-80 text-center text-xl mb-5 ">
         Previsão do horário
       </Text>
-      <Text className="text-juaGreen">
+      <Text className="text-juaGreen mb-10 w-4/5 text-center">
         A previsão do caminhão passar em sua rua hoje é por volta de:
       </Text>
-      <View className="flex flex-row">
+      <View className="flex flex-row mb-10 items-center">
         <Watch size="32" color="#8CC63F" />
-        <Text className="text-juaGreen text-2xl mx-2">17:00</Text>
+        <Text className="text-juaGreen text-7xl mx-2">17:00</Text>
         <Watch size="32" color="#8CC63F" />
       </View>
 
-      <Text className="mtop-10 bg-juaGreen font-semibold px-5 py-3 rounded-lg text-center">
+      <Text className="mtop-10 bg-juaGreen font-semibold px-5 py-3 rounded-lg text-center mb-10 w-4/5 break-words">
         Ufa! Parece que nenhum imprevisto foi registrado em sua rua!
       </Text>
 
-      <Text className="text-juaGreen text-center px-10">
+      <Text className="text-juaGreen text-center px-10  w-4/5 items-center">
         Coloque o lixo para fora quando o caminhão estiver próximo de sua
         residência!
       </Text>

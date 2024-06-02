@@ -3,6 +3,7 @@ import Navbar from "../../_components/navbar";
 import ActionButton from "../../_components/actionButton";
 import image from "@/assets/bgimage.png"
 import gariImage from "@/assets/Fotos/Garis.jpg"
+import { TruckTick } from "iconsax-react-native";
 
 //TO DO: Lógica ainda não implementada, tem que ver com o backend
 export default function Timer() {
@@ -25,17 +26,34 @@ export default function Timer() {
         Fique atento para não perder o dia da coleta!
       </Text>
 
-      <View className="w-96 h-56 border-juaGreen border-2">
-        <View className="flex flex-row space-x-5 py-3">
-          <Text className="text-juaGreen text-lg"> DOM </Text>
-          <Text className="text-juaDGreen text-lg"> SEG </Text>
-          <Text className="text-juaGreen text-lg"> TER </Text>
-          <Text className="text-juaDGreen text-lg"> QUA </Text>
-          <Text className="text-juaGreen text-lg"> QUI </Text>
-          <Text className="text-juaDGreen text-lg"> SEX </Text>
-          <Text className="text-juaGreen text-lg"> SAB </Text>
+      <View className="h-24 px-3 border-juaGreen border-2">
+        <View className="flex flex-row py-2 border-juaGreen border-b-2 ">
+          <Text className="text-juaDGreen text-lg px-2">DOM</Text>
+          <Text className="text-juaGreen text-lg px-2">SEG</Text>
+          <Text className="text-juaDGreen text-lg px-2">TER</Text>
+          <Text className="text-juaGreen text-lg px-2">QUA</Text>
+          <Text className="text-juaDGreen text-lg px-2">QUI</Text>
+          <Text className="text-juaGreen text-lg px-2">SEX</Text>
+          <Text className="text-juaDGreen text-lg px-2">SAB</Text>
+        </View>
+        <View className="flex flex-row mt-2 mb">
+          <Text className="text-juaDGreen text-lg px-8">-</Text>
+          <TruckTick size="28" color="#8CC63F" />
+          <Text className="text-juaDGreen text-lg px-8">-</Text>
+          <TruckTick size="28" color="#8CC63F" />
+          <Text className="text-juaDGreen text-lg px-8">-</Text>
+          <TruckTick size="28" color="#8CC63F" />
+          <Text className="text-juaDGreen text-lg px-8">-</Text>
         </View>
       </View>
+
+      <View className="border-juaGreen border-2 flex flex-row py-2 px-5 border-dotted break-words w-56 items-center bg-black/50">
+        <TruckTick size="28" color="#8CC63F" />
+        <Text className="text-juaGreen px-2 text-center">
+          Este desenho indica os dias que o caminhão estará passando em sua rua!
+        </Text>
+      </View>
+
       <ActionButton />
     </ImageBackground>
   );
