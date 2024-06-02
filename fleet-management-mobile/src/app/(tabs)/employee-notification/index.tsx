@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Navbar from "../components/navbar";
 import EmployeeCardNotification from "./_components/cardNotification";
-import { UseSendNotification } from "../../../hooks/mutation/useSendNotification";
+import { UseSendNotification } from "../../../../hooks/mutation/useSendNotification";
 import QueryClientProviderComponent from "./_components/queryClientProvider";
 
 interface NotificationType {
