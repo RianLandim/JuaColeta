@@ -19,6 +19,9 @@ module.exports = {
         juaDGreen: "#2C612C"
       }
     },
+    space: {
+      '5px': '5px',
+    }
   },
   plugins: [],
 };
