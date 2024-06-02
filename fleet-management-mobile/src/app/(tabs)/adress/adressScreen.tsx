@@ -30,10 +30,10 @@ export default function AdressScreen() {
             <View className="flex items-center flex-row space-x-10">
               <View className="flex flex-col">
                 <Text className="text-lg text-LightGreenApp">
-                  Rua Avenida Presidente da Ditadura
+                  Rua Avenida Presidente Dutra
                 </Text>
-                <Text className="text-lg text-LightGreenApp">NUmero Xyz</Text>
-                <Text className="text-lg text-LightGreenApp">Bairo Fulano</Text>
+                <Text className="text-lg text-LightGreenApp">Numero Xyz</Text>
+                <Text className="text-lg text-LightGreenApp">Bairo Centro</Text>
               </View>
 
               <Image source={require("@/assets/Buttons/ArrowToRight.png")} />
