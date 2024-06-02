@@ -46,14 +46,14 @@ export default function AdressScreen() {
         {isAdmin ? (
           <View>
             <TouchableWithoutFeedback onPress={handleAcessChange}>
-              <Text className="text-LightGrayApp text-2xl">
+              <Text className="text-LightGreenApp text-2xl">
                 Sair do modo funcionário
               </Text>
             </TouchableWithoutFeedback>
           </View>
         ) : (
           <Link href={"workerLogin/workerLoginScreen"} asChild>
-            <Text className="text-LightGrayApp text-2xl">
+            <Text className="text-LightGreenApp text-2xl">
               Entrar como funcionário
             </Text>
           </Link>

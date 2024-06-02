@@ -1,10 +1,4 @@
-import {
-  ImageBackground,
-  View,
-  TouchableWithoutFeedback,
-  ScrollView,
-  Text,
-} from "react-native";
+import { ImageBackground, View, ScrollView, Text } from "react-native";
 import Navbar from "../../_components/navbar";
 import CardNotification from "../../_components/cardNotification";
 import image from "@/assets/bgimage.png";
@@ -85,70 +79,46 @@ export default function Notification() {
           <View>
             <CardNotification
               color="light"
-              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
+              text="Olá, infelizmente fomos notificados de um pequeno imprevisto na rota do caminhão de coleta para sua casa. Por favor, saiba que nesse caso a coleta pode demorar um pouco mais, pedimos desculpas pelo ocorrido."
               isNew
             />
           </View>
           <View>
             <CardNotification
               color="dark"
-              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
+              text="Olá, infelizmente fomos notificados de um imprevisto na rota do caminhão de coleta para sua casa. Por favor, saiba que nesse caso a coleta pode demorar um mais, pedimos desculpas pelo ocorrido."
               isNew
             />
           </View>
           <View>
             <CardNotification
               color="light"
-              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
+              text="Olá, infelizmente fomos notificados de uma impossibilidade na rota do caminhão de coleta para sua casa. Por favor, saiba que nesse caso a coleta pode não aconter hoje, pedimos desculpas pelo ocorrido. Assim que possível, faremos a coleta na sua rua."
               isNew
             />
           </View>
           <View>
-            <CardNotification
+          <CardNotification
+              color="light"
+              text="Olá, infelizmente fomos notificados de uma impossibilidade na rota do caminhão de coleta para sua casa. Por favor, saiba que nesse caso a coleta pode não aconter hoje, pedimos desculpas pelo ocorrido. Assim que possível, faremos a coleta na sua rua."
+            />
+          </View>
+          <View>
+          <CardNotification
               color="dark"
-              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
-              isNew
+              text="Olá, infelizmente fomos notificados de um imprevisto na rota do caminhão de coleta para sua casa. Por favor, saiba que nesse caso a coleta pode demorar um mais, pedimos desculpas pelo ocorrido."
+            />
+          </View>
+          <View>
+          <CardNotification
+              color="light"
+              text="Olá, infelizmente fomos notificados de um pequeno imprevisto na rota do caminhão de coleta para sua casa. Por favor, saiba que nesse caso a coleta pode demorar um pouco mais, pedimos desculpas pelo ocorrido."
             />
           </View>
           <View>
             <CardNotification
               color="light"
-              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
-              isNew
-            />
-          </View>
-          <View>
-            <CardNotification
-              color="dark"
-              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
-              isNew
-            />
-          </View>
-          <View>
-            <CardNotification
-              color="light"
-              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem."
-              isNew
-            />
-          </View>
-
-          <View>
-            <CardNotification
-              color="dark"
-              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised "
-              isNew
-            />
-          </View>
-          <View>
-            <CardNotification
-              color="light"
-              text="There are many variations of passages of Lorem Ipsum available, but the majority"
-            />
-          </View>
-          <View>
-            <CardNotification
-              text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form"
-              color="dark"
+              text="Olá, infelizmente fomos notificados de um pequeno imprevisto na rota do caminhão de coleta para sua casa. Por favor, saiba que nesse caso a coleta pode demorar um pouco mais, pedimos desculpas pelo ocorrido."
             />
           </View>
         </View>

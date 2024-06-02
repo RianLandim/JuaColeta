@@ -19,11 +19,10 @@ export default function WorkerLogin() {
 
   const handleInputChange = (text: string) => {
     setInput(text);
-    console.log("starting...");
 
     if (text === "123456") {
       setIsAdmin(true);
-      console.log("sucessful");
+      // console.log("sucessful");
       navigation.push("/adress/adressScreen");
       setInput("");
     }

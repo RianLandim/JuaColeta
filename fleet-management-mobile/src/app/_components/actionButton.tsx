@@ -54,7 +54,7 @@ export default function ActionButton() {
     <View style={{ position: "absolute", bottom: 25, right: 25 }}>
       <Animated.View style={{ marginBottom: noti }}>
         {isAdmin ? (
-          <Link href="notification/notificationScreen" asChild>
+          <Link href="employeeNotification" asChild>
             <TouchableOpacity>
               <Image
                 source={require("../../../assets/ActionButton/notiButton.png")}
