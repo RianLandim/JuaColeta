@@ -23,17 +23,17 @@ export default function AdressScreen() {
       <Navbar isRouteToGoBack />
 
       <View className="flex h-full w-full px-10 space-y-5">
-        <Text className="text-LightGrayApp text-2xl">Endereço</Text>
+        <Text className="text-LightGreenApp text-2xl">Endereço</Text>
 
         <View className="flex flex-row items-center space-x-5">
           <Link href={"/adress/editAdressScreen"}>
             <View className="flex items-center flex-row space-x-10">
               <View className="flex flex-col">
-                <Text className="text-lg text-LightGrayApp">
+                <Text className="text-lg text-LightGreenApp">
                   Rua Avenida Presidente da Ditadura
                 </Text>
-                <Text className="text-lg text-LightGrayApp">NUmero Xyz</Text>
-                <Text className="text-lg text-LightGrayApp">Bairo Fulano</Text>
+                <Text className="text-lg text-LightGreenApp">NUmero Xyz</Text>
+                <Text className="text-lg text-LightGreenApp">Bairo Fulano</Text>
               </View>
 
               <Image source={require("@/assets/Buttons/ArrowToRight.png")} />
