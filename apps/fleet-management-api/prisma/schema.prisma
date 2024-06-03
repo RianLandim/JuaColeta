@@ -17,6 +17,11 @@ enum UserRole {
   CLIENT
 }
 
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
 model User {
   id       String @id
   email    String @unique
@@ -126,6 +131,8 @@ model Vehicle {
   renavam        String
   averageConsume Float?
   capacity       Float?
+
+  status Status @default(ACTIVE)
 
   isSecured Boolean
 

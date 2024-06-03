@@ -9,6 +9,10 @@
         "inputs": ["prisma/schema.prisma"],
       "cache": false
       },
+      "db:studio": {
+        "inputs": ["prisma/schema.prisma"],
+      "cache": false
+      },
       "build": {
         "dependsOn": ["^build"],
         "outputs": [".next/**", "!.next/cache/**"]

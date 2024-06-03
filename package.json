@@ -6,8 +6,10 @@
   },
   "scripts": {
     "prepare": "husky",
+    "postinstall": "pnpm db:generate",
     "dev": "turbo run dev --parallel",
     "db:generate": "turbo db:generate",
+    "db:studio": "turbo db:studio",
     "db:push": "turbo db:push"
   }
 }

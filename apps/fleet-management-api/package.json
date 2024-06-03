@@ -21,7 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "dev:email": "email dev --dir ./src/infra/mail/templates --port 3001",
     "db:generate": "pnpx prisma generate",
-    "db:push": "pnpx prisma db push"
+    "db:push": "pnpx prisma db push",
+    "db:studio": "pnpx prisma studio"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

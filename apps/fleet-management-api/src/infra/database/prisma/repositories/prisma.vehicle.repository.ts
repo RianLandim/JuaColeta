@@ -18,11 +18,26 @@ export class PrismaVehicleRepository implements VehicleRepository {
 
   async list(companyId: string): Promise<Vehicle[]> {
     const prismaVehicles = await this.prisma.vehicle.findMany({
-      where: { companyId },
+      where: { companyId, status: 'ACTIVE' },
     });
 
-    const vehicles = prismaVehicles.map((vehicle) => new Vehicle(vehicle));
+    const vehicles = prismaVehicles.map(
+      (vehicle) => new Vehicle(vehicle, vehicle.id),
+    );
 
     return vehicles;
+  }
+
+  async update(vehicle: Vehicle) {
+    throw new Error('Method not implemented yet');
+  }
+
+  async delete(vehicleId: string) {
+    await this.prisma.vehicle.update({
+      where: { id: vehicleId },
+      data: {
+        status: 'INACTIVE',
+      },
+    });
   }
 }

@@ -13,4 +13,8 @@ export class InMemoryVehicleRepository implements VehicleRepository {
 
     return vehicles;
   }
+
+  async delete(vehicleId: string): Promise<void> {
+    throw new Error('method not implemented yet');
+  }
 }

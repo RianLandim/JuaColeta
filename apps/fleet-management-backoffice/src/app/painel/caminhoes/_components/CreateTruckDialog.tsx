@@ -15,9 +15,14 @@ import {
 } from "@fleet/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/ui/inputField";
+import { useCreateVehicleMutation } from "@/hooks/mutations/useCreateVehicle";
+import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
 
 export function CreateTruckDialog() {
-  const { register, handleSubmit, watch } = useForm<CreateTruckValidatorProps>({
+  const [open, setOpen] = useState(false);
+
+  const { register, handleSubmit, reset } = useForm<CreateTruckValidatorProps>({
     resolver: zodResolver(CreateTruckValidator),
     defaultValues: {
       category: "D",
@@ -27,17 +32,47 @@ export function CreateTruckDialog() {
       plate: "",
       renavam: "",
       year: "",
+      companyId: "x9unlf5rw4hhm15npwjkl5g4",
+      isSecured: true,
     },
   });
 
+  const createVehicleMutation = useCreateVehicleMutation();
+  const { toast } = useToast();
+
   const submit: SubmitHandler<CreateTruckValidatorProps> = (data) => {
-    console.log(data);
+    createVehicleMutation.mutate(data, {
+      onSuccess: () => {
+        toast({
+          title: "Sucesso",
+          description: "Caminhão registrado com sucesso",
+        });
+        reset();
+        setOpen(false);
+      },
+      onError: (error) => {
+        console.error(error);
+
+        toast({
+          title: "Erro",
+          description: "Ocorreu um erro ao registrar o caminhão",
+          variant: "destructive",
+        });
+      },
+    });
   };
 
   return (
-    <Dialog>
+    <Dialog
+      open={open}
+      onOpenChange={(open) => {
+        if (!open) {
+          setOpen(false);
+        }
+      }}
+    >
       <DialogTrigger asChild>
-        <Button>Adicionar Caminhão</Button>
+        <Button onClick={() => setOpen(true)}>Adicionar Caminhão</Button>
       </DialogTrigger>
       <DialogContent className="bg-main">
         <DialogHeader>
@@ -58,12 +93,14 @@ export function CreateTruckDialog() {
           <InputField label="Placa" inputProps={register("plate")} />
           <InputField label="Renavam" inputProps={register("renavam")} />
           <InputField label="Ano" inputProps={register("year")} />
-          <Button type="submit" variant="outline">
+          <Button
+            type="submit"
+            variant="outline"
+            isLoading={createVehicleMutation.status === "pending"}
+          >
             Salvar
           </Button>
         </form>
-
-        <pre>{JSON.stringify(watch(), null, 2)}</pre>
       </DialogContent>
     </Dialog>
   );

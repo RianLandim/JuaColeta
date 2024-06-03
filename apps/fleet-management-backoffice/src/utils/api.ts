@@ -24,7 +24,7 @@ export async function fetchApi<TValidator extends z.ZodType<unknown>>(
   route: string,
   options: FetchApiOptions<TValidator> = {
     method: "GET",
-  }
+  },
 ) {
   const url = new URL(route, env.NEXT_PUBLIC_BASE_URL);
 

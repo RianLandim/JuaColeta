@@ -16,10 +16,14 @@ import { useMemo } from "react";
 import { match, P } from "ts-pattern";
 import { CircleEllipsisIcon } from "lucide-react";
 import { CreateTruckDialog } from "./_components/CreateTruckDialog";
+import { DeleteTruckDialog } from "./_components/DeleteTruckDialog";
+import { useQueryParam } from "@/hooks/useQueryParam";
 
-const columnHelper = createColumnHelper<Truck>();
+const columnHelper = createColumnHelper<Truck & { id: string }>();
 
 export default function Trucks() {
+  const { createQueryString } = useQueryParam();
+
   const columns = useMemo(
     () => [
       columnHelper.accessor("model", {
@@ -35,7 +39,7 @@ export default function Trucks() {
         id: "actions",
         header: "",
         size: 32,
-        cell: () => (
+        cell: (info) => (
           <DropdownMenu>
             <DropdownMenuTrigger>
               <CircleEllipsisIcon />
@@ -44,7 +48,15 @@ export default function Trucks() {
               <DropdownMenuLabel>Opções</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Editar</DropdownMenuItem>
-              <DropdownMenuItem>Inativar</DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() =>
+                  createQueryString([
+                    { name: "delete", value: info.row.original.id },
+                  ])
+                }
+              >
+                Inativar
+              </DropdownMenuItem>
               <DropdownMenuItem>Ver Motorista</DropdownMenuItem>
               <DropdownMenuItem>Ver Rota</DropdownMenuItem>
             </DropdownMenuContent>
@@ -59,6 +71,7 @@ export default function Trucks() {
 
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center gap-4 p-4">
+      <DeleteTruckDialog />
       <header className="w-full flex items-center justify-between">
         <div id="header" className="self-start">
           <h1 className="font-bold text-white">Caminhoẽs</h1>

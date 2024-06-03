@@ -20,6 +20,7 @@ import { AddNotification } from '@app/usecases/notification/add-notification.use
 import { GetNotifications } from '@app/usecases/notification/get-notification.usecase';
 import { MailModule } from '@infra/mail/mail.module';
 import { GetUsersWithVehicle } from '@app/usecases/user/get-users-with-vehicle';
+import { DeleteVehicle } from '@app/usecases/vehicle/delete-vehicle';
 
 @Module({
   imports: [AuthenticationModule, DatabaseModule, MailModule],
@@ -44,6 +45,7 @@ import { GetUsersWithVehicle } from '@app/usecases/user/get-users-with-vehicle';
     AddNotification,
     GetNotifications,
     GetUsersWithVehicle,
+    DeleteVehicle,
   ],
 })
 export class HttpModule {}
