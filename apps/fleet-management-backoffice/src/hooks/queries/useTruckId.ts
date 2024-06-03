@@ -1,28 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchApi } from "../../utils/api";
-import { number, string, z } from "zod";
-
-const truckIdValidator = z.object({
-  idTruck: number(),
-});
-
-type TruckId = z.infer<typeof truckIdValidator>;
+import { truckValidator } from "@fleet/validators";
 
 const FETCH_TRUCK_ID_KEY = ["FETCH_TRUCK_ID_KEY"];
 
-const UseTruckId = async () => {
-  const [data, _] = await fetchApi("vehicle/", {
+const UseTruckId = async (id: string) => {
+  const [data, error] = await fetchApi(`vehicle/${id}/list`, {
     method: "GET",
-    validator: truckIdValidator.array(),
+    validator: truckValidator,
   });
+
+  if (error) {
+    throw new Error(error.message);
+  }
 
   return data;
 };
 
-const useTruckIdList = () =>
+const useTruckIdList = (id: string) =>
   useQuery({
-    queryKey: FETCH_TRUCK_ID_KEY,
-    queryFn: () => UseTruckId(),
+    queryKey: [...FETCH_TRUCK_ID_KEY, id],
+    queryFn: ({ queryKey }) => UseTruckId(queryKey[1]),
   });
 
-export { useTruckIdList, FETCH_TRUCK_ID_KEY, type TruckId };
+export { useTruckIdList, FETCH_TRUCK_ID_KEY };

@@ -5,61 +5,68 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import {
-  CreateTruckValidator,
-  CreateTruckValidatorProps,
-} from "@fleet/validators";
+import { EditTruckValidator, EditTruckValidatorProps } from "@fleet/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/ui/inputField";
-import { useCreateVehicleMutation } from "@/hooks/mutations/useCreateVehicle";
 import { useToast } from "@/components/ui/use-toast";
-import { useState } from "react";
+import { useEditVehicleMutation } from "@/hooks/mutations/useEditVehicle";
+import { useQueryParam } from "@/hooks/useQueryParam";
+import { useTruckIdList } from "@/hooks/queries/useTruckId";
+import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { FETCH_VEHICLES_KEY } from "@/hooks/queries/useTruck";
 
-export function CreateTruckDialog() {
-  const [open, setOpen] = useState(false);
+export function EditTruckDialog() {
+  const { createQueryString, searchParams } = useQueryParam();
 
-  const { register, handleSubmit, reset } = useForm<CreateTruckValidatorProps>({
-    resolver: zodResolver(CreateTruckValidator),
+  const { data } = useTruckIdList(searchParams.get("edit") ?? "");
+
+  const { register, handleSubmit, reset } = useForm<EditTruckValidatorProps>({
+    resolver: zodResolver(EditTruckValidator),
     defaultValues: {
-      category: "D",
-      color: "",
-      fabricator: "",
-      model: "",
-      plate: "",
-      renavam: "",
-      year: "",
-      companyId: "x9unlf5rw4hhm15npwjkl5g4",
-      isSecured: true,
+      id: searchParams.get("edit") ?? data?.id,
     },
   });
 
-  const createVehicleMutation = useCreateVehicleMutation();
-  const { toast } = useToast();
-  const apiUtils = useQueryClient();
+  useEffect(() => {
+    reset({
+      id: searchParams.get("edit") ?? data?.id,
+      category: data?.category ?? "D",
+      color: data?.color,
+      fabricator: data?.fabricator,
+      model: data?.model,
+      plate: data?.plate,
+      renavam: data?.renavam,
+      year: data?.year,
+      companyId: data?.companyId,
+      isSecured: data?.isSecured,
+    });
+  }, [data]);
 
-  const submit: SubmitHandler<CreateTruckValidatorProps> = (data) => {
-    createVehicleMutation.mutate(data, {
+  const editVehicleMutation = useEditVehicleMutation();
+  const apiUtils = useQueryClient();
+  const { toast } = useToast();
+
+  const submit: SubmitHandler<EditTruckValidatorProps> = (data) => {
+    editVehicleMutation.mutate(data, {
       onSuccess: () => {
         toast({
           title: "Sucesso",
-          description: "Caminhão registrado com sucesso",
+          description: "Caminhão editado com sucesso",
         });
         reset();
         apiUtils.invalidateQueries({ queryKey: FETCH_VEHICLES_KEY });
-        setOpen(false);
+        createQueryString([{ name: "edit", value: undefined }]);
       },
       onError: (error) => {
         console.error(error);
 
         toast({
           title: "Erro",
-          description: "Ocorreu um erro ao registrar o caminhão",
+          description: "Ocorreu um erro ao editar o caminhão",
           variant: "destructive",
         });
       },
@@ -68,16 +75,14 @@ export function CreateTruckDialog() {
 
   return (
     <Dialog
-      open={open}
+      open={searchParams.has("edit")}
       onOpenChange={(open) => {
         if (!open) {
-          setOpen(false);
+          createQueryString([{ name: "edit", value: undefined }]);
+          reset();
         }
       }}
     >
-      <DialogTrigger asChild>
-        <Button onClick={() => setOpen(true)}>Adicionar Caminhão</Button>
-      </DialogTrigger>
       <DialogContent className="bg-main">
         <DialogHeader>
           <DialogTitle className="text-white">
@@ -100,7 +105,7 @@ export function CreateTruckDialog() {
           <Button
             type="submit"
             variant="outline"
-            isLoading={createVehicleMutation.status === "pending"}
+            isLoading={editVehicleMutation.status === "pending"}
           >
             Salvar
           </Button>

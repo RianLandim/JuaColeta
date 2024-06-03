@@ -18,6 +18,7 @@ import { CircleEllipsisIcon } from "lucide-react";
 import { CreateTruckDialog } from "./_components/CreateTruckDialog";
 import { DeleteTruckDialog } from "./_components/DeleteTruckDialog";
 import { useQueryParam } from "@/hooks/useQueryParam";
+import { EditTruckDialog } from "./_components/EditTruckDialog";
 
 const columnHelper = createColumnHelper<Truck & { id: string }>();
 
@@ -47,7 +48,15 @@ export default function Trucks() {
             <DropdownMenuContent>
               <DropdownMenuLabel>Opções</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Editar</DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() =>
+                  createQueryString([
+                    { name: "edit", value: info.row.original.id },
+                  ])
+                }
+              >
+                Editar
+              </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() =>
                   createQueryString([
@@ -72,6 +81,7 @@ export default function Trucks() {
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center gap-4 p-4">
       <DeleteTruckDialog />
+      <EditTruckDialog />
       <header className="w-full flex items-center justify-between">
         <div id="header" className="self-start">
           <h1 className="font-bold text-white">Caminhoẽs</h1>

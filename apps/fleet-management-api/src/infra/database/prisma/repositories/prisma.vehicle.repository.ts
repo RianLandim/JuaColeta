@@ -28,8 +28,25 @@ export class PrismaVehicleRepository implements VehicleRepository {
     return vehicles;
   }
 
-  async update(vehicle: Vehicle) {
-    throw new Error('Method not implemented yet');
+  async listById(id: string): Promise<Vehicle> {
+    const prismaVehicle = await this.prisma.vehicle.findUnique({
+      where: { id },
+    });
+
+    const vehicle = new Vehicle(prismaVehicle, prismaVehicle.id);
+
+    return vehicle;
+  }
+
+  async update({ id, ...vehicle }: Vehicle) {
+    await this.prisma.vehicle.update({
+      where: {
+        id: id,
+      },
+      data: {
+        ...vehicle,
+      },
+    });
   }
 
   async delete(vehicleId: string) {
