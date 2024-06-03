@@ -1,8 +1,4 @@
 import { ImageBackground, Image } from "react-native";
-// import { LayoutProps } from "../../../utils/types/layoutProps";
-import Navbar from "../_components/navbar";
-import ActionButton from "../_components/actionButton";
-
 import {
   getCurrentPositionAsync,
   LocationObject,
@@ -12,6 +8,9 @@ import {
 } from "expo-location";
 import MapView, { Marker } from "react-native-maps";
 import { useEffect, useState } from "react";
+import Navbar from "../../_components/navbar";
+import ActionButton from "../../_components/actionButton";
+import image from "@/assets/bgimage.png";
 
 export default function Home() {
   const [location, setLocation] = useState<LocationObject | null>(null);
@@ -44,10 +43,7 @@ export default function Home() {
   }, []);
 
   return (
-    <ImageBackground
-      className="w-full h-full"
-      source={require("../../../assets/bgimage.png")}
-    >
+    <ImageBackground className="w-full h-full" source={image}>
       <Navbar />
 
       {location && (
@@ -68,6 +64,7 @@ export default function Home() {
           />
         </MapView>
       )}
+      <ActionButton />
     </ImageBackground>
   );
 }

@@ -4,7 +4,6 @@ import {
   Text,
   ImageBackground,
   Image,
-  Button,
   TouchableOpacity,
 } from "react-native";
 
@@ -31,18 +30,17 @@ export default function LoginScreen() {
       <Link href="/home" asChild>
         <TouchableOpacity>
           <Text className="bg-juaGreen text-lg font-semibold px-20 py-3 rounded-lg text-center">
-            {" "}
-            Entrar{" "}
+            Entrar
           </Text>
         </TouchableOpacity>
       </Link>
 
-      <Link href="/(tabs)/workerLogin" asChild>
+      <Link href="/workerLogin/workerLogin" asChild>
         <TouchableOpacity>
           <Text className="text-juaGreen underline font-semibol text-center">
             Trabalha usando o app?
           </Text>
-          <Text className="text-juaGreen underline font-semibold text-center font-bold">
+          <Text className="text-juaGreen underline text-center font-bold">
             Cadastre-se Aqui!
           </Text>
         </TouchableOpacity>

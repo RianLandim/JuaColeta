@@ -11,14 +11,18 @@ module.exports = {
     extend: {
       colors: {
         bgGrayApp: "#1E1E1E",
-        LightGrayApp: "#8CC63F",
-        DarkGrayApp: "#2A5C43",
+        LightGreenApp: "#8CC63F",
+        DarkGreenApp: "#2A5C43",
         whiteApp: "#F9F9F9",
         redApp: "#FF1C18",
+        yellowApp: "#D9E021",
         juaGreen: "#8CC63F",
         juaDGreen: "#2C612C"
       }
     },
+    space: {
+      '5px': '5px',
+    }
   },
   plugins: [],
 };
