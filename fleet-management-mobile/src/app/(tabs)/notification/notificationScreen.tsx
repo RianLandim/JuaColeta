@@ -18,25 +18,25 @@ export default function Notification() {
 
   const { data: notifications, isPending, isError } = UseNotificationList();
 
-  if (isPending) {
-    return (
-      <ImageBackground
-        className="animate-pulse flex space-y-5 w-full h-full items-center justify-center"
-        source={image}
-      >
-        <Text className="text-white text-xl">
-          Carregando, por favor aguarde.
-        </Text>
-        <Animatable.View
-          animation="flipInX"
-          iterationCount={10}
-          duration={1100}
-        >
-          <ArrowDown size="48" color="#fff" />
-        </Animatable.View>
-      </ImageBackground>
-    );
-  }
+  // if (isPending) {
+  //   return (
+  //     <ImageBackground
+  //       className="animate-pulse flex space-y-5 w-full h-full items-center justify-center"
+  //       source={image}
+  //     >
+  //       <Text className="text-white text-xl">
+  //         Carregando, por favor aguarde.
+  //       </Text>
+  //       <Animatable.View
+  //         animation="flipInX"
+  //         iterationCount={10}
+  //         duration={1100}
+  //       >
+  //         <ArrowDown size="48" color="#fff" />
+  //       </Animatable.View>
+  //     </ImageBackground>
+  //   );
+  // }
 
   // if (isError) {
   //   return (

@@ -12,7 +12,7 @@ export default function GoBackButton({ css }: GoBackButtonProps) {
   return (
     <TouchableWithoutFeedback onPress={() => navigation.push("/home")}>
       <ArrowCircleLeft
-        className={`bg-LightGrayApp rounded-full px-2 py-2 shadow-md 
+        className={`bg-LightGreenApp rounded-full px-2 py-2 shadow-md 
                   ${css}`}
         size={46}
         color="#000"

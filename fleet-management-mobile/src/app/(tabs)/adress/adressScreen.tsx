@@ -27,7 +27,7 @@ export default function AdressScreen() {
 
         <View className="flex flex-row items-center space-x-5">
           <Link href={"/adress/editAdressScreen"}>
-            <View className="flex items-center flex-row space-x-10">
+            <View className="flex items-center flex-row space-x-14">
               <View className="flex flex-col">
                 <Text className="text-lg text-LightGreenApp">
                   Rua Avenida Presidente Dutra
@@ -41,7 +41,7 @@ export default function AdressScreen() {
           </Link>
         </View>
 
-        <View className="h-[1px] w-full bg-LightGrayApp"></View>
+        <View className="h-[1px] w-full bg-LightGreenApp"></View>
 
         {isAdmin ? (
           <View>

@@ -12,9 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { UseGetAdress } from "../../../../hooks/queries/useGetAdress";
 import { UseEditAdressMutation } from "../../../../hooks/mutation/useEditAdress";
-import image from "@/assets/bgimage.png"
-
-
+import image from "@/assets/bgimage.png";
 
 export default function EditAdressScreen() {
   const editAdressFormSchema = z.object({
@@ -57,14 +55,11 @@ export default function EditAdressScreen() {
   }, [GetAdressQuery]);
 
   return (
-    <ImageBackground
-      className="flex space-y-10 w-full h-full"
-      source={image}
-    >
+    <ImageBackground className="flex space-y-10 w-full h-full" source={image}>
       <Navbar isRouteToGoBack />
 
-      <View className="flex h-full w-full px-10 space-y-12">
-        <View className="flex flex-col space-y-6">
+      <View className="flex h-full w-full px-10 space-y-14">
+        <View className="flex flex-col space-y-7">
           <Text className="text-LightGreenApp text-2xl">Endereço</Text>
 
           <View>
@@ -151,6 +146,7 @@ export default function EditAdressScreen() {
           <Text className="text-2xl font-semibold">Salvar</Text>
         </Pressable>
       </View>
+
     </ImageBackground>
   );
 }

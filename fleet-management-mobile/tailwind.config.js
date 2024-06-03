@@ -17,12 +17,9 @@ module.exports = {
         redApp: "#FF1C18",
         yellowApp: "#D9E021",
         juaGreen: "#8CC63F",
-        juaDGreen: "#2C612C"
-      }
+        juaDGreen: "#2C612C",
+      },
     },
-    space: {
-      '5px': '5px',
-    }
   },
   plugins: [],
 };
