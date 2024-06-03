@@ -99,14 +99,14 @@ export default function ModalAddEmployee({
                     {selectedImage ? (
                       <Image
                         src={selectedImage}
-                        alt="Pré-vizualização da Foto"
+                        alt="Pré-visualização da Foto"
                         width={10000}
                         height={10000}
                       />
                     ) : (
                       <Image
                         src={"/iconAddProfilePhoto.svg"}
-                        alt="Pré-vizualização da Foto"
+                        alt="Pré-visualização da Foto"
                         width={100}
                         height={100}
                       />

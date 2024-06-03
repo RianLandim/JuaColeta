@@ -45,7 +45,7 @@ export default function CompanyProfile({ company }: CompanyProfileProps) {
           <div className="flex gap-10 mb-[4%] mt-[3%]">
             <Image
               src="/companyProfile/fotoEmpresa.svg"
-              alt="Foto da empresa"
+              alt={`Foto da ${company}`}
               width={200}
               height={200}
             />
@@ -139,74 +139,6 @@ export default function CompanyProfile({ company }: CompanyProfileProps) {
                     </tr>
                   );
                 })}
-
-                {/* <tr>
-                  <td className="py-[3%] pr-20 pl-4 text-left border-l-8 border-main">
-                    {123456}
-                  </td>
-                  <td className="px-5">
-                    <div className="flex items-center">
-                      <Image
-                        src="/companyProfile/fotoPerfil.svg"
-                        alt={`Foto de`}
-                        width={40}
-                        height={20}
-                        className="mr-2"
-                      />
-                      <span>Bryan</span>
-                    </div>
-                  </td>
-                  <td>9999-avm</td>
-                  <td className={`text-white px-6 bg-[#39B54A]}`}>Operante</td>
-                  <td className={`text-white px-6 bg-[#CC3030]}`}>
-                    COM ATRASO
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-[3%] pr-20 pl-4 text-left border-l-8 border-main">
-                    {123456}
-                  </td>
-                  <td className="px-5">
-                    <div className="flex items-center">
-                      <Image
-                        src="/companyProfile/fotoPerfil.svg"
-                        alt={`Foto de`}
-                        width={40}
-                        height={20}
-                        className="mr-2"
-                      />
-                      <span>Bryan</span>
-                    </div>
-                  </td>
-                  <td>9999-avm</td>
-                  <td className={`text-white px-6 bg-[#39B54A]}`}>Operante</td>
-                  <td className={`text-white px-6 bg-[#CC3030]}`}>
-                    Em manutenção
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-[3%] pr-20 pl-4 text-left border-l-8 border-main">
-                    {123456}
-                  </td>
-                  <td className="px-5">
-                    <div className="flex items-center">
-                      <Image
-                        src="/companyProfile/fotoPerfil.svg"
-                        alt={`Foto de`}
-                        width={40}
-                        height={20}
-                        className="mr-2"
-                      />
-                      <span>Bryan</span>
-                    </div>
-                  </td>
-                  <td>9999-avm</td>
-                  <td className={`text-white px-6 bg-[#39B54A]}`}>Operante</td>
-
-                  <td className={`text-white px-6 bg-[#FF6B00]}`}>
-                    "Com atraso"
-                  </td>
-                </tr> */}
               </tbody>
             </table>
           </div>
