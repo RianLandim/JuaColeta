@@ -18,8 +18,8 @@ jobs:
 
       - name: Install dependencies
         run: npm i
-        working-directory: ./fleet-management-backoffice
+        working-directory: .apps/fleet-management-backoffice
 
       - name: Lint
         run: npm run lint
-        working-directory: ./fleet-management-backoffice
+        working-directory: .apps/fleet-management-backoffice

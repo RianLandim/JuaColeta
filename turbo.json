@@ -1,0 +1,34 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "pipeline": {
+      "db:generate": {
+        "inputs": ["prisma/schema.prisma"],
+        "cache": false
+      },
+      "db:push": {
+        "inputs": ["prisma/schema.prisma"],
+      "cache": false
+      },
+      "db:studio": {
+        "inputs": ["prisma/schema.prisma"],
+      "cache": false
+      },
+      "build": {
+        "dependsOn": ["^build"],
+        "outputs": [".next/**", "!.next/cache/**"]
+      },
+      "deploy": {
+        "dependsOn": ["build", "test", "lint"]
+      },
+      "test": {
+    
+        "dependsOn": ["build"],
+        "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts", "test/**/*.tsx"]
+      },
+      "lint": {},
+      "dev": {
+        "cache": false,
+        "persistent": true
+      }
+    }
+  }
