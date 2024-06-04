@@ -1,0 +1,180 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  COMPANY_ADMIN
+  DRIVER
+  CLIENT
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+model User {
+  id       String @id
+  email    String @unique
+  password String
+
+  name      String
+  cellphone String
+  license   String?
+
+  role UserRole @default(COMPANY_ADMIN)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  RefrestToken RefreshToken[]
+  Company      Company[]
+  Vehicle      Vehicle[]
+
+  @@map("user")
+}
+
+model RefreshToken {
+  id    String @id
+  token String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime  @default(now())
+  expiresAt DateTime?
+
+  @@map("refresh_token")
+}
+
+model Address {
+  id String @id
+
+  number   Int
+  street   String
+  city     String
+  state    String
+  district String
+  country  String
+  zipCode  String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  company Company?
+}
+
+enum BillingStatus {
+  DEMO
+  SUBSCRIBED
+}
+
+model Billing {
+  id String @id
+
+  status BillingStatus
+  dueIn  DateTime
+
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@map("billing")
+}
+
+model Company {
+  id String @id
+
+  cnpj       String
+  socialName String
+  addressId  String  @unique
+  address    Address @relation(fields: [addressId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  users   User[]
+  Vehicle Vehicle[]
+  Billing Billing[]
+
+  @@map("company")
+}
+
+enum VehicleCategory {
+  A
+  B
+  C
+  D
+  E
+}
+
+model Vehicle {
+  id String @id
+
+  model          String
+  plate          String
+  color          String?
+  year           String
+  fabricator     String
+  category       VehicleCategory @default(B)
+  renavam        String
+  averageConsume Float?
+  capacity       Float?
+
+  status Status @default(ACTIVE)
+
+  isSecured Boolean
+
+  driverId String?
+  driver   User?   @relation(fields: [driverId], references: [id])
+
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  Route     Route[]
+
+  @@map("vehicle")
+}
+
+model Route {
+  id         String  @id
+  externalId String?
+
+  vehicleId String
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id])
+
+  startPointLat String
+  startPointLon String
+  endPointLat   String
+  endPointLon   String
+
+  duration Float
+  distance Float
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Notification {
+  id String @id
+
+  title    String
+  message  String
+  category String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}

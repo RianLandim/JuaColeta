@@ -1,0 +1,70 @@
+{
+  "expo": {
+    "name": "fleet-management-mobile",
+    "slug": "fleet-management-mobile",
+    "scheme": "fleet-management-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+
+    "ios": {
+      "infoPlist": {
+        "UIBackgroundModes": ["location", "fetch", "remote-notification"],
+        "NSLocationWhenInUseUsageDescription": "This app requires access to your location when open.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "This app requires access to your location even when closed.",
+        "NSLocationAlwaysUsageDescription": "This app requires access to your location when open.",
+        "deploymentTarget": "14"
+      },
+      "bundleIdentifier": "com.anonymous.fleetmanagementmobile"
+    },
+    "plugins": [
+      "expo-location",
+      "expo-background-fetch",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 33,
+            "targetSdkVersion": 33,
+            "buildToolsVersion": "33.0.0"
+          },
+          "ios": {
+            "deploymentTarget": "14.0"
+          }
+        }
+      ],
+      [
+        "expo-task-manager",
+        {
+          "ios": {
+            "minimumOSVersion": "14"
+          }
+        }
+      ],
+      [
+        "expo-background-fetch",
+        {
+          "ios": {
+            "minimumOSVersion": "14"
+          }
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ]
+    ],
+      "package": "com.anonymous.fleetmanagementmobile"
+  }
+}
