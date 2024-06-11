@@ -37,7 +37,7 @@ export class CreateUser {
 
     if (this.mailRepository) {
       await this.mailRepository.sendMail({
-        from: 'no-reply@fleetmanagement.com',
+        from: 'no-reply@juamanagement.com',
         to: user.email,
         subject: 'Confirmação',
         html: render(ConfirmEmail()),
