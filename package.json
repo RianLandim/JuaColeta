@@ -2,7 +2,7 @@
   "name": "juacoleta",
   "packageManager": "pnpm@8.15.7",
   "engines": {
-    "pnpm": "8.15.7"
+    "node": ">=20.12.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.6.1",
