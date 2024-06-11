@@ -1,5 +1,6 @@
 {
     "$schema": "https://turbo.build/schema.json",
+    "globalDependencies": ["**/.env", "tsconfig.json"],
     "pipeline": {
       "db:generate": {
         "inputs": ["prisma/schema.prisma"],

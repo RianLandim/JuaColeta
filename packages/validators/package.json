@@ -1,5 +1,5 @@
 {
-  "name": "@fleet/validators",
+  "name": "@jua/validators",
   "version": "1.0.0",
   "type": "module",
   "exports": {
