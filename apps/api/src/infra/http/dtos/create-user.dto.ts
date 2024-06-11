@@ -19,6 +19,10 @@ export class CreateUserDto {
   cellphone: string;
 
   @IsString()
+  @IsOptional()
+  avatar?: string;
+
+  @IsString()
   @IsEnum(['ADMIN', 'COMPANY_ADMIN', 'DRIVER', 'CLIENT'])
   role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER' | 'CLIENT';
 }

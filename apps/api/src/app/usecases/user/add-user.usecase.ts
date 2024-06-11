@@ -1,7 +1,10 @@
 import { User } from '@app/entities/user';
 import { UserRepository } from '@app/repositories/user.repository';
+import { PresignedPost } from '@aws-sdk/s3-presigned-post';
 import { MailRepository } from '@infra/mail/repositories/mail.repository';
 import ConfirmEmail from '@infra/mail/templates/confirm-email';
+import { StorageService } from '@infra/storate/storage.service';
+
 import { Injectable } from '@nestjs/common';
 import { render } from '@react-email/components';
 
@@ -12,6 +15,7 @@ interface UserRequestProps {
   password: string;
   name: string;
   license?: string | null;
+  avatar?: string | null;
   cellphone: string;
   companyId?: string;
   role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER' | 'CLIENT';
@@ -19,16 +23,21 @@ interface UserRequestProps {
 
 export interface UserResponseProps {
   id: string;
+  presignedPost?: PresignedPost;
 }
 
 @Injectable()
 export class CreateUser {
   constructor(
     private userRepository: UserRepository,
+    private storageService: StorageService,
     private mailRepository?: MailRepository,
   ) {}
 
-  async execute(request: UserRequestProps): Promise<UserResponseProps> {
+  async execute({
+    avatar,
+    ...request
+  }: UserRequestProps): Promise<UserResponseProps> {
     const hashedPassword = hashSync(request.password, 8);
 
     const user = new User({ ...request, password: hashedPassword });
@@ -42,6 +51,17 @@ export class CreateUser {
         subject: 'Confirmação',
         html: render(ConfirmEmail()),
       });
+    }
+
+    if (avatar) {
+      const key = `${user.id}/avatar`;
+
+      const presignedPost = await this.storageService.getUploadUrl(key);
+
+      return {
+        id: user.id,
+        presignedPost,
+      };
     }
 
     return {
