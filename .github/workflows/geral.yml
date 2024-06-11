@@ -19,7 +19,7 @@ jobs:
           version: 8.15.7
 
       - name: Install dependencies
-        run: npm i
+        run: pnpm i
 
       - name: Lint
         run: pnpm lint
