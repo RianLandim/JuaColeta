@@ -1,4 +1,4 @@
 packages:
-  - "apps/fleet-management-api"
-  - "apps/fleet-management-backoffice"
+  - "apps/api"
+  - "apps/web"
   - "packages/*"
