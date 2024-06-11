@@ -1,5 +1,5 @@
 {
-  "extends": "@neri/tsconfig/base.json",
+  "extends": "@jua/tsconfig/base.json",
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
   },

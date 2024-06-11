@@ -1,5 +1,5 @@
 {
-  "name": "@neri/prettier-config",
+  "name": "@jua/prettier-config",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -17,8 +17,8 @@
     "prettier-plugin-tailwindcss": "^0.5.11"
   },
   "devDependencies": {
-    "@neri/tsconfig": "workspace:^0.1.0",
+    "@jua/tsconfig": "workspace:^0.1.0",
     "typescript": "^5.3.3"
   },
-  "prettier": "@neri/prettier-config"
+  "prettier": "@jua/prettier-config"
 }

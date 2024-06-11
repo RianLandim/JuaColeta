@@ -1,5 +1,5 @@
 {
-  "name": "@neri/tailwind-config",
+  "name": "@jua/tailwind-config",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -21,9 +21,9 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@neri/eslint-config": "workspace:^0.2.0",
-    "@neri/prettier-config": "workspace:^0.1.0",
-    "@neri/tsconfig": "workspace:^0.1.0",
+    "@jua/eslint-config": "workspace:^0.2.0",
+    "@jua/prettier-config": "workspace:^0.1.0",
+    "@jua/tsconfig": "workspace:^0.1.0",
     "eslint": "^8.56.0",
     "prettier": "^3.2.5",
     "typescript": "^5.3.3"
@@ -31,8 +31,8 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@neri/eslint-config/base"
+      "@jua/eslint-config/base"
     ]
   },
-  "prettier": "@neri/prettier-config"
+  "prettier": "@jua/prettier-config"
 }
