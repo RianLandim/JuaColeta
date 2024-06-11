@@ -1,5 +1,6 @@
 {
   "name": "juacoleta",
+  "packageManager": "pnpm@8.15.7",
   "engines": {
     "pnpm": "8.15.7"
   },
@@ -11,6 +12,7 @@
   },
   "scripts": {
     "prepare": "husky",
+    "postinstall": "turbo db:generate",
     "dev": "turbo run dev --parallel",
     "test": "turbo run test --parallel",
     "lint": "turbo run lint --parallel",
