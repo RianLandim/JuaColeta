@@ -9,6 +9,7 @@
     "postinstall": "pnpm db:generate",
     "dev": "turbo run dev --parallel",
     "test": "turbo run test --parallel",
+    "lint": "turbo run lint --parallel",
     "db:generate": "turbo db:generate",
     "db:studio": "turbo db:studio",
     "db:push": "turbo db:push"

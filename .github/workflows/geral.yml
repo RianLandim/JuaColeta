@@ -14,25 +14,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: pnpm/action-setup@v4
 
       - name: Install dependencies
         run: npm i
-        working-directory: ./apps/fleet-management-api
 
       - name: Lint
-        run: npm run lint
-        working-directory: ./apps/fleet-management-api
+        run: pnpm lint
 
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: pnpm/action-setup@v4
 
       - name: Install dependencies
-        run: npm i
-        working-directory: ./apps/fleet-management-api
+        run: pnpm i
 
-      - run: npm run test
-        working-directory: ./apps/fleet-management-api
+      - name: Test Suite
+        run: pnpm test
