@@ -10,9 +10,9 @@ export const configurationValidationSchema = z.object({
   S3_ACCESS_KEY_ID: z.string(),
   S3_SECRET_ACCESS_KEY: z.string(),
   S3_BUCKET: z.string(),
-  MINIO_URL: z.string().url(),
-  MAILER_USER: z.undefined(),
-  MAILER_PASS: z.undefined(),
+  MINIO_URL: z.string(),
+  MAILER_USER: z.undefined().or(z.string()),
+  MAILER_PASS: z.undefined().or(z.string()),
   RESEND_KEY: z.string(),
 });
 

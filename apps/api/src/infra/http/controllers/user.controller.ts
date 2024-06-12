@@ -18,7 +18,7 @@ import { Roles } from '@utils/decorator/role.decorator';
 import { RolesGuard } from '@infra/authentication/guards/role.guard';
 import { GetUsersWithVehicle } from '@app/usecases/user/get-users-with-vehicle';
 
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('user')
 export class UserController {
   constructor(
@@ -30,8 +30,8 @@ export class UserController {
 
   logger = new Logger(UserController.name);
 
-  // @Roles(['ADMIN', 'COMPANY_ADMIN'])
-  // @UseGuards(RolesGuard)
+  @Roles(['ADMIN', 'COMPANY_ADMIN'])
+  @UseGuards(RolesGuard)
   @Post()
   addUser(@Body() data: CreateUserDto, @User() currentUser: UserProps) {
     return this.createUser.execute({
