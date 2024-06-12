@@ -1,26 +1,6 @@
 import { fetchApi } from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
-import { z } from "zod";
-
-const companyValidator = z.object({
-  id: z.string(),
-  cnpj: z.string(),
-  socialName: z.string(),
-  address: z.object({
-    id: z.string(),
-    number: z.number(),
-    street: z.string(),
-    district: z.string(),
-    city: z.string(),
-    state: z.string(),
-    country: z.string(),
-    zipCode: z.string(),
-  }),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-});
-
-type Companies = z.infer<typeof companyValidator>;
+import { companyValidator } from "@jua/validators";
 
 type CompaniesQueryParams = {
   page: string;
@@ -47,4 +27,4 @@ const useCompaniesList = (queryParams?: CompaniesQueryParams) =>
     queryFn: () => fetchCompanies(queryParams),
   });
 
-export { useCompaniesList, FETCH_COMPANIES_KEY, type Companies };
+export { useCompaniesList, FETCH_COMPANIES_KEY };

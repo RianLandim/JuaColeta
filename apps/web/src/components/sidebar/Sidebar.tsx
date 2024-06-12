@@ -1,28 +1,26 @@
 "use client";
 
-import { ButtonSidebar } from "../ui/button-sidebar";
-import {
-  Home,
-  Sliders,
-  Briefcase,
-  Truck,
-  BellDot,
-  LogOutIcon,
-  Contact2,
-} from "lucide-react";
 import Image from "next/image";
 import ProfileCard from "./ProfileCard";
 import { UseSession } from "@/utils/providers/SessionProvider";
-import { SidebarItem } from "../ui/sidebarItem";
+import { SidebarItem } from "./SidebarItem";
+import { Button } from "../ui/button";
+import {
+  Buildings,
+  Home,
+  Logout,
+  Notification,
+  Personalcard,
+  Profile2User,
+  Setting2,
+  Truck,
+} from "iconsax-react";
 
 export function SideBar() {
-  const { signOut } = UseSession();
+  const { signOut, user } = UseSession();
 
   return (
-    <aside
-      className="bg-[#2C612C] w-1/5 py-4 flex items-center 
-    justify-around flex-col h-screen text-[18px]"
-    >
+    <aside className="bg-[#2C612C] w-1/6 py-4 flex items-center justify-around flex-col h-screen text-[18px]">
       <Image
         width={100}
         height={50}
@@ -32,69 +30,50 @@ export function SideBar() {
         priority
       />
       <ProfileCard />
-      <div className="w-full flex flex-col space-y-4 justify-self-start ">
+      <div className="w-full flex flex-col space-y-4 justify-self-start">
         <SidebarItem
           label="Página inicial"
           href="/painel/pagina-inicial"
           icon={Home}
         />
+        {user.role === "ADMIN" && (
+          <SidebarItem
+            label="Empresas"
+            href="/painel/empresa"
+            icon={Buildings}
+          />
+        )}
         <SidebarItem
           label="Notificações"
           href="/painel/notificacoes"
-          icon={BellDot}
+          icon={Notification}
         />
         <SidebarItem
           label="Funcionários"
           href="/painel/funcionarios"
-          icon={Contact2}
+          icon={Profile2User}
         />
         <SidebarItem label="Caminhões" href="/painel/caminhoes" icon={Truck} />
         <SidebarItem
           label="Perfil da Empresa"
           href="/painel/perfil-da-empresa"
-          icon={Briefcase}
+          icon={Personalcard}
         />
         <SidebarItem
           label="Configurações"
           href="/painel/configuracoes"
-          icon={Sliders}
+          icon={Setting2}
         />
 
-        <div className="w-full justify-center flex h-full">
-          <ButtonSidebar
-            variant={"ghost"}
-            onClick={signOut}
-            className="w-full flex items-center gap-4 py-7 px-8"
-          >
-            <LogOutIcon className="h-10 w-10" />
-            Sair
-          </ButtonSidebar>
-        </div>
-      </div>
-      <div className="flex text-main text-base w-full justify-between px-4 underline">
-        <p>Suporte</p>
-        <p>Termo de Contrato</p>
+        <Button
+          variant={"ghost"}
+          onClick={signOut}
+          className="w-full flex items-center py-7 px-8 justify-evenly hover:bg-primary-main/60"
+        >
+          <Logout className="h-10 w-10" />
+          Sair
+        </Button>
       </div>
     </aside>
   );
 }
-
-// interface NavButtonProps {
-//   href: string;
-//   label: string;
-//   icon?: LucideIcon;
-//   iconHeight?: string;
-// }
-
-// function NavButton({ href, label, icon }: NavButtonProps) {
-//   const Icon = icon;
-
-//   return (
-//     <Link className="w-full h-full" href={href}>
-//       <ButtonSidebar variant="ghost" className="w-full flex items-center gap-4 py-7 px-8">
-//         {Icon && <Icon className={`h-10 w-10`} />}
-//         {label}
-//       </ButtonSidebar>
-//     </Link>
-//   );
-// }
