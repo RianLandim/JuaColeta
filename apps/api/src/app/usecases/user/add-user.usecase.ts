@@ -30,7 +30,7 @@ export interface UserResponseProps {
 export class CreateUser {
   constructor(
     private userRepository: UserRepository,
-    private storageService: StorageService,
+    private storageService?: StorageService,
     private mailRepository?: MailRepository,
   ) {}
 
