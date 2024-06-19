@@ -34,11 +34,8 @@ export class CreateUser {
     private mailRepository?: MailRepository,
   ) {}
 
-  async execute({
-    avatar,
-    ...request
-  }: UserRequestProps): Promise<UserResponseProps> {
-    const hashedPassword = hashSync(request.password, 8);
+  async execute(request: UserRequestProps): Promise<UserResponseProps> {
+    const hashedPassword = hashSync('teste123', 8);
 
     const user = new User({ ...request, password: hashedPassword });
 
@@ -53,7 +50,7 @@ export class CreateUser {
       });
     }
 
-    if (avatar) {
+    if (request.avatar) {
       const key = `${user.id}/avatar`;
 
       const presignedPost = await this.storageService.getUploadUrl(key);
