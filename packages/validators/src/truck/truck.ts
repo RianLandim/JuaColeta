@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const truckValidator = z.object({
+const truckValidator = z.object({
   id: z.string(),
   model: z.string(),
   fabricator: z.string(),
@@ -17,4 +17,6 @@ export const truckValidator = z.object({
   updatedAt: z.coerce.date(),
 });
 
-export type TruckValidatorProps = z.infer<typeof truckValidator>;
+type TruckValidatorProps = z.infer<typeof truckValidator>;
+
+export { truckValidator, TruckValidatorProps };

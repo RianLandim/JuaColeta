@@ -1,5 +1,5 @@
 import { fetchApi } from "@/utils/api";
-import { CreateTruckValidatorProps } from "@fleet/validators";
+import { CreateTruckValidatorProps } from "@jua/validators";
 import { useMutation } from "@tanstack/react-query";
 
 const createVehicle = async (body: CreateTruckValidatorProps) => {

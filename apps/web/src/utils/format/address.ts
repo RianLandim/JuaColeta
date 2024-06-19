@@ -1,5 +1,5 @@
 type FormatAddressProps = {
-  number: string;
+  number: number;
   street: string;
   district: string;
   city: string;
@@ -9,5 +9,5 @@ type FormatAddressProps = {
 };
 
 export const formatAddress = (address: FormatAddressProps) => {
-  return `${address.street}, nº ${address.number} - ${address.district}. CEP: ${address.zipCode}. ${address.city} - ${address.state}.`;
+  return `${address.street}, nº ${address.number} - ${address.district}. ${address.city} - ${address.state}.`;
 };

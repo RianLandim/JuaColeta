@@ -8,7 +8,7 @@ describe('List Company [usecase]', () => {
   const listCompany = new ListCompany(companyRepository);
 
   it('should be able to list all companies', async () => {
-    const companies = await listCompany.execute();
+    const { companies } = await listCompany.execute();
 
     expect(companies.every((c) => c instanceof Company)).toBeTruthy();
   });
@@ -23,7 +23,7 @@ describe('List Company [usecase]', () => {
       socialName: 'teste',
     });
 
-    expect(storedCompany.length).not.toEqual(1);
+    expect(storedCompany.companies.length).not.toEqual(1);
   });
 
   it('should be able get company based on social name param', async () => {
@@ -36,7 +36,9 @@ describe('List Company [usecase]', () => {
       socialName: company.socialName,
     });
 
-    expect(storedCompany.every((c) => c instanceof Company)).toBeTruthy();
-    expect(storedCompany[0].socialName).toEqual(company.socialName);
+    expect(
+      storedCompany.companies.every((c) => c instanceof Company),
+    ).toBeTruthy();
+    expect(storedCompany.companies[0].socialName).toEqual(company.socialName);
   });
 });

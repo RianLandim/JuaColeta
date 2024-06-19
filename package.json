@@ -1,13 +1,21 @@
 {
+  "name": "juacoleta",
+  "packageManager": "pnpm@9.1.0",
+  "engines": {
+    "node": ">=20.12.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^18.6.1",
     "@commitlint/config-conventional": "^18.6.2",
-    "husky": "^9.0.11"
+    "husky": "^9.0.11",
+    "turbo": "latest"
   },
   "scripts": {
     "prepare": "husky",
-    "postinstall": "pnpm db:generate",
+    "postinstall": "turbo db:generate",
     "dev": "turbo run dev --parallel",
+    "test": "turbo run test --parallel",
+    "lint": "turbo run lint --parallel",
     "db:generate": "turbo db:generate",
     "db:studio": "turbo db:studio",
     "db:push": "turbo db:push"

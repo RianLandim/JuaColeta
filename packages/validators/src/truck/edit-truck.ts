@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const EditTruckValidator = z.object({
+const EditTruckValidator = z.object({
   id: z.string(),
   model: z.string().optional(),
   fabricator: z.string().optional(),
@@ -14,4 +14,6 @@ export const EditTruckValidator = z.object({
   averageConsume: z.number().nullish().optional(),
 });
 
-export type EditTruckValidatorProps = z.infer<typeof EditTruckValidator>;
+type EditTruckValidatorProps = z.infer<typeof EditTruckValidator>;
+
+export { EditTruckValidator, EditTruckValidatorProps };

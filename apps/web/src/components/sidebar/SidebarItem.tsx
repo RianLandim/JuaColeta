@@ -1,13 +1,14 @@
-import { LucideIcon } from "lucide-react";
-import { ButtonSidebar } from "./button-sidebar";
+import { Icon } from "iconsax-react";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Button } from "../ui/button";
+import clsx from "clsx";
 
 interface NavButtonProps {
   href: string;
   label: string;
-  icon?: LucideIcon;
+  icon?: Icon;
   iconHeight?: string;
 }
 
@@ -16,8 +17,12 @@ export const SidebarItem = ({ label, icon, href }: NavButtonProps) => {
   const isActive = pathname === href;
 
   return (
-    <div className={isActive ? (`w-full bg-[#203f20]/50 flex`) : ('w-full flex')}>
-      <div className={isActive ? (`w-2 h-full bg-main`) : ('')}></div>
+    <div
+      className={clsx("w-full flex ", {
+        "bg-primary-main/60": isActive,
+      })}
+    >
+      <div className={isActive ? `w-2 h-full bg-main` : ""}></div>
       <NavButton label={label} icon={icon} href={href} />
     </div>
   );
@@ -30,13 +35,13 @@ function NavButton({ href, label, icon }: NavButtonProps) {
 
   return (
     <Link className="w-full h-full" href={href}>
-      <ButtonSidebar
+      <Button
         variant="ghost"
-        className="w-full flex items-center gap-4 py-7 px-8"
+        className="w-full flex items-center py-7 px-8 justify-evenly hover:bg-primary-main/60"
       >
-        {Icon && <Icon className="h-10 w-10" />}
+        {Icon && <Icon className="h-9 w-9" variant="Bulk" />}
         {label}
-      </ButtonSidebar>
+      </Button>
     </Link>
   );
 }

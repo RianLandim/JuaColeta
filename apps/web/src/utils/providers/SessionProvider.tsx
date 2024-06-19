@@ -7,17 +7,7 @@ import {
   useState,
 } from "react";
 import { fetchApi } from "../api";
-import { z } from "zod";
-
-type User = {
-  id: string;
-  email: string;
-  name: string;
-  cellphone: string;
-  license?: string | null;
-  role: string;
-  createdAt: Date;
-};
+import { userValidator, UserValidator } from "@jua/validators";
 
 type SessionOptions = {
   required: boolean;
@@ -26,7 +16,7 @@ type SessionOptions = {
 type SessionStatus = "authenticated" | "unathenticated";
 
 type Session = {
-  user: User;
+  user: UserValidator;
   status: SessionStatus;
   signIn: SessionContextProps["signIn"];
   signOut: SessionContextProps["signOut"];
@@ -38,25 +28,15 @@ type SignInParams = {
 };
 
 interface SessionContextProps {
-  user: User;
+  user: UserValidator;
   status: SessionStatus;
   signIn(params: SignInParams): Promise<void>;
   signOut(): void;
 }
 
 const SessionContext = createContext<SessionContextProps>(
-  {} as SessionContextProps
+  {} as SessionContextProps,
 );
-
-const userValidator = z.object({
-  id: z.string(),
-  email: z.string().email(),
-  name: z.string(),
-  cellphone: z.string(),
-  license: z.string().nullish(),
-  role: z.string(),
-  createdAt: z.coerce.date(),
-});
 
 type SessionProvider = {
   children: ReactNode;
@@ -64,30 +44,34 @@ type SessionProvider = {
 
 export default function SessionProvider({ children }: SessionProvider) {
   const [status, setStatus] = useState<SessionStatus>("unathenticated");
-  const [user, setUser] = useState<User>({} as User);
+  const [user, setUser] = useState<UserValidator>({} as UserValidator);
 
   const router = useRouter();
 
-  // useEffect(() => {
-  //   async function validate() {
-  //     const [data, error] = await fetchApi("user/current-user", {
-  //       method: "GET",
-  //       validator: userValidator,
-  //     });
+  useEffect(() => {
+    async function validate() {
+      const [data, error] = await fetchApi("user/current-user", {
+        method: "GET",
+        validator: userValidator,
+      });
 
-  //     if (data) {
-  //       setStatus("authenticated");
+      if (error) {
+        throw new Error(error.message);
+      }
 
-  //       setUser(data);
+      if (data) {
+        setStatus("authenticated");
 
-  //       return;
-  //     }
+        setUser(data);
 
-  //     router.replace("/entrar");
-  //   }
+        return;
+      }
 
-  //   void validate();
-  // }, []);
+      router.replace("/entrar");
+    }
+
+    void validate();
+  }, []);
 
   async function signIn({ email, password }: SignInParams) {
     const [data, error] = await fetchApi("authentication/login", {
@@ -130,7 +114,7 @@ export function UseSession(options?: SessionOptions): Session {
       "useSession must be inside SessionProvider, verify if SessionProvider is setted on initial settings",
       {
         cause: "SessionProvider not been settled",
-      }
+      },
     );
   }
 

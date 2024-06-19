@@ -7,6 +7,7 @@ interface InputFieldProps {
   label: string;
   className?: string;
   rightIcon?: ReactNode;
+  error?: string;
 }
 
 export function InputField({
@@ -14,6 +15,7 @@ export function InputField({
   label,
   className,
   rightIcon,
+  error,
 }: InputFieldProps) {
   return (
     <div className={cn("w-full gap-2", className)}>
@@ -24,6 +26,7 @@ export function InputField({
         <Input {...inputProps}></Input>
         {rightIcon}
       </div>
+      {error && <span className="text-sm text-red-500">{error}</span>}
     </div>
   );
 }

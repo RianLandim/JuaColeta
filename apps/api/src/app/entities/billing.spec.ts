@@ -9,7 +9,7 @@ describe('Billing entity', () => {
       status: 'DEMO',
     });
 
-    expect(billing).toBeInstanceOf(billing);
+    expect(billing).toBeInstanceOf(Billing);
     expect(billing.status).toEqual('DEMO');
   });
 });
