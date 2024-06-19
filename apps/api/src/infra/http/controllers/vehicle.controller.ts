@@ -1,14 +1,27 @@
 import { CreateVehicle } from '@app/usecases/vehicle/add-vehicle.usecase';
 import { ListVehicle } from '@app/usecases/vehicle/get-vehicle.usecase';
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { CreateVehicleDTO } from '../dtos/create-vehicle.dto';
 import { VehicleViewModel } from '../view-model/vehicle.view-model';
 import { DeleteVehicle } from '@app/usecases/vehicle/delete-vehicle';
 import { UpdateVehicleDTO } from '../dtos/update-vehicle.dto';
 import { UpdateVehicle } from '@app/usecases/vehicle/update-vehicle';
 import { ListVehicleById } from '@app/usecases/vehicle/get-vehicle-by-id';
+import { JwtAuthGuard } from '@infra/authentication/guards/auth.guard';
+import { RolesGuard } from '@infra/authentication/guards/role.guard';
+import { Roles } from '@utils/decorator/role.decorator';
 
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
+@UseGuards(RolesGuard)
+@Roles(['ADMIN', 'COMPANY_ADMIN'])
 @Controller('vehicle')
 export class VehicleController {
   constructor(
