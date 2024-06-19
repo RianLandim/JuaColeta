@@ -15,16 +15,19 @@ export default function ProfileCard() {
   }, [currentUserQuery.isError, currentUserQuery.error]);
 
   return (
-    <div>
+    <>
       {match(currentUserQuery)
         .with({ isLoading: true }, () => <Skeleton className="h-12 w-full" />)
         .with({ isError: true }, () => <></>)
         .otherwise(({ data }) => (
-          <div className="bg-white w-full rounded-md p-2 flex items-center justify-center flex-col">
-            <p>{data?.name}</p>
-            <p>{data?.email}</p>
+          <div className="w-full rounded-md p-2 flex items-center justify-start mb-4 gap-2">
+            <div className="bg-green-500 rounded-md py-2 px-3">RL</div>
+            <div className="w-full flex flex-col">
+              <span className="text-white">{data?.name}</span>
+              <span className="text-white text-sm">JuaColeta</span>
+            </div>
           </div>
         ))}
-    </div>
+    </>
   );
 }

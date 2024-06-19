@@ -3,24 +3,24 @@
 import Image from "next/image";
 import ProfileCard from "./ProfileCard";
 import { UseSession } from "@/utils/providers/SessionProvider";
-import { SidebarItem } from "./SidebarItem";
+import { NavButton } from "./NavButton";
 import { Button } from "../ui/button";
 import {
-  Buildings,
-  Home,
-  Logout,
-  Notification,
-  Personalcard,
-  Profile2User,
-  Setting2,
+  LayoutGrid,
+  Bell,
+  Building2,
+  User,
   Truck,
-} from "iconsax-react";
+  Book,
+  LogOut,
+} from "lucide-react";
+import { Setting } from "iconsax-react";
 
 export function SideBar() {
   const { signOut, user } = UseSession();
 
   return (
-    <aside className="bg-[#2C612C] w-1/6 py-4 flex items-center justify-around flex-col h-screen text-[18px]">
+    <aside className="bg-main-dark w-1/7 p-4 gap-4 flex items-center justify-evenly flex-col h-screen">
       <Image
         width={100}
         height={50}
@@ -29,50 +29,51 @@ export function SideBar() {
         className="w-auto h-auto"
         priority
       />
-      <ProfileCard />
-      <div className="w-full flex flex-col space-y-4 justify-self-start">
-        <SidebarItem
+      <div className="w-full flex flex-col gap-4 justify-self-start">
+        <ProfileCard />
+        <NavButton
           label="Página inicial"
           href="/painel/pagina-inicial"
-          icon={Home}
+          icon={LayoutGrid}
         />
-        {user.role === "ADMIN" && (
-          <SidebarItem
-            label="Empresas"
-            href="/painel/empresa"
-            icon={Buildings}
-          />
-        )}
-        <SidebarItem
+        <NavButton
+          label="Empresas"
+          href="/painel/empresa"
+          icon={Building2}
+          hidden={user.role !== "ADMIN"}
+        />
+        <NavButton
           label="Notificações"
           href="/painel/notificacoes"
-          icon={Notification}
+          icon={Bell}
         />
-        <SidebarItem
+        <NavButton
           label="Funcionários"
           href="/painel/funcionarios"
-          icon={Profile2User}
+          icon={User}
         />
-        <SidebarItem label="Caminhões" href="/painel/caminhoes" icon={Truck} />
-        <SidebarItem
+        <NavButton label="Caminhões" href="/painel/caminhoes" icon={Truck} />
+        <NavButton
           label="Perfil da Empresa"
           href="/painel/perfil-da-empresa"
-          icon={Personalcard}
+          icon={Book}
         />
-        <SidebarItem
-          label="Configurações"
-          href="/painel/configuracoes"
-          icon={Setting2}
-        />
-
-        <Button
-          variant={"ghost"}
-          onClick={signOut}
-          className="w-full flex items-center py-7 px-8 justify-evenly hover:bg-primary-main/60"
-        >
-          <Logout className="h-10 w-10" />
-          Sair
-        </Button>
+        <div className="h-[1px] w-full bg-slate-600" />
+        <div className="w-full flex items-center justify-between">
+          <Button
+            variant={"ghost"}
+            onClick={signOut}
+            className="w-full flex items-center p-2 justify-start bg-main-dark text-white hover:bg-main-dark-active hover:text-white rounded-md gap-4 text-base font-normal"
+          >
+            <LogOut className="h-6 w-6" />
+            Sair
+          </Button>
+          <NavButton
+            label="Configurações"
+            href="/painel/configuracoes"
+            icon={Setting}
+          />
+        </div>
       </div>
     </aside>
   );
