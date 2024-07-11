@@ -1,15 +1,15 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "./button";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Skeleton } from "@/components/ui/skeleton";
+} from "./dialog";
+import { Input } from "./input";
+import { Skeleton } from "./skeleton";
 import { useCompanyList } from "@/hooks/queries/useCompany";
 import { useQueryParam } from "@/hooks/useQueryParam";
 import { zodResolver } from "@hookform/resolvers/zod";

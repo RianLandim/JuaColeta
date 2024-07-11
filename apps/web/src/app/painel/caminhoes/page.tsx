@@ -8,8 +8,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { LoadingIndicator } from "@/components/ui/loadingIndicator";
+} from "./dropdown-menu";
+import { LoadingIndicator } from "./loadingIndicator";
 import { Truck, useTruckList } from "@/hooks/queries/useTruck";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useMemo } from "react";

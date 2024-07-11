@@ -1,6 +1,7 @@
 import { InputHTMLAttributes, ReactNode } from "react";
+
+import { cn } from ".";
 import { Input } from "./input";
-import { cn } from "@/utils/cn";
 
 interface InputFieldProps {
   inputProps: InputHTMLAttributes<HTMLInputElement>;
@@ -19,10 +20,10 @@ export function InputField({
 }: InputFieldProps) {
   return (
     <div className={cn("w-full gap-2", className)}>
-      <label className="font-bold self-start text-sm" htmlFor={inputProps.name}>
+      <label className="self-start text-sm font-bold" htmlFor={inputProps.name}>
         {label}
       </label>
-      <div className="w-full flex flex-row items-center justify-center">
+      <div className="flex w-full flex-row items-center justify-center">
         <Input {...inputProps}></Input>
         {rightIcon}
       </div>

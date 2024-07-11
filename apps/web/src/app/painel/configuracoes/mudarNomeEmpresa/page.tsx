@@ -1,12 +1,12 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
+import { Input } from "./input";
 import Link from "next/link";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "./button";
 
 interface ChangeCompanyName {
   companyName: string;

@@ -4,8 +4,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Card } from "../../_components/Card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "./button";
+import { Input } from "./input";
 
 const signInFormSchema = z.object({
   email: z

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "./button";
 import {
   Dialog,
   DialogContent,
@@ -6,8 +6,8 @@ import {
   DialogHeader,
   DialogTrigger,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { InputField } from "@/components/ui/inputField";
+} from "./dialog";
+import { InputField } from "./inputField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff, PlusCircle } from "lucide-react";
 import { useState } from "react";

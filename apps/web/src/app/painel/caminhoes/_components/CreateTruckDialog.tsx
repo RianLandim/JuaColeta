@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "./button";
 import {
   Dialog,
   DialogContent,
@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "./dialog";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import {
@@ -14,9 +14,9 @@ import {
   CreateTruckValidatorProps,
 } from "@jua/validators/truck";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputField } from "@/components/ui/inputField";
+import { InputField } from "./inputField";
 import { useCreateVehicleMutation } from "@/hooks/mutations/useCreateVehicle";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "./use-toast";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { FETCH_VEHICLES_KEY } from "@/hooks/queries/useTruck";

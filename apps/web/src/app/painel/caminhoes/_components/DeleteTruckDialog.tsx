@@ -7,8 +7,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { useToast } from "@/components/ui/use-toast";
+} from "./alert-dialog";
+import { useToast } from "./use-toast";
 import { useDeleteVehicleMutation } from "@/hooks/mutations/useDeleteVehicle";
 import { FETCH_VEHICLES_KEY } from "@/hooks/queries/useTruck";
 import { useQueryParam } from "@/hooks/useQueryParam";

@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "exports": {
-    "./company": "./src/company/index.ts",
-    "./truck": "./src/truck/index.ts",
-    "./user": "./src/user/index.ts",
-    "./utils": "./src/utils/index.ts"
+    "./*": "././*/index.ts"
   },
   "description": "",
   "scripts": {
