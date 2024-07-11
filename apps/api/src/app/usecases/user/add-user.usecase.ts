@@ -3,7 +3,7 @@ import { UserRepository } from '@app/repositories/user.repository';
 import { PresignedPost } from '@aws-sdk/s3-presigned-post';
 import { MailRepository } from '@infra/mail/repositories/mail.repository';
 import ConfirmEmail from '@infra/mail/templates/confirm-email';
-import { StorageService } from '@infra/storate/storage.service';
+import { StorageService } from '@infra/storage/storage.service';
 
 import { Injectable } from '@nestjs/common';
 import { render } from '@react-email/components';
