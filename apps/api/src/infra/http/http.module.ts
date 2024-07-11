@@ -23,7 +23,7 @@ import { GetUsersWithVehicle } from '@app/usecases/user/get-users-with-vehicle';
 import { DeleteVehicle } from '@app/usecases/vehicle/delete-vehicle';
 import { UpdateVehicle } from '@app/usecases/vehicle/update-vehicle';
 import { ListVehicleById } from '@app/usecases/vehicle/get-vehicle-by-id';
-import { StorageModule } from '@infra/storate/storage.module';
+import { StorageModule } from '@infra/storage/storage.module';
 
 @Module({
   imports: [AuthenticationModule, DatabaseModule, MailModule, StorageModule],
