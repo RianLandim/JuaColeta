@@ -10,13 +10,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LoadingIndicator } from "@/components/ui/loadingIndicator";
-import { Truck, useTruckList } from "@/hooks/queries/useTruck";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useMemo } from "react";
 import { match, P } from "ts-pattern";
 import { CircleEllipsisIcon } from "lucide-react";
 import { useQueryParam } from "@/hooks/useQueryParam";
-import { Company } from "@jua/validators";
+import { Company } from "@jua/validators/company";
 import { useCompaniesList } from "@/hooks/queries/useCompanyList";
 import { cnpjMask } from "@/utils/format/cnpj";
 import { formatDateTime } from "@/utils/format/datetime";

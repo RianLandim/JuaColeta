@@ -3,7 +3,6 @@ import { LayoutProps } from "@/utils/types/layoutProps";
 
 import { Metadata } from "next";
 import Image from "next/image";
-import { Fragment } from "react";
 
 export const metadata: Metadata = {
   title: "Painel",

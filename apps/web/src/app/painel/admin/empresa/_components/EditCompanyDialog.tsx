@@ -8,7 +8,10 @@ import {
 } from "@/components/ui/dialog";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { EditTruckValidator, EditTruckValidatorProps } from "@jua/validators";
+import {
+  EditTruckValidator,
+  EditTruckValidatorProps,
+} from "@jua/validators/truck";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/ui/inputField";
 import { useToast } from "@/components/ui/use-toast";

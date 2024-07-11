@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchApi } from "../../utils/api";
-import { truckValidator } from "@jua/validators";
+import { truckValidator } from "@jua/validators/truck";
 
 const FETCH_TRUCK_ID_KEY = ["FETCH_TRUCK_ID_KEY"];
 

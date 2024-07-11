@@ -416,6 +416,10 @@ importers:
       zod:
         specifier: ^3.22.4
         version: 3.23.8
+    devDependencies:
+      typescript:
+        specifier: ^4.0.0
+        version: 4.9.5
 
   tooling/eslint:
     dependencies:
@@ -1776,7 +1780,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.6
-      '@babel/helper-plugin-utils': 7.24.6
+      '@babel/helper-plugin-utils': 7.24.7
       '@babel/plugin-syntax-logical-assignment-operators': 7.10.4(@babel/core@7.24.6)
     dev: false
 
@@ -6163,7 +6167,7 @@ packages:
       '@babel/plugin-transform-sticky-regex': 7.24.7(@babel/core@7.24.6)
       '@babel/plugin-transform-typescript': 7.24.7(@babel/core@7.24.6)
       '@babel/plugin-transform-unicode-regex': 7.24.7(@babel/core@7.24.6)
-      '@babel/template': 7.24.6
+      '@babel/template': 7.24.7
       '@react-native/babel-plugin-codegen': 0.74.84(@babel/preset-env@7.24.7)
       babel-plugin-transform-flow-enums: 0.0.2(@babel/core@7.24.6)
       react-refresh: 0.14.2
@@ -6196,7 +6200,7 @@ packages:
     peerDependencies:
       '@babel/preset-env': ^7.1.6
     dependencies:
-      '@babel/parser': 7.24.6
+      '@babel/parser': 7.24.7
       '@babel/preset-env': 7.24.7(@babel/core@7.24.6)
       glob: 7.2.3
       hermes-parser: 0.19.1
@@ -16974,6 +16978,12 @@ packages:
 
   /typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
+
+  /typescript@4.9.5:
+    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
 
   /typescript@5.1.6:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}

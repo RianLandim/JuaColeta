@@ -1,5 +1,5 @@
 import { fetchApi } from "@/utils/api";
-import { CreateCompany } from "@jua/validators";
+import { CreateCompany } from "@jua/validators/company";
 import { useMutation } from "@tanstack/react-query";
 
 const createCompany = async (body: CreateCompany) => {

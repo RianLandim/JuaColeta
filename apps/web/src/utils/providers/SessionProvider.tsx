@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import { fetchApi } from "../api";
-import { userValidator, UserValidator } from "@jua/validators";
+import { userValidator, UserValidator } from "@jua/validators/user";
 
 type SessionOptions = {
   required: boolean;

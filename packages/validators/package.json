@@ -3,14 +3,21 @@
   "version": "1.0.0",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    "./company": "./src/company/index.ts",
+    "./truck": "./src/truck/index.ts",
+    "./user": "./src/user/index.ts",
+    "./utils": "./src/utils/index.ts"
   },
   "description": "",
   "scripts": {
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.0"
   }
 }

@@ -1,5 +1,5 @@
 import { fetchApi } from "@/utils/api";
-import { EditTruckValidatorProps } from "@jua/validators";
+import { EditTruckValidatorProps } from "@jua/validators/truck";
 import { useMutation } from "@tanstack/react-query";
 
 const editVehicle = async (body: EditTruckValidatorProps) => {

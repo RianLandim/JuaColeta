@@ -1,6 +1,6 @@
 import { fetchApi } from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
-import { companyValidator } from "@jua/validators";
+import { companyValidator } from "@jua/validators/company";
 
 type CompaniesQueryParams = {
   page: string;

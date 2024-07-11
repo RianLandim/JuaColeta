@@ -72,13 +72,13 @@ export function CreateCompanyDialog() {
               [FETCH_COMPANIES_KEY],
               (data: unknown[]) => {
                 return [...data, company];
-              }
+              },
             );
           }
 
           setOpen(false);
         },
-      }
+      },
     );
   };
 

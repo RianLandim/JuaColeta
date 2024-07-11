@@ -9,11 +9,10 @@ import {
 } from "@/components/ui/dialog";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import {
-  CreateCompany,
-  cepValidator,
-  createCompanyValidator,
-} from "@jua/validators";
+import { CreateCompany, createCompanyValidator } from "@jua/validators/company";
+
+import { cepValidator } from "@jua/validators/utils";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/ui/inputField";
 import { useToast } from "@/components/ui/use-toast";

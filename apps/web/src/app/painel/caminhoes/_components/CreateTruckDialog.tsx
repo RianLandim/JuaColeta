@@ -12,7 +12,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import {
   CreateTruckValidator,
   CreateTruckValidatorProps,
-} from "@jua/validators";
+} from "@jua/validators/truck";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/ui/inputField";
 import { useCreateVehicleMutation } from "@/hooks/mutations/useCreateVehicle";
