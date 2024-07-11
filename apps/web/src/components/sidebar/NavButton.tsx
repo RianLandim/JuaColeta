@@ -20,7 +20,6 @@ export function NavButton({
 }: NavButtonProps) {
   const pathname = usePathname();
   const isActive = pathname === href;
-
   const Icon = icon;
 
   return (

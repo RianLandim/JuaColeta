@@ -31,14 +31,10 @@ export function SideBar() {
       />
       <div className="w-full flex flex-col gap-4 justify-self-start">
         <ProfileCard />
-        <NavButton
-          label="Página inicial"
-          href="/painel/pagina-inicial"
-          icon={LayoutGrid}
-        />
+        <NavButton label="Página inicial" href="/painel" icon={LayoutGrid} />
         <NavButton
           label="Empresas"
-          href="/painel/empresa"
+          href="/painel/admin/empresa"
           icon={Building2}
           hidden={user.role !== "ADMIN"}
         />
@@ -53,11 +49,6 @@ export function SideBar() {
           icon={User}
         />
         <NavButton label="Caminhões" href="/painel/caminhoes" icon={Truck} />
-        <NavButton
-          label="Perfil da Empresa"
-          href="/painel/perfil-da-empresa"
-          icon={Book}
-        />
         <div className="h-[1px] w-full bg-slate-600" />
         <div className="w-full flex items-center justify-between">
           <Button

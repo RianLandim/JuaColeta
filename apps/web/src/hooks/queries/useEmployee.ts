@@ -26,7 +26,7 @@ type EmployeeQueryParams = {
 
 const FETCH_USER_WITH_VEHICLES_KEY = ["fetch-user-with-vehicles"];
 
-const fetchEmployees = async (queryParams?: EmployeeQueryParams) => {
+const fetchEmployees = async () => {
   const [data, _] = await fetchApi("user", {
     method: "GET",
     validator: employeeValidator.array(),
@@ -35,10 +35,10 @@ const fetchEmployees = async (queryParams?: EmployeeQueryParams) => {
   return data;
 };
 
-const useEmployeesList = (queryParams?: EmployeeQueryParams) =>
+const useEmployeesList = () =>
   useQuery({
     queryKey: FETCH_USER_WITH_VEHICLES_KEY,
-    queryFn: () => fetchEmployees(queryParams),
+    queryFn: () => fetchEmployees(),
   });
 
 export { useEmployeesList, FETCH_USER_WITH_VEHICLES_KEY, type Employee };

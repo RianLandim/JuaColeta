@@ -1,4 +1,4 @@
-import { SideBar } from "@/components/sidebar/Sidebar";
+import { SideBar } from "@/components/sidebar";
 import { LayoutProps } from "@/utils/types/layoutProps";
 
 import { Metadata } from "next";
