@@ -5,15 +5,7 @@ import ProfileCard from "./ProfileCard";
 import { UseSession } from "@/utils/providers/SessionProvider";
 import { NavButton } from "./NavButton";
 import { Button } from "@jua/ui/button";
-import {
-  LayoutGrid,
-  Bell,
-  Building2,
-  User,
-  Truck,
-  Book,
-  LogOut,
-} from "lucide-react";
+import { LayoutGrid, Bell, Building2, User, Truck, LogOut } from "lucide-react";
 import { Setting } from "iconsax-react";
 
 export function SideBar() {

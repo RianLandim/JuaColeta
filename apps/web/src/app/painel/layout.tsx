@@ -13,7 +13,7 @@ export default function DashboardLayout({ children }: LayoutProps) {
     <main className="w-full h-screen bg-main-dark/80">
       <div className=" flex flex-row relative z-10 ">
         <SideBar />
-        <div className="w-4/5 flex flex-col items-center justify-center px-12">
+        <div className="w-4/5 flex flex-col items-center justify-center p-12">
           {children}
         </div>
         <Image
