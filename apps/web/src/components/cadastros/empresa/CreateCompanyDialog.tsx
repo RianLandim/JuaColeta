@@ -1,7 +1,7 @@
 "use client";
 
 import { z } from "zod";
-import { Button } from "../../../../../../packages/ui/./button";
+import { Button } from "@jua/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,11 +10,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../../ui/dialog";
+} from "@jua/ui/dialog";
 import { PlusCircle } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "../../ui/input";
+import { Input } from "@jua/ui/input";
 import { useHookFormMask } from "use-mask-input";
 import { useFetchCep } from "@/hooks/queries/useFetchCep";
 import { useEffect, useState } from "react";

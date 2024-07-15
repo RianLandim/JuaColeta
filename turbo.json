@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-
+  "ui": "tui",
   "tasks": {
     "db:generate": {
       "inputs": ["prisma/schema.prisma"],
@@ -24,6 +24,10 @@
     },
     "deploy": {
       "dependsOn": ["build", "test", "lint"]
+    },
+    "ui-add": {
+      "cache": false,
+      "interactive": true
     },
     "test": {
       "inputs": [

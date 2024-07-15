@@ -2,7 +2,7 @@ import "../../appFont.css";
 import "../../globals.css";
 import type { Metadata } from "next";
 import { Providers } from "@/utils/providers";
-import { Toaster } from "./toaster";
+import { Toaster } from "@jua/ui/toaster";
 // import { Inter } from "next/font/google";
 
 // const inter = Inter({ subsets: ["latin"] });

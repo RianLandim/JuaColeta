@@ -4,7 +4,7 @@ import Image from "next/image";
 import ProfileCard from "./ProfileCard";
 import { UseSession } from "@/utils/providers/SessionProvider";
 import { NavButton } from "./NavButton";
-import { Button } from "../../../../../packages/ui/./button";
+import { Button } from "@jua/ui/button";
 import {
   LayoutGrid,
   Bell,

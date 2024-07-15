@@ -1,13 +1,13 @@
 {
-  "name": "@acme/ui",
+  "name": "@jua/ui",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": "././index.ts",
+    ".": "./src/index.ts",
     "./*": [
-      "././*.tsx",
-      "././*.ts"
+      "./src/*.tsx",
+      "./src/*.ts"
     ]
   },
   "license": "MIT",

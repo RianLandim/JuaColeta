@@ -1,15 +1,15 @@
 "use client";
 
-import { Button } from "./button";
+import { Button } from "@jua/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "./dialog";
-import { Input } from "./input";
-import { Skeleton } from "./skeleton";
+} from "@jua/ui/dialog";
+import { Input } from "@jua/ui/input";
+import { Skeleton } from "@jua/ui/skeleton";
 import { useCompanyList } from "@/hooks/queries/useCompany";
 import { useQueryParam } from "@/hooks/useQueryParam";
 import { zodResolver } from "@hookform/resolvers/zod";

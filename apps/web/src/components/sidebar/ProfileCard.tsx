@@ -1,7 +1,7 @@
 "use client";
 
 import { useCurrentUser } from "@/hooks/queries/useCurrentUser";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "@jua/ui/skeleton";
 import { match, P } from "ts-pattern";
 import { useEffect } from "react";
 

@@ -1,48 +1,72 @@
-import type { Config } from "tailwindcss";
+import { createId } from '@paralleldrive/cuid2';
+import { Replace } from 'src/utils/helpers/replace';
+import { Vehicle } from './vehicle';
 
-export default {
-  darkMode: ["class"],
-  content: ["./**/*.{ts,tsx}"],
-  theme: {
-    extend: {
-      colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-      },
-      borderColor: {
-        DEFAULT: "hsl(var(--border))",
-      },
-    },
-  },
-} satisfies Config;
+interface UserProps {
+  email: string;
+  password: string;
+  name: string;
+  cellphone: string;
+  license?: string | null;
+  role: 'ADMIN' | 'COMPANY_ADMIN' | 'DRIVER' | 'CLIENT';
+  vehicle?: Vehicle;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export class User {
+  private _id: string;
+  private props: UserProps;
+
+  constructor(
+    props: Replace<UserProps, { createdAt?: Date; updatedAt?: Date }>,
+    id?: string,
+  ) {
+    this._id = id ?? createId();
+    this.props = {
+      ...props,
+      createdAt: props.createdAt ?? new Date(),
+      updatedAt: props.updatedAt ?? new Date(),
+    };
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  get email() {
+    return this.props.email;
+  }
+
+  get password() {
+    return this.props.password;
+  }
+
+  get name() {
+    return this.props.name;
+  }
+
+  get license() {
+    return this.props.license;
+  }
+
+  get role() {
+    return this.props.role;
+  }
+
+  get cellphone() {
+    return this.props.cellphone;
+  }
+
+  get vehicle() {
+    return this.props.vehicle;
+  }
+
+  get createdAt() {
+    return this.props.createdAt;
+  }
+
+  get updatedAt() {
+    return this.props.updatedAt;
+  }
+}

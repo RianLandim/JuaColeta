@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { LoadingIndicator } from "../../components/ui/loadingIndicator";
+import { LoadingIndicator } from "@jua/ui/loadingIndicator";
 
 export default function DashboardLoading(): ReactElement {
   return (
@@ -11,10 +11,6 @@ export default function DashboardLoading(): ReactElement {
     </section>
   );
 }
-
-// <div className="w-full h-screen bg-gray-500 flex items-center justify-center">
-//   <span className="text-red-500 text-3xl font-bold">Carregando...</span>
-// </div>
 
 interface errorProps {
   errorMessage?: string;
