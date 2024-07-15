@@ -19,6 +19,7 @@
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "date-fns": "^3.4.0",
     "iconsax-react": "^0.0.8",
     "jiti": "^1.21.0",
     "lucide-react": "^0.407.0",

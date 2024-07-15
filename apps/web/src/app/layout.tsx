@@ -3,6 +3,8 @@ import "../../globals.css";
 import type { Metadata } from "next";
 import { Providers } from "@/utils/providers";
 import { Toaster } from "@jua/ui/toaster";
+import { setDefaultOptions } from "date-fns";
+import { ptBR } from "date-fns/locale";
 // import { Inter } from "next/font/google";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -17,6 +19,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  setDefaultOptions({ locale: ptBR });
+
   return (
     <html lang="pt-br" className="font-roboto">
       <body>
