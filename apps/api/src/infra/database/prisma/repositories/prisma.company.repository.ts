@@ -1,6 +1,7 @@
 import {
   CompanyListQueryParams,
   CompanyRepository,
+  GetDashboardInfoParams,
 } from '@app/repositories/company.repository';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
@@ -108,5 +109,25 @@ export class PrismaCompanyRepository implements CompanyRepository {
 
       return new Company({ ...c, address }, c.id);
     });
+  }
+
+  async getDashboardInfo({ startDate, endDate }: GetDashboardInfoParams) {
+    const rawCompanies = await this.prisma.company.findMany({
+      where: {
+        createdAt: {
+          gte: startDate,
+          lte: endDate,
+        },
+      },
+      select: {
+        socialName: true,
+        createdAt: true,
+      },
+    });
+
+    return {
+      companies: rawCompanies,
+      companiesCount: rawCompanies.length,
+    };
   }
 }

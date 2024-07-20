@@ -7,6 +7,11 @@ type CompanyListSearchParams = {
   page?: string;
 };
 
+export type GetDashboardInfoParams = {
+  startDate: string;
+  endDate: string;
+};
+
 export interface CompanyListQueryParams {
   searchParams: CompanyListSearchParams;
 }
@@ -19,4 +24,5 @@ export abstract class CompanyRepository {
   abstract getCompanyById(id: string): Promise<Company>;
   abstract addCompanyEmployee(userId: string, companyId: string): Promise<void>;
   abstract getCompanyByUser(userId: string): Promise<Company[]>;
+  abstract getDashboardInfo(GetDashboardInfoParams): Promise<any>;
 }

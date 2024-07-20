@@ -2,6 +2,7 @@ import { Company } from '@app/entities/company';
 import {
   CompanyListQueryParams,
   CompanyRepository,
+  GetDashboardInfoParams,
 } from '@app/repositories/company.repository';
 import { NotFoundException } from '@nestjs/common';
 
@@ -61,5 +62,11 @@ export class InMemoryCompanyRepository implements CompanyRepository {
     }
 
     return companies;
+  }
+
+  async getDashboardInfo(
+    GetDashboardInfoParams: GetDashboardInfoParams,
+  ): Promise<any> {
+    throw Error('Method not implemented yet');
   }
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { CardIndicator } from "@/components/painel/CardIndicator";
 import {
   Card,
@@ -8,20 +10,36 @@ import {
 } from "@jua/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@jua/ui/avatar";
 import { DatePickerWithRange } from "@jua/ui/range-datepicker";
+import { useState } from "react";
+import { DateRange } from "react-day-picker";
+import { useDashboard } from "@/hooks/queries/useDashboard";
 
-export default async function Dashboard() {
+export default function Dashboard() {
+  const [value, setValue] = useState<DateRange | undefined>();
+
+  const dashboardQuery = useDashboard({
+    startDate: value?.from?.toISOString() ?? new Date().toISOString(),
+    endDate: value?.to?.toISOString() ?? new Date().toISOString(),
+  });
+
   return (
     <div className="min-w-full h-full flex flex-col items-center justify-start gap-4">
       <div id="header" className="flex w-full items-center justify-between">
         <h1 className="font-bold text-2xl text-white">Painel Administrativo</h1>
 
-        <DatePickerWithRange />
+        <DatePickerWithRange
+          value={value}
+          onChange={(value) => setValue(value as DateRange)}
+        />
       </div>
       <div id="indicators" className="grid grid-cols-4 gap-4 w-full">
-        <CardIndicator />
-        <CardIndicator />
-        <CardIndicator />
-        <CardIndicator />
+        <CardIndicator
+          title="Empresas"
+          value={dashboardQuery.data?.companiesCount ?? 0}
+        />
+        <CardIndicator title="Notificações" value={32} />
+        <CardIndicator title="Notificações" value={45} />
+        <CardIndicator title="Notificações" value={23} />
       </div>
       <div
         id="panels"

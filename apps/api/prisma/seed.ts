@@ -1,6 +1,7 @@
 import { createId } from '@paralleldrive/cuid2';
 import { PrismaClient } from '@prisma/client';
 import { hashSync } from 'bcrypt';
+
 const prisma = new PrismaClient();
 async function main() {
   const admin = await prisma.user.upsert({
@@ -16,7 +17,31 @@ async function main() {
     },
   });
 
-  console.log({ admin });
+  const company = await prisma.company.upsert({
+    where: {
+      cnpj: '32707269000107',
+    },
+    update: {},
+    create: {
+      id: createId(),
+      cnpj: '32707269000107',
+      socialName: 'Landim`s dev',
+      address: {
+        create: {
+          id: createId(),
+          city: 'Barbalha',
+          country: 'Brasil',
+          district: 'Centro',
+          number: 173,
+          state: 'Ceará',
+          street: 'Avenida Costa Cavalcante',
+          zipCode: '63090001',
+        },
+      },
+    },
+  });
+
+  console.log({ admin, company });
 }
 main()
   .then(async () => {

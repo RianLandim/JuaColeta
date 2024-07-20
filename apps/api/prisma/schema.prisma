@@ -96,7 +96,7 @@ model Billing {
 model Company {
   id String @id
 
-  cnpj       String
+  cnpj       String  @unique
   socialName String
   addressId  String  @unique
   address    Address @relation(fields: [addressId], references: [id])
