@@ -24,15 +24,25 @@ import { DeleteVehicle } from '@app/usecases/vehicle/delete-vehicle';
 import { UpdateVehicle } from '@app/usecases/vehicle/update-vehicle';
 import { ListVehicleById } from '@app/usecases/vehicle/get-vehicle-by-id';
 import { StorageModule } from '@infra/storage/storage.module';
+import { CheckoutModule } from '@infra/checkout/checkout.module';
+import { AddBilling } from '@app/usecases/billing/add-billing.usecase';
+import { BillingController } from './controllers/billing.controller';
 
 @Module({
-  imports: [AuthenticationModule, DatabaseModule, MailModule, StorageModule],
+  imports: [
+    AuthenticationModule,
+    DatabaseModule,
+    MailModule,
+    StorageModule,
+    CheckoutModule,
+  ],
   controllers: [
     AuthenticationController,
     UserController,
     CompanyController,
     VehicleController,
     NotificationController,
+    BillingController,
   ],
   providers: [
     CreateUser,
@@ -51,6 +61,7 @@ import { StorageModule } from '@infra/storage/storage.module';
     DeleteVehicle,
     UpdateVehicle,
     ListVehicleById,
+    AddBilling,
   ],
 })
 export class HttpModule {}

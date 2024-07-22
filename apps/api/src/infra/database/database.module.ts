@@ -8,6 +8,8 @@ import { VehicleRepository } from '@app/repositories/vehicle.repository';
 import { PrismaVehicleRepository } from './prisma/repositories/prisma.vehicle.repository';
 import { NotificationRepository } from '@app/repositories/notification.repository';
 import { PrismaNotificationRepository } from './prisma/repositories/prisma.notification.repository';
+import { BillingRepository } from '@app/repositories/billing.repository';
+import { PrismaBillingRepository } from './prisma/repositories/prisma.billing.repository';
 
 @Module({
   providers: [
@@ -16,12 +18,14 @@ import { PrismaNotificationRepository } from './prisma/repositories/prisma.notif
     { provide: CompanyRepository, useClass: PrismaCompanyRepository },
     { provide: VehicleRepository, useClass: PrismaVehicleRepository },
     { provide: NotificationRepository, useClass: PrismaNotificationRepository },
+    { provide: BillingRepository, useClass: PrismaBillingRepository },
   ],
   exports: [
     UserRepository,
     CompanyRepository,
     VehicleRepository,
     NotificationRepository,
+    BillingRepository,
   ],
 })
 export class DatabaseModule {}
