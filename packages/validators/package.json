@@ -3,15 +3,14 @@
   "version": "1.0.0",
   "type": "module",
   "exports": {
-    "./*":{
-      "types": "./dist/src/*.d.ts",
-      "default":"./src/*"
+    "./*": {
+      "types": "./src/*.ts",
+      "default": "./src/*.js"
     }
   },
   "description": "",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",

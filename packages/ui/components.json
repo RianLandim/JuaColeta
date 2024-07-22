@@ -12,6 +12,6 @@
   "aliases": {
     "components": "@jua/ui",
     "ui": "src/",
-    "utils": "./"
+    "utils": "/"
   }
 }
