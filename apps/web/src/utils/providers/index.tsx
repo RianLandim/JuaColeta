@@ -10,6 +10,7 @@ import {
 import { FC, ReactNode, useState } from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import SessionProvider from "./SessionProvider";
+import { Next13ProgressBar } from "next13-progressbar";
 
 export const Providers: FC<{ children: ReactNode }> = ({ children }) => {
   const [queryClient] = useState(
@@ -54,6 +55,7 @@ export const Providers: FC<{ children: ReactNode }> = ({ children }) => {
           initialIsOpen={process.env.NODE_ENV === "development"}
         />
       </QueryClientProvider>
+      <Next13ProgressBar height="4px" color="#35C928" showOnShallow />
     </SessionProvider>
   );
 };

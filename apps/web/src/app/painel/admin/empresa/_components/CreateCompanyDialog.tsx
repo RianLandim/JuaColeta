@@ -44,7 +44,6 @@ export function CreateCompanyDialog() {
 
   const createCompanyMutation = useCreateCompanyMutation();
   const { toast } = useToast();
-  const apiUtils = useQueryClient();
 
   const submit: SubmitHandler<CreateCompany> = (data) => {
     createCompanyMutation.mutate(data, {
@@ -54,7 +53,6 @@ export function CreateCompanyDialog() {
           description: "Caminhão registrado com sucesso",
         });
         reset();
-        apiUtils.invalidateQueries({ queryKey: FETCH_VEHICLES_KEY });
         setOpen(false);
       },
       onError: (error) => {
@@ -71,7 +69,7 @@ export function CreateCompanyDialog() {
 
   useEffect(() => {
     async function getAddress() {
-      const cep = watch("address.zipCode").replace(/-/g, "");
+      const cep = watch("address.zipCode")?.replace(/-/g, "");
 
       const response = await fetch(
         `https://brasilapi.com.br/api/cep/v2/${cep}`,

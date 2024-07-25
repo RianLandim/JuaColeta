@@ -41,18 +41,12 @@ export function CreateCompanyDialog() {
   const [fetch, setFetch] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-    setValue,
-  } = useForm<CreateCompanySchemaProps>({
-    resolver: zodResolver(createCompanySchema),
-  });
+  const { register, handleSubmit, watch, setValue } =
+    useForm<CreateCompanySchemaProps>({
+      resolver: zodResolver(createCompanySchema),
+    });
 
   const createCompanyMutation = useCreateCompanyMutation();
-  const queryClient = useQueryClient();
 
   const registerWithMask = useHookFormMask(register);
 
@@ -66,16 +60,7 @@ export function CreateCompanyDialog() {
         address,
       },
       {
-        onSuccess: (company) => {
-          if (company) {
-            queryClient.setQueryData(
-              [FETCH_COMPANIES_KEY],
-              (data: unknown[]) => {
-                return [...data, company];
-              },
-            );
-          }
-
+        onSuccess: () => {
           setOpen(false);
         },
       },

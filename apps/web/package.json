@@ -24,6 +24,7 @@
     "jiti": "^1.21.0",
     "lucide-react": "^0.407.0",
     "next": "14.0.4",
+    "next13-progressbar": "^1.2.1",
     "node": "^18.20.2",
     "react": "^18",
     "react-day-picker": "^8.10.1",

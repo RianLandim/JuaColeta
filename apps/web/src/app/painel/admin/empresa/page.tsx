@@ -101,19 +101,17 @@ export default function Trucks() {
 
       <div className="w-full h-2/3">
         {match(companyQuery)
-          .with({ isLoading: true }, () => <LoadingIndicator />)
           .with({ isError: true }, () => (
             <span>Ocorreu um erro ao buscar os veiculos</span>
           ))
-          .with({ data: P.nullish }, () => (
-            <span>Nenhum veiculo encontrado</span>
-          ))
-          .with(
-            { data: P.not(undefined).and(P.not(P.nullish)) },
-            //@ts-ignore due an bug
-            ({ data }) => <DataTable columns={columns} data={data} />,
-          )
-          .exhaustive()}
+          .otherwise(({ data, isLoading }) => (
+            <DataTable
+              //@ts-ignore is a bug
+              columns={columns}
+              data={data ?? []}
+              isLoading={isLoading}
+            />
+          ))}
       </div>
     </main>
   );

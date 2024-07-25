@@ -1,5 +1,5 @@
-import { Input } from "./input";
-import { Button } from "../../../../../../../packages/ui/./button";
+import { Input } from "@jua/ui/input";
+import { Button } from "@jua/ui/button";
 
 import {
   Dialog,
@@ -8,8 +8,7 @@ import {
   DialogHeader,
   DialogDescription,
   DialogTitle,
-  DialogFooter,
-} from "./dialog";
+} from "@jua/ui/dialog";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -20,9 +19,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./form";
+} from "@jua/ui/form";
 import { useCreateEmployeeMutation } from "@/hooks/mutations/useCreateEmployee";
-import { useToast } from "./use-toast";
+import { useToast } from "@jua/ui/use-toast";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { FETCH_USER_WITH_VEHICLES_KEY } from "@/hooks/queries/useEmployee";
