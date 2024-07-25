@@ -13,6 +13,7 @@ type FetchApiOptions<TValidator extends z.ZodTypeAny> = (
   queryParams?: Record<string, string | string[] | undefined>;
   validator?: TValidator;
   credentials?: RequestCredentials;
+  headers?: HeadersInit;
 };
 
 type ErrorLike = {
@@ -43,6 +44,7 @@ export async function fetchApi<TValidator extends z.ZodType<unknown>>(
     method: options.method,
     headers: {
       "Content-Type": "application/json",
+      ...options.headers,
     },
     credentials: options.credentials ?? "include",
     body:

@@ -8,14 +8,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./dropdown-menu";
-import { LoadingIndicator } from "./loadingIndicator";
+} from "@jua/ui/dropdown-menu";
+import { LoadingIndicator } from "@jua/ui/loadingIndicator";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useMemo } from "react";
 import { match, P } from "ts-pattern";
 import { CircleEllipsisIcon } from "lucide-react";
 import { useQueryParam } from "@/hooks/useQueryParam";
-import { Company } from "@jua/validators/company";
+import { Company } from "@jua/validators/company/index";
 import { useCompaniesList } from "@/hooks/queries/useCompanyList";
 import { cnpjMask } from "@/utils/format/cnpj";
 import { formatDateTime } from "@/utils/format/datetime";

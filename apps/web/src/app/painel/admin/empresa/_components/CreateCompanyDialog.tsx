@@ -1,4 +1,4 @@
-import { Button } from "./button";
+import { Button } from "@jua/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -6,16 +6,19 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./dialog";
+} from "@jua/ui/dialog";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { CreateCompany, createCompanyValidator } from "@jua/validators/company";
+import {
+  CreateCompany,
+  createCompanyValidator,
+} from "@jua/validators/company/index";
 
-import { cepValidator } from "@jua/validators/utils";
+import { cepValidator } from "@jua/validators/utils/index";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputField } from "./inputField";
-import { useToast } from "./use-toast";
+import { InputField } from "@jua/ui/inputField";
+import { useToast } from "@jua/ui/use-toast";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { FETCH_VEHICLES_KEY } from "@/hooks/queries/useTruck";

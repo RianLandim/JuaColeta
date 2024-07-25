@@ -24,7 +24,7 @@ export class StripeService implements CheckoutRepository {
       ],
       mode: 'subscription',
       success_url: 'http://localhost:3000/',
-      cancel_url: 'http://localhost:3000/',
+      cancel_url: 'http://localhost:3000/painel',
     });
 
     return session;
